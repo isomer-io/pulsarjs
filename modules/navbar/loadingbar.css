@@ -1,0 +1,5 @@
+#iron-router-progress {
+    background-color : #4caf50;
+    box-shadow       : 0 0 5px #4caf50;
+    z-index: 10;
+}

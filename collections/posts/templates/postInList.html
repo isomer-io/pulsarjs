@@ -1,0 +1,17 @@
+<!--
+
+    You will need to change this file, to reflect one post in
+    the list of posts from the findPosts template. For example.
+    this.name would would display the name of the post within
+    the list.
+
+-->
+
+
+<template name="postInList">
+    <a href="/posts/{{this._id}}" class="list-group-item">
+        <h4 class="list-group-item-heading">{{this.title}}</h4>
+        <p class="list-group-item-text">{{this.body}}</p>
+        <p class="list-group-item-text">{{this.createdOn}}</p>
+    </a>
+</template>
