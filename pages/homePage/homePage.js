@@ -4,9 +4,8 @@
 
 if (Meteor.isClient) {
 
-
-    orion.dictionary.addDefinition('title', 'homePage', {
-        type: String
+    Router.route('/', function() {
+        this.render('homePage');
     });
 
     Template.homePage.helpers({

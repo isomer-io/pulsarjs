@@ -33,16 +33,7 @@ if (Meteor.isClient) {
     //    },
     //    menuName: 'Whatever',
     //    menuOrientation: 'left || right',
-    //    templateName: 'homePage'
     //};
-
-    Router.route('/', function() {
-        this.render('homePage');
-    });
-
-    Router.route('/signup', function() {
-        this.render('loginPage');
-    });
 
     Session.setDefault('pagesLeft', '[]');
     Session.set('pagesLeft', '[]');
@@ -54,9 +45,6 @@ if (Meteor.isClient) {
 
         add: function(item) {
 
-            Router.route(item.url, function() {
-               this.render(item.pageTemplateName);
-            });
 
             if (item.menuOrientation === 'left') {
 
