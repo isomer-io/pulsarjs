@@ -1,0 +1,24 @@
+<template name="viewOnePostPage">
+
+    <div class="container">
+
+        <div class="row">
+
+            {{> findOnePost }}
+
+            <div class="col-md-offset-4 col-md-4">
+
+                {{#if isOwner }}
+                    <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
+                        Edit this post
+                    </a>
+                    <a id="deletePostButton" class="btn btn-block btn-danger">
+                        Delete this post
+                    </a>
+                {{/if}}
+            </div>
+        </div>
+
+    </div>
+
+</template>

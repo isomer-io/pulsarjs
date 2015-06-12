@@ -1,4 +1,3 @@
-
 /*
     Here we create our collection. This is the same as
     a normal mongo collection, but you must also pass
@@ -9,8 +8,8 @@ Posts = new orion.collection('posts', {
     pluralName: 'posts', // The name of more than one of these items
 
     /*
-        Tabular settings for this collection, this must be filled out
-        correctly for the admin panel to work
+    Tabular settings for this collection, this must be filled out
+    correctly for the admin panel to work
      */
     tabular: {
         columns: [
@@ -20,49 +19,14 @@ Posts = new orion.collection('posts', {
             the index table you must call this function
             orion.attributeColumn(attributeType, key, label)
          */
-            orion.attributeColumn('file', 'image', 'Image'),
+            orion.attributeColumn('image', 'image', 'Image'),
             orion.attributeColumn('summernote', 'body', 'Content'),
-            orion.attributeColumn('createdBy', 'createdBy', 'Created By')
+            orion.attributeColumn('createdBy', 'createdBy', 'Created By'),
+            orion.attributeColumn('createdAt', 'createdAt', 'Created At'),
+            orion.attributeColumn('updatedAt', 'updatedAt', 'Updated At')
         ]
     }
 });
-
-TestSchema = {
-    title: {
-        type: String
-    },
-
-    /*
-     The file attribute is a custom orion attribute
-     This is where orion does its magic. Just set
-     the attribute type and it will automatically
-     create the form for the file.
-     WARNING: the url of the image will not be saved in
-     .image, it will be saved in .image.url.
-     */
-    image: orion.attribute('file', {
-        label: 'Image',
-        optional: true
-    }),
-
-    /*
-     Here it's the same with an image attribute.
-     summernote is an html editor.
-     */
-    body: orion.attribute('summernote', {
-        label: 'Body'
-    }),
-
-    /*
-     This attribute sets the user id to that of the user that created
-     this post automatically.  */
-    createdBy: orion.attribute('createdBy'),
-
-    createdAt: orion.attribute('createdAt'),
-
-    updatedAt: orion.attribute('updatedAt')
-
-};
 
 /*
     Now we will attach the schema for the posts collection.
@@ -115,12 +79,13 @@ Posts.attachSchema(new SimpleSchema({
 
 /*
 This is our pagination object. It lets us do an infinite
-scroll through our list
+scroll through our list. You probably don't want to change
+this unless you know what you are doing.
  */
-Posts.list = new Meteor.Pagination(Posts, {
+Posts.findList = new Meteor.Pagination(Posts, {
     infinite: true,
     infiniteItemsLimit: 100,
-    itemTemplate: 'postInList',
+    itemTemplate: 'postInFindList',
     sort: {
         createdAt: -1
     },

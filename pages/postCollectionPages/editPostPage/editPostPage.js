@@ -14,7 +14,7 @@ if (Meteor.isClient) {
         var post = Posts.findOne({_id: this.params._id});
 
         //then set it as the 'this' object on the page
-        this.render('updatePostPage', {data: post});
+        this.render('editPostPage', {data: post});
     });
 
     //after they insert a new post, redirect back to
@@ -22,8 +22,8 @@ if (Meteor.isClient) {
 
     //'insertPost' is the id of the quickform we
     //and 'updatePost' are the id's of the quickforms
-    //we want to listen to
-    AutoForm.addHooks(['insertPost', 'updatePost'], {
+    //we want to listen to, not the name of the page level templates
+    AutoForm.addHooks('updatePost', {
 
         //the onSuccess method gets called after
         //a successful submit on either of the forms

@@ -14,16 +14,22 @@ if (Meteor.isClient) {
        this.render('listPostsPage');
     });
 
+    Template.listPostsPage.helpers({
+       hasResults: function() {
+           return Posts.find().count();
+       }
+    });
+
     Template.listPostsPage.events({
         'click #oldest-first': function() {
-            Posts.list.set({
+            Posts.findList.set({
                sort: {
                    createdAt: 1
                }
             });
         },
         'click #newest-first': function() {
-            Posts.list.set({
+            Posts.findList.set({
                 sort: {
                     createdAt: -1
                 }

@@ -10,31 +10,6 @@ orion.dictionary.addDefinition('title', 'navbar', {
 
 if (Meteor.isClient) {
 
-
-    //Navbar = {
-    //    leftItems: [],
-    //    rightItems: [],
-    //    addLink: function(item) {
-    //
-    //        if (item.alignment === 'left') {
-    //            leftItems.push(item);
-    //        } else {
-    //            rightItems.push(item);
-    //        }
-    //
-    //        items.push(item);
-    //    }
-    //};
-
-    //var blah = {
-    //    url: '/whatever',
-    //    subscribes: function() {
-    //        //call subscriptions here
-    //    },
-    //    menuName: 'Whatever',
-    //    menuOrientation: 'left || right',
-    //};
-
     Session.setDefault('pagesLeft', '[]');
     Session.set('pagesLeft', '[]');
 
@@ -107,8 +82,18 @@ if (Meteor.isClient) {
                 return false;
             }
 
+        },
+
+        menuIsToggled: function() {
+            if (Session.get('menuToggled')) {
+                return 'toggled';
+            } else {
+                return '';
+            }
         }
     });
+
+    Session.setDefault('menuToggled', true);
 
     Template.navbar.events({
         'click #log-out': function() {

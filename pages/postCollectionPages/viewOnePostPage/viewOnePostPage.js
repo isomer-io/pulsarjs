@@ -13,14 +13,14 @@ if (Meteor.isClient) {
         var post = Posts.findOne({_id: this.params._id});
 
         //then set it as the 'this' object on the page, using the data object
-        this.render('singlePostPage', {data: post});
+        this.render('viewOnePostPage', {data: post});
     });
 
 
     //Here we define a helper on the single post page
     //In this case we check if the loggedin user
     //created the post
-    Template.singlePostPage.helpers({
+    Template.viewOnePostPage.helpers({
         'isOwner': function() {
             return this.createdBy === Meteor.userId();
         }
@@ -30,8 +30,10 @@ if (Meteor.isClient) {
     //This is how you display a modal
     //In this case, we are displaying a modal to
     //confirm that the user wants to delete a specific post
-    Template.singlePostPage.events({
+    Template.viewOnePostPage.events({
         'click #deletePostButton': function() {
+
+            //'this' is the current doc we are showing
             Modal.show('confirmPostDeleteModal', this);
         }
     });
