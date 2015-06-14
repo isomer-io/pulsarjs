@@ -1,3 +1,16 @@
+<template name="postInFindList">
+
+    <div class="col-md-12">
+        <a href="/posts/{{this._id}}" class="list-group-item" style="margin-bottom: 0.5%;">
+            <h4 class="list-group-item-heading">{{this.title}}</h4>
+            <p class="list-group-item-text">{{this.body}}</p>
+            <p class="list-group-item-text">{{this.createdOn}}</p>
+        </a>
+    </div>
+
+</template>
+
+
 <template name="findPosts">
     {{> posts }}
 </template>
