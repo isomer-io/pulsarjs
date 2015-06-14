@@ -102,6 +102,9 @@ if (Meteor.isClient) {
             Meteor.logout();
 
             Router.go('/');
+        },
+        'click .fa-bars': function() {
+            Session.set('menuToggled', !Session.get('menuToggled'));
         }
     });
 

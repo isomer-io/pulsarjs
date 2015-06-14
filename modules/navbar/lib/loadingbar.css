@@ -6,6 +6,11 @@
 
 .navbar {
     border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.sidebar-fixed {
+
 }
 
 .navbar-fixed-spacer {
