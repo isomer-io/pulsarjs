@@ -46,7 +46,7 @@ Posts.attachSchema(new SimpleSchema({
         WARNING: the url of the image will not be saved in
         .image, it will be saved in .image.url.
      */
-    image: orion.attribute('file', {
+    image: orion.attribute('image', {
         label: 'Image',
         optional: true
     }),
@@ -69,13 +69,6 @@ Posts.attachSchema(new SimpleSchema({
     updatedAt: orion.attribute('updatedAt')
 
 }));
-
-
-//save the created at time each time is inserted
-//this is an example of an insert 'hook'
-//Posts.before.insert(function(userId, doc) {
-//   doc.createdAt = Date.now();
-//});
 
 /*
 This is our pagination object. It lets us do an infinite

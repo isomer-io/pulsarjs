@@ -8,14 +8,26 @@
 
 <template name="findOnePost">
 
-    <div class="col-md-12">
-        <h2>{{this.title}}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{{this.title}}</h2>
+        </div>
     </div>
-    <div class="col-md-12">
-        <p>
-            {{this.body}}
-        </p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {{this.body}}
+            </p>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <img src="{{this.image.url}}" class="img-responsive center-block"/>
+        </div>
+    </div>
+
 
 
 </template>
