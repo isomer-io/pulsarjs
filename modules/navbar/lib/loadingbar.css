@@ -3,3 +3,11 @@
     box-shadow       : 0 0 5px #4caf50;
     z-index: 10;
 }
+
+.navbar {
+    border-radius: 0 !important;
+}
+
+.navbar-fixed-spacer {
+    margin-top: 87px !important;
+}

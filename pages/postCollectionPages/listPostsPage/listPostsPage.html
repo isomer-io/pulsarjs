@@ -10,22 +10,24 @@
             </div>
         </div>
 
-        {{#if hasResults}}
         <div class="row">
-            <h3>
-                Sort This List
-            </h3>
+            <div class="col-md-12">
+                <h3>
+                    Sort This List
+                </h3>
+                {{#if hasResults}}
+                    <button id="newest-first" class="btn btn-primary btn-block">
+                        Newest First
+                    </button>
 
-            <button id="newest-first" class="btn btn-primary btn-block">
-                Newest First
-            </button>
-
-            <button id="oldest-first" class="btn btn-primary btn-block">
-                Oldest First
-            </button>
+                    <button id="oldest-first" class="btn btn-primary btn-block">
+                        Oldest First
+                    </button>
+                {{/if}}
+            </div>
         </div>
+
         <br>
-        {{/if}}
 
         <div class="row">
             {{> findPosts }}

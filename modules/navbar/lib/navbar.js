@@ -77,8 +77,10 @@ if (Meteor.isClient) {
             }
 
             if (routeName.indexOf('admin') !== -1) {
+                $('body').removeClass('navbar-fixed-spacer');
                 return true;
             } else {
+                $('body').addClass('navbar-fixed-spacer');
                 return false;
             }
 

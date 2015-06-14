@@ -84,12 +84,13 @@ this unless you know what you are doing.
  */
 Posts.findList = new Meteor.Pagination(Posts, {
     infinite: true,
-    infiniteItemsLimit: 100,
     itemTemplate: 'postInFindList',
     sort: {
         createdAt: -1
     },
     availableSettings: {
         sort: true
-    }
+    },
+    fastRender: true
 });
+

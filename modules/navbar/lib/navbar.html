@@ -7,7 +7,7 @@
 
     {{#unless isOnAdmin}}
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -36,16 +36,64 @@
                     {{/each}}
 
                     {{#if currentUser}}
-                        <li id="log-out"><a >Log Out</a></li>
+                        <form class="navbar-form navbar-right" role="search">
+                            <button id="log-out" class="btn btn-default">Log Out</button>
+                        </form>
                     {{/if}}
                     {{#unless currentUser}}
-                        <li class="{{isActive 'signup'}}"><a href="/login/user">Log In / Sign Up</a></li>
+                        <form class="navbar-form navbar-right" role="search">
+                            <a href="/login/user">
+                                <button id="log-out" class="btn btn-default">
+                                    Log In / Sign Up
+                                </button>
+                            </a>
+                        </form>
                     {{/unless}}
                 </ul>
+
             </div>
         </div>
     </nav>
 
         {{/unless}}
+
+    <div class="orion-bootstrap-admin">
+        <div class="sidebar">
+
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/">
+                        Admin
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/dictionary">Dictionary</a>
+                </li>
+
+
+                <li>
+                    <a href="/admin/posts">Posts</a>
+                </li>
+
+
+                <li class="active">
+                    <a href="/admin/my-account">My Account</a>
+                </li>
+
+
+                <li>
+                    <a href="/admin/config">Config</a>
+                </li>
+
+                <li>
+                    <a href="/admin/accounts">Accounts</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
 
 </template>
