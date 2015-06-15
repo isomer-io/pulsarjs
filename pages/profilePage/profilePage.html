@@ -1,3 +1,20 @@
 <template name="profilePage">
 
+    {{#with currentUser.profile}}
+
+        <div class="container">
+
+            <div class="row">
+
+                 <h1>
+                     {{this.name}}
+                 </h1>
+
+            </div>
+
+        </div>
+
+    {{/with}}
+
+
 </template>
