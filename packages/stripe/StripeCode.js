@@ -6,8 +6,8 @@ Router.route('/api/stripeoauth/').get(function () {
     if(!Meteor.user().stripe){
         Meteor.call('obtainAccessToken', this.params.query, function(err,data){
 
-            Session.set('stripeErr',err);
-            Session.set('stripeData',data);
+            Session.set('stripeOauthErr',err);
+            Session.set('stripeOauthData',data);
         });
     }
 
@@ -21,3 +21,4 @@ Router.route('/api/stripeoauth/').get(function () {
 orion.config.add('STRIPE_API_KEY', 'stripe');
 orion.config.add('STRIPE_API_CLIENT_ID', 'stripe');
 orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true});
+orion.config.add('STRIPE_COMPANY_NAME', 'stripe', {secret: true});

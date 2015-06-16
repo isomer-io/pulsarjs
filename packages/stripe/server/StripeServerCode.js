@@ -1,8 +1,7 @@
 if(Meteor.isServer){
-    Meteor.publish("userData", function () {
+    Meteor.publish("userTransactions", function () {
         if (this.userId) {
-            return Meteor.users.find({_id: this.userId},
-                {fields: {'stripe': 1,'transactions':1}});
+            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1}});
         } else {
             this.ready();
         }

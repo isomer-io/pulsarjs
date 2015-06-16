@@ -1,0 +1,13 @@
+<template name="shoppingCart">
+    <div class="row">
+        <ul>
+            {{#each shoppingCartItems}}
+                {{>shoppingCartItem}}
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="shoppingCartItem">
+    <li>{{>findOneShoppingCartItem}}</li>
+</template>
