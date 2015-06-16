@@ -6,18 +6,27 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use(["templating"], "client");
-  api.use(["tracker"], "client");
-  api.use(["session"], "client");
-  api.use(["mrgalaxy:stripe@2.1.0","orionjs:core@1.1.0","meteorhacks:async@1.0.0"], ["client", "server"]);
-  api.use("iron:router", ["client", "server"]);
-  api.use("spacebars", ["client", "server"]);
+  api.use(["templating",'tracker','session'], "client");
+
   api.use("meteorhacks:async@1.0.0", "server");
+
+  api.use([
+    "mrgalaxy:stripe@2.1.0",
+    "orionjs:core@1.1.0",
+    "iron:router@1.0.9",
+    "meteorhacks:async@1.0.0",
+    "spacebars"
+  ], ["client", "server"]);
+
   api.versionsFrom('METEOR@1.1.0.2');
-  api.addFiles('StripeCode.js', 'server');
+
+  api.addFiles(['server/StripeServerCode.js'],'server');
+
   api.addFiles(['payForItemButtonTemplate.html','payForItem.html',
-    'connectToStripeButtonTemplate.html', 'StripeOauthTemplate.html', 'StripeCode.js','server/StripeServerCode.js',
+    'connectToStripeButtonTemplate.html', 'StripeOauthTemplate.html',
     'client/StripeClientCode.js'], 'client');
+
+  api.addFiles(['StripeCode.js'],['client','server']);
   
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');

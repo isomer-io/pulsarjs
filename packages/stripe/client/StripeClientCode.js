@@ -7,7 +7,6 @@ if(Meteor.isClient){
             image: '/img/documentation/checkout/marketplace.png',
             token: function(token) {
                 Meteor.call('chargeCard', token, Session.get('currentItem'),function(err,data){
-                    console.log(err,data);
                     Session.set('stripeErr',err);
                     Session.set('stripeData',data.result);
                 });
