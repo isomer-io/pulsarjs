@@ -61,7 +61,6 @@ meteorhacks:async@1.0.0
 meteorhacks:fast-render@2.5.0
 meteorhacks:inject-data@1.3.0
 meteorhacks:inject-initial@1.0.2
-meteorhacks:npm@1.3.0
 meteorhacks:picker@1.0.2
 minifiers@1.1.5
 minimongo@1.0.8
