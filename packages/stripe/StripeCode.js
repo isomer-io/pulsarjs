@@ -22,3 +22,4 @@ orion.config.add('STRIPE_API_KEY', 'stripe');
 orion.config.add('STRIPE_API_CLIENT_ID', 'stripe');
 orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true});
 orion.config.add('STRIPE_COMPANY_NAME', 'stripe', {secret: true});
+orion.config.add('STRIPE_COMMISSION', 'stripe');

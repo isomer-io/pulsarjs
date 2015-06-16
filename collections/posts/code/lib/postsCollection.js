@@ -93,3 +93,6 @@ Posts.findList = new Meteor.Pagination(Posts, {
     fastRender: true
 });
 
+//for stripe shopping cart
+findOneItem = "findOnePost";
+

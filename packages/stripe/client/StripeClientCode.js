@@ -1,4 +1,14 @@
 if(Meteor.isClient){
+    var copyArray = function(arr){
+        var copyOfArr = [];
+
+        for(var i = 0; i < arr.length; i++){
+            copyOfArr.push(arr[i]);
+        }
+
+        return copyOfArr;
+    };
+
     Meteor.startup(function(){
         Session.setDefault('cart',[]);
 
@@ -19,21 +29,30 @@ if(Meteor.isClient){
 
     Template.addToShoppingCartButtonTemplate.events({
         'click #addToShoppingCartButton':function(event){
-            var cartContents = [];
-            for(var i = 0; i < Session.get('cart').length; i++){
-                cartContents.push(Session.get('cart')[i]);
+            var cartContents = copyArray(Session.get('cart'));
+
+            if(!_.findWhere(cartContents, {_id:this._id})){
+                cartContents.push(this);
+            } else {
+                console.log('item already in cart');
             }
 
-            cartContents.push(this);
 
             Session.set('cart',cartContents);
-            console.log(Session.get('cart'));
         }
     });
 
     Template.shoppingCart.helpers({
         shoppingCartItems:function(){
             return Session.get('cart');
+        },
+        itemInCart:function(){
+            var cartContents = copyArray(Session.get('cart'));
+            return _.findWhere(cartContents, {_id:this._id});
+        },
+        findOneItemHelper:function(){
+            console.log(findOneItem);
+            return findOneItem;
         }
     });
 

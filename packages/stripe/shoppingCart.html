@@ -2,12 +2,8 @@
     <div class="row">
         <ul>
             {{#each shoppingCartItems}}
-                {{>shoppingCartItem}}
+                {{> UI.dynamic template=findOneItemHelper}}
             {{/each}}
         </ul>
     </div>
-</template>
-
-<template name="shoppingCartItem">
-    <li>{{>findOneShoppingCartItem}}</li>
 </template>
