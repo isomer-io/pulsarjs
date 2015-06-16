@@ -1,13 +1,4 @@
 if(Meteor.isClient){
-    var copyArray = function(arr){
-        var copyOfArr = [];
-
-        for(var i = 0; i < arr.length; i++){
-            copyOfArr.push(arr[i]);
-        }
-
-        return copyOfArr;
-    };
 
     Meteor.startup(function(){
         Session.setDefault('cart',[]);
