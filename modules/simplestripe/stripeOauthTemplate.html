@@ -1,0 +1,19 @@
+<template name="stripeOauthPage">
+    {{>stripeOauthTemplate}}
+</template>
+
+<template name="stripeOauthTemplate">
+    <div class="row">
+        {{#if stripeErr}}
+            <div class="col-md-offset-6 col-md-6">
+                <div class="alert alert-danger" role="alert">Stripe had an error: {{stripeErr.message}}</div>
+            </div>
+        {{/if}}
+
+        {{#if stripeData}}
+            <div class="col-md-offset-6 col-md-6">
+                <div class="alert alert-success" role="alert">Account created</div>
+            </div>
+        {{/if}}
+    </div>
+</template>

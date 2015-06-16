@@ -1,0 +1,10 @@
+{
+  "public":{
+    "stripe":{
+      "publishableKey":"pk_test_OQMKRsZJABBBBBBBBBBXX"
+    }
+  },
+  "stripe":{
+    "secretKey":"sk_test_r0BBBBBBBBBBJUy0"
+  }
+}
