@@ -17,8 +17,8 @@ Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.1.0.2');
   api.addFiles('StripeCode.js', 'server');
   api.addFiles(['payForItemButtonTemplate.html','payForItem.html',
-    'connectToStripeButtonTemplate.html', 'StripeOauthTemplate.html', 'StripeCode.js','client/derp/lib/StripeClientCode.js',
-  'server/lib/StripeServerCode.js'], 'client');
+    'connectToStripeButtonTemplate.html', 'StripeOauthTemplate.html', 'StripeCode.js','server/StripeServerCode.js',
+    'client/StripeClientCode.js'], 'client');
   
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
