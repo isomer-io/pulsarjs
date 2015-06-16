@@ -63,6 +63,33 @@ if(Meteor.isServer){
             console.log(Meteor.users.findOne(this.userId).transactions);
 
             return res;
+        },
+        createSubscription:function(token){
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var user = Meteor.users.findOne(this.userId);
+
+            var stripeCustomerId = user.stripeCustomerId;
+
+            if(!stripeCustomerId) {
+                var res = Async.runSync(function (done) {
+                    Stripe.customers.create({
+                        source: token.id,
+                        plan: 'gold',
+                        email: Meteor.user().emails[0].address
+                    }, function (err, customerObj) {
+                        console.log(err,customerObj);
+
+                        stripeCustomerId = customerObj.id;
+
+                        done(err, stripeCustomerId);
+                    })
+                });
+
+                Meteor.users.update({_id:this.userId}, {$set: {stripeCustomerId: stripeCustomerId} } );
+            }
+
+            return stripeCustomerId;
         }
     });
 

@@ -5,12 +5,22 @@ if(Meteor.isClient){
 
         Stripe.setPublishableKey(orion.config.get('STRIPE_API_KEY'));
 
-        handler = StripeCheckout.configure({
+        chargeHandler = StripeCheckout.configure({
             key: orion.config.get('STRIPE_API_KEY'),
             token: function(token) {
                 Meteor.call('chargeCard', token, Session.get('currentItem'),function(err,data){
                     Session.set('stripeChargeErr',err);
                     Session.set('stripeChargeData',data.result);
+                });
+            }
+        });
+
+        subscriptionHandler = StripeCheckout.configure({
+            key: orion.config.get('STRIPE_API_KEY'),
+            token: function(token) {
+                Meteor.call('createSubscription', token, function(err,data){
+                    Session.set('stripeSubscriptionErr',err);
+                    Session.set('stripeSubscriptionData',data.result);
                 });
             }
         });
@@ -36,6 +46,25 @@ if(Meteor.isClient){
         }
     });
 
+    Template.subscribe.helpers({
+        stripeData:function(){
+            return Session.get('stripeSubscriptionData');
+        },
+        stripeErr:function(){
+            return Session.get('stripeSubscriptionErr');
+        }
+    });
+
+    Template.subscribeButtonTemplate.events({
+        'click #subscribeButton':function(event){
+            subscriptionHandler.open({
+                name: orion.config.get('STRIPE_COMPANY_NAME'),
+                description: 'Subscription', //TODO: this is also fucked
+                email:Meteor.user().emails[0].address
+            });
+        }
+    });
+
     Template.connectToStripeButtonTemplate.helpers({
         stripeClientId:function(){
             return orion.config.get('STRIPE_API_CLIENT_ID');
@@ -45,9 +74,9 @@ if(Meteor.isClient){
     Template.payForItemButtonTemplate.events({
         'click #payForItemButton':function(event){
             Session.set('currentItem', this);
-            handler.open({
+            chargeHandler.open({
                 name: orion.config.get('STRIPE_COMPANY_NAME'),
-                description: this.name,
+                description: this.title,
                 email:Meteor.user().emails[0].address,
                 amount: Math.round(this.price * 100)
             });
