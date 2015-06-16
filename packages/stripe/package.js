@@ -1,8 +1,7 @@
 Package.describe({
-  name: 'maxjohansen:simplestripe',
-  version: '0.2.0',
+  name: 'stripe',
+  version: '0.0.1',
   summary: 'A simplified version of https://github.com/tyler-johnson/stripe-meteor',
-  git: 'https://github.com/macsj200/simplestripe',
   documentation: 'README.md'
 });
 
@@ -22,10 +21,4 @@ Package.onUse(function(api) {
   
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
-});
-
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('maxjohansen:simplestripe');
-  //api.addFiles('simplestripe-tests.js');
 });
