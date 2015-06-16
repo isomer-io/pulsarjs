@@ -1,7 +1,7 @@
 if(Meteor.isServer){
     Meteor.publish("userTransactions", function () {
         if (this.userId) {
-            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1}});
+            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1, "stripe":1}});
         } else {
             this.ready();
         }
@@ -42,6 +42,7 @@ if(Meteor.isServer){
                     amount: Math.round(item.price * 100),
                     currency: 'usd',
                     source: token.id,
+                    application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
                     destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id
                 }, function (err, chargeObj) {
                     console.log(err,chargeObj);

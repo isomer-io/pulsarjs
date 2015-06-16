@@ -27,35 +27,6 @@ if(Meteor.isClient){
 
     Meteor.subscribe("userTransactions");
 
-    Template.addToShoppingCartButtonTemplate.events({
-        'click #addToShoppingCartButton':function(event){
-            var cartContents = copyArray(Session.get('cart'));
-
-            if(!_.findWhere(cartContents, {_id:this._id})){
-                cartContents.push(this);
-            } else {
-                console.log('item already in cart');
-            }
-
-
-            Session.set('cart',cartContents);
-        }
-    });
-
-    Template.shoppingCart.helpers({
-        shoppingCartItems:function(){
-            return Session.get('cart');
-        },
-        itemInCart:function(){
-            var cartContents = copyArray(Session.get('cart'));
-            return _.findWhere(cartContents, {_id:this._id});
-        },
-        findOneItemHelper:function(){
-            console.log(findOneItem);
-            return findOneItem;
-        }
-    });
-
     Template.stripeOauthTemplate.helpers({
         stripeData:function(){
             return Session.get('stripeOauthData');
@@ -86,7 +57,7 @@ if(Meteor.isClient){
             handler.open({
                 name: orion.config.get('STRIPE_COMPANY_NAME'),
                 description: this.name,
-                email:Meteor.user().emails[0],
+                email:Meteor.user().emails[0].address,
                 amount: Math.round(this.price * 100)
             });
         }
