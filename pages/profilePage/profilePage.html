@@ -3,16 +3,22 @@
     {{#with currentUser.profile}}
 
         <div class="container">
-
             <div class="row">
-
                  <h1>
                      {{this.name}}
                  </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    {{>connectToStripeButtonTemplate}}
+                </div>
+            </div>
+            <div class="row">
 
             </div>
-
         </div>
+
+
 
     {{/with}}
 

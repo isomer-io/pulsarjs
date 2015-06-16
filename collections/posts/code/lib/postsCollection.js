@@ -59,6 +59,13 @@ Posts.attachSchema(new SimpleSchema({
         label: 'Body'
     }),
 
+
+    price:{
+        type:Number,
+        decimal:true,
+        min:0
+    },
+
     /*
     This attribute sets the user id to that of the user that created
     this post automatically.  */
@@ -67,6 +74,7 @@ Posts.attachSchema(new SimpleSchema({
     createdAt: orion.attribute('createdAt'),
 
     updatedAt: orion.attribute('updatedAt'),
+
 
 }));
 
@@ -86,4 +94,7 @@ Posts.findList = new Meteor.Pagination(Posts, {
     },
     fastRender: true
 });
+
+//for stripe shopping cart
+findOneItem = "findOnePost";
 
