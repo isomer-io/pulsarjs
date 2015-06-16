@@ -7,7 +7,8 @@ if (Meteor.isClient) {
     Navbar.add({
         url: '/profile',
         menuName: 'Account',
-        menuOrientation: 'right'
+        menuOrientation: 'right',
+        requiresLogin: true
     });
 
     Router.route('/profile', function() {

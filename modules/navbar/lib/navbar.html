@@ -22,9 +22,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                 <ul class="nav navbar-nav">
                     {{#each pagesLeft}}
-                        <li class="{{isActive this.url}}">
-                            <a href="{{this.url}}">{{this.menuName}}</a>
-                        </li>
+                        {{#if requiresLogin this}}
+                            <li class="{{isActive this.url}}">
+                                <a href="{{this.url}}">{{this.menuName}}</a>
+                            </li>
+                        {{/if}}
                     {{/each}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
