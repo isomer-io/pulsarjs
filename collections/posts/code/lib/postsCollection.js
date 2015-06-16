@@ -66,7 +66,13 @@ Posts.attachSchema(new SimpleSchema({
 
     createdAt: orion.attribute('createdAt'),
 
-    updatedAt: orion.attribute('updatedAt')
+    updatedAt: orion.attribute('updatedAt'),
+
+    price:{
+        type:Number,
+        decimal:true,
+        min:0
+    }
 
 }));
 

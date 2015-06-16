@@ -24,10 +24,19 @@
 
     <div class="row">
         <div class="col-md-12">
+            <p>
+                {{this.price}}
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <img src="{{this.image.url}}" class="img-responsive center-block"/>
         </div>
     </div>
 
+    {{>payForItem}}
 
 
 </template>
