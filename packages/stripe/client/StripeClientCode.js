@@ -1,7 +1,7 @@
 if(Meteor.isClient){
 
     Meteor.startup(function(){
-        Session.setDefault('cart',[]);
+        Session.setDefault('plans',[]);
 
         Stripe.setPublishableKey(orion.config.get('STRIPE_API_KEY'));
 
@@ -52,11 +52,20 @@ if(Meteor.isClient){
         },
         stripeErr:function(){
             return Session.get('stripeSubscriptionErr');
+        },
+        plans:function(){
+            //TODO: should we be reactively (repeatedly) using RMI here?
+            Meteor.call('getPlans', function(err,res){
+                Session.set('plans',res.data);
+            });
+
+            return Session.get('plans');
         }
     });
 
     Template.subscribeButtonTemplate.events({
         'click #subscribeButton':function(event){
+            console.log(this.id);
             subscriptionHandler.open({
                 name: orion.config.get('STRIPE_COMPANY_NAME'),
                 description: 'Subscription', //TODO: this is also fucked

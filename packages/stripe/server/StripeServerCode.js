@@ -90,6 +90,21 @@ if(Meteor.isServer){
             }
 
             return stripeCustomerId;
+        },
+        getPlans:function(){
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var plans = null;
+
+            var res = Async.runSync(function (done) {
+                Stripe.plans.list(function (err, plansObj) {
+                    plans = plansObj;
+
+                    done(err, plans);
+                })
+            });
+
+            return plans;
         }
     });
 
