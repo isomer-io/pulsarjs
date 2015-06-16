@@ -40,8 +40,8 @@ if (Meteor.isClient) {
     };
 
     Template.navbar.helpers({
-        requiresLogin: function(menuItem) {
-            return Meteor.user() && !menuItem.requiresLogin;
+        shouldShow: function(menuItem) {
+            return !(!Meteor.user() && menuItem.requiresLogin);
         },
        pagesLeft: function() {
            return JSON.parse(Session.get('pagesLeft'));
