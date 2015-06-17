@@ -64,7 +64,7 @@ if(Meteor.isServer){
 
             return res;
         },
-        createSubscription:function(token){
+        createSubscription:function(token,plan){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
@@ -75,7 +75,6 @@ if(Meteor.isServer){
                 var res = Async.runSync(function (done) {
                     Stripe.customers.create({
                         source: token.id,
-                        plan: 'gold',
                         email: Meteor.user().emails[0].address
                     }, function (err, customerObj) {
                         console.log(err,customerObj);
@@ -89,7 +88,18 @@ if(Meteor.isServer){
                 Meteor.users.update({_id:this.userId}, {$set: {stripeCustomerId: stripeCustomerId} } );
             }
 
-            return stripeCustomerId;
+            var res = Async.runSync(function (done) {
+                console.log('subscribing to plan',plan);
+                Stripe.customers.createSubscription(stripeCustomerId, {
+                    plan: plan
+                },function(err,data){
+                    console.log(err,data);
+
+                    done(err,data);
+                });
+            });
+
+            return res;
         },
         getPlans:function(){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
@@ -105,6 +115,50 @@ if(Meteor.isServer){
             });
 
             return plans;
+        },
+        getUserSubscriptions:function(){
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var user = Meteor.users.findOne(this.userId);
+
+            var userSubscriptions = null;
+
+            var res = Async.runSync(function (done) {
+                Stripe.customers.retrieve(
+                    user.stripeCustomerId,
+                    function(err, customer) {
+                        userSubscriptions = customer.subscriptions.data;
+
+                        //TODO: make less hackish
+                        _.forEach(userSubscriptions, function(subscription){
+                            subscription.planId = subscription.plan.id;
+                        });
+
+                        done(err, customer);
+                    }
+                );
+            });
+
+            return userSubscriptions;
+        },
+        cancelSubscription:function(subscriptionId){
+            //TODO: read docs more closely https://stripe.com/docs/api/node#cancel_subscription
+
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var user = Meteor.users.findOne(this.userId);
+
+            var userSubscriptions = null;
+
+            var res = Async.runSync(function (done) {
+                Stripe.customers.cancelSubscription(user.stripeCustomerId, subscriptionId, function(err, res) {
+                    done(err, res);
+                });
+
+
+            });
+
+            return userSubscriptions;
         }
     });
 

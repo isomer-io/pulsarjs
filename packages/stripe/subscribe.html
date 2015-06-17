@@ -24,5 +24,10 @@
 
 <template name="plan">
     {{id}}
-    {{>subscribeButtonTemplate}}
+
+    {{#if userIsSubscribed id}}
+        {{>unsubscribeButtonTemplate}}
+    {{else}}
+        {{>subscribeButtonTemplate}}
+    {{/if}}
 </template>

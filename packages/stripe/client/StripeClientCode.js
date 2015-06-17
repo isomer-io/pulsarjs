@@ -18,7 +18,7 @@ if(Meteor.isClient){
         subscriptionHandler = StripeCheckout.configure({
             key: orion.config.get('STRIPE_API_KEY'),
             token: function(token) {
-                Meteor.call('createSubscription', token, function(err,data){
+                Meteor.call('createSubscription', token, Session.get('currentPlan'), function(err,data){
                     Session.set('stripeSubscriptionErr',err);
                     Session.set('stripeSubscriptionData',data.result);
                 });
@@ -63,13 +63,37 @@ if(Meteor.isClient){
         }
     });
 
+    Template.plan.helpers({
+        userIsSubscribed:function(planId){
+            Meteor.call('getUserSubscriptions', function(err,res){
+                Session.set('userSubscriptions', res);
+            });
+
+            //TODO: possibly clean up (a little hackish injecting planId, need to do for findWhere to work)
+            return _.findWhere(Session.get('userSubscriptions'), {'planId':planId});
+        }
+    });
+
     Template.subscribeButtonTemplate.events({
         'click #subscribeButton':function(event){
-            console.log(this.id);
+            Session.set('currentPlan',this.id);
             subscriptionHandler.open({
                 name: orion.config.get('STRIPE_COMPANY_NAME'),
                 description: 'Subscription', //TODO: this is also fucked
                 email:Meteor.user().emails[0].address
+            });
+        }
+    });
+
+    Template.unsubscribeButtonTemplate.events({
+        'click #unsubscribeButton':function(event){
+            Meteor.call('getUserSubscriptions', function(err,res){
+                Session.set('userSubscriptions', res);
+            });
+
+
+            Meteor.call('cancelSubscription', _.findWhere(Session.get('userSubscriptions'), {'planId':this.id}).id, function(err,res){
+
             });
         }
     });
