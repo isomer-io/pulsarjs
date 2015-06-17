@@ -12,6 +12,7 @@
       {{ else }}
         {{# if base64 }}
           <img src="{{ base64 }}" class="base64-preview {{ uploadingClass }}">
+            {{>cropperPlaceholder}}
           {{# if progress }}
             <div class="progress">
               <div class="progress-bar progress-bar-striped active determinate" style="width: {{ progress }}%"></div>
@@ -38,4 +39,8 @@
   {{ else }}
     <p class="help-block"><i>{{ i18n 'attributes.file.noFile' }}</i></p>
   {{/ if }}
+</template>
+
+<template name="cropperPlaceholder">
+    <span class="btn btn-info" id="cropButton">Crop</span>
 </template>

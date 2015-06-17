@@ -30,3 +30,4 @@ fortawesome:fontawesome
 orionjs:image-attribute
 stripe
 ccorcos:clientside-image-manipulation
+jonblum:jquery-cropper

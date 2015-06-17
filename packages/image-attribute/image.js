@@ -5,8 +5,28 @@ ReactiveTemplates.onRendered('attribute.image', function () {
   Session.set('image' + this.data.name, this.data.value);
 });
 
+var addCropper = function(){
+
+  $('.image-attribute > img').cropper({
+    aspectRatio: 16 / 9,
+    autoCropArea: 0.65,
+    strict: false,
+    guides: false,
+    highlight: false,
+    dragCrop: false,
+    cropBoxMovable: false,
+    cropBoxResizable: false
+  });
+
+};
+
+Template.cropperPlaceholder.onRendered(function(){
+  addCropper();
+});
+
 ReactiveTemplates.helpers('attribute.image', {
   base64: function() {
+    console.log(Session.get('image_base64' + this.name));
     return Session.get('image_base64' + this.name);
   },
   uploadingClass: function() {
@@ -56,43 +76,55 @@ ReactiveTemplates.events('attribute.image', {
     var files = event.currentTarget.files;
     if (files.length != 1) return;
 
-    processImage(files[0],20,20,function(data){
-      var file = dataURItoBlob(data);
-
-      orion.helpers.getBase64Image(file, function(base64) {
-        Session.set('image_base64' + self.name, base64);
-
-        var upload = orion.filesystem.upload({
-          fileList: files,
-          name: files[0].name,
-          uploader: 'image-attribute'
-        });
-
-        Session.set('isUploading' + self.name, true);
-        Session.set('uploadProgress' + self.name, 1);
-
-        Tracker.autorun(function () {
-          if (upload.ready()) {
-            if (upload.error) {
-              Session.set('image' + self.name, null);
-              console.log(upload.error);
-              alert(upload.error.reason);
-            } else {
-              var information = orion.helpers.analizeColorFromBase64(base64);
-              console.log(information, 'info');
-              Session.set('image' + self.name, {
-                fileId: upload.fileId,
-                url: upload.url,
-                info: information
-              });
-            }
-            Session.set('isUploading' + self.name, false);
-          }
-        });
-        Tracker.autorun(function () {
-          Session.set('uploadProgress' + self.name, upload.progress());
-        });
-      })
+    orion.helpers.getBase64Image(files[0], function(base64) {
+      Session.set('image_base64' + self.name, base64);
     });
+  },
+  'click #cropButton':function(e,t){
+    var self = this;
+
+    var cropUrl = $('.image-attribute > img').cropper('getCroppedCanvas').toDataURL();
+
+    $('.image-attribute > img').cropper('destroy');
+
+
+    Session.set('image_base64' + self.name, cropUrl);
+
+    var files = [dataURItoBlob(cropUrl)];
+
+    files[0].name = self.name;
+
+    var upload = orion.filesystem.upload({
+      fileList: files,
+      name: files[0].name,
+      uploader: 'image-attribute'
+    });
+
+    Session.set('isUploading' + self.name, true);
+    Session.set('uploadProgress' + self.name, 1);
+
+    Tracker.autorun(function () {
+      if (upload.ready()) {
+        if (upload.error) {
+          Session.set('image' + self.name, null);
+          console.log(upload.error);
+          alert(upload.error.reason);
+        } else {
+          //var information = orion.helpers.analizeColorFromBase64(base64);
+          //console.log(information, 'info');
+          Session.set('image' + self.name, {
+            fileId: upload.fileId,
+            url: upload.url,
+            info: null
+          });
+        }
+        Session.set('isUploading' + self.name, false);
+      }
+    });
+    Tracker.autorun(function () {
+      Session.set('uploadProgress' + self.name, upload.progress());
+    });
+
+    return false;
   }
 });
