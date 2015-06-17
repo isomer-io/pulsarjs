@@ -25,6 +25,7 @@
 <template name="plan">
     {{id}}
 
+        <!--TODO: Fix reactivity. These buttons do not appear to be entirely reactive, probably because we have to make calls to the server-->
     {{#if userIsSubscribed id}}
         {{>unsubscribeButtonTemplate}}
     {{else}}

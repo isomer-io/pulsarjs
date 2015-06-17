@@ -65,12 +65,21 @@ if(Meteor.isClient){
 
     Template.plan.helpers({
         userIsSubscribed:function(planId){
-            Meteor.call('getUserSubscriptions', function(err,res){
-                Session.set('userSubscriptions', res);
-            });
+            //Meteor.call('getUserSubscriptions', function(err,res){
+            //    if (res) {
+            //        console.log('derp');
+            //        Session.set('userSubscriptions', res);
+            //    }
+            //});
+            //
+            ////TODO: possibly clean up (a little hackish injecting planId, need to do for findWhere to work)
+            //return _.findWhere(Session.get('userSubscriptions'), {'planId':planId});
 
-            //TODO: possibly clean up (a little hackish injecting planId, need to do for findWhere to work)
-            return _.findWhere(Session.get('userSubscriptions'), {'planId':planId});
+            if (Meteor.user().subscriptions) {
+               return _.findWhere(Meteor.user().subscriptions, {'planId':planId});
+            }
+            return false;
+
         }
     });
 

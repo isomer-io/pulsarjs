@@ -1,7 +1,7 @@
 if(Meteor.isServer){
     Meteor.publish("userTransactions", function () {
         if (this.userId) {
-            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1, "stripe":1}});
+            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1, "stripe":1, "subscriptions": 1}});
         } else {
             this.ready();
         }
@@ -99,6 +99,13 @@ if(Meteor.isServer){
                 });
             });
 
+            Async.runSync(function (done) {
+                Meteor.call('getUserSubscriptions', function(err, res) {
+                    Meteor.users.update(this.userId, {$set: {subscriptions: res}});
+                    done(err, res);
+                });
+            });
+
             return res;
         },
         getPlans:function(){
@@ -152,10 +159,18 @@ if(Meteor.isServer){
 
             var res = Async.runSync(function (done) {
                 Stripe.customers.cancelSubscription(user.stripeCustomerId, subscriptionId, function(err, res) {
+
                     done(err, res);
                 });
 
 
+            });
+
+            Async.runSync(function (done) {
+                Meteor.call('getUserSubscriptions', function(err, res) {
+                    Meteor.users.update(this.userId, {$set: {subscriptions: res}});
+                    done(err, res);
+                });
             });
 
             return userSubscriptions;
