@@ -67,7 +67,7 @@ if(Meteor.isClient){
         }
     });
 
-    Template.plan.helpers({
+    Template.subscribe.helpers({
         userIsSubscribed:function(planId){
             subscriptionsDep.depend();
             Meteor.call('getUserSubscriptions', function(err,res){

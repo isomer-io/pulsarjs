@@ -1,7 +1,13 @@
 <template name="subscribe">
     <div class="row">
         {{#each plans}}
-            {{>plan}}
+            {{id}}
+
+            {{#if userIsSubscribed id}}
+                {{>unsubscribeButtonTemplate}}
+            {{else}}
+                {{>subscribeButtonTemplate}}
+            {{/if}}
         {{/each}}
     </div>
 
@@ -20,14 +26,4 @@
         {{/if}}
     </div>
 
-</template>
-
-<template name="plan">
-    {{id}}
-
-    {{#if userIsSubscribed id}}
-        {{>unsubscribeButtonTemplate}}
-    {{else}}
-        {{>subscribeButtonTemplate}}
-    {{/if}}
 </template>
