@@ -43,7 +43,8 @@ if(Meteor.isServer){
                     currency: 'usd',
                     source: token.id,
                     application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
-                    destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id
+                    destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
+                    description: item.title //TODO: this is fucked
                 }, function (err, chargeObj) {
                     console.log(err,chargeObj);
 
