@@ -93,7 +93,10 @@ if(Meteor.isServer){
                 Stripe.customers.createSubscription(stripeCustomerId, {
                     plan: plan
                 },function(err,data){
-                    console.log(err,data);
+
+                    if(!err){
+                        console.log('subscribed');
+                    }
 
                     done(err,data);
                 });
@@ -144,6 +147,8 @@ if(Meteor.isServer){
         cancelSubscription:function(subscriptionId){
             //TODO: read docs more closely https://stripe.com/docs/api/node#cancel_subscription
 
+            console.log('cancelling plan');
+
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
@@ -152,6 +157,9 @@ if(Meteor.isServer){
 
             var res = Async.runSync(function (done) {
                 Stripe.customers.cancelSubscription(user.stripeCustomerId, subscriptionId, function(err, res) {
+                    if(!err){
+                        console.log('canceled');
+                    }
                     done(err, res);
                 });
 
