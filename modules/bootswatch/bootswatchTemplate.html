@@ -1,0 +1,17 @@
+<template name="bootswatchTemplate">
+    {{#unless isOnAdmin}}
+        {{#unless bootswatchThemeUrl}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-info btn-block" href="/admin/config">Configure bootswatch theme</a>
+                    </div>
+                </div>
+            </div>
+        {{/unless}}
+    {{/unless}}
+</template>
+
+<body>
+    {{>bootswatchTemplate}}
+</body>

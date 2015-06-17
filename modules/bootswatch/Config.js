@@ -13,4 +13,26 @@ if(Meteor.isClient){
             document.getElementsByTagName('head')[0].appendChild(css);
         });
     });
+
+    Template.bootswatchTemplate.helpers({
+        bootswatchThemeUrl:function(){
+            return orion.config.get('BOOTSWATCH_THEME_URL');
+        },
+        isOnAdmin: function() {
+            var routeName = null;
+            if (Router.current()) {
+                routeName = Router.current().url;
+            }
+            if (!routeName) {
+                return false;
+            }
+
+            if (routeName.indexOf('admin') !== -1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+    });
 }
