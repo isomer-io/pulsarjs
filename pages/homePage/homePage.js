@@ -6,6 +6,8 @@ if (Meteor.isClient) {
 
     Router.route('/', function() {
         this.render('homePage');
+
+        GAnalytics.pageview();
     });
 
     Template.homePage.helpers({
