@@ -8,24 +8,6 @@ orion.attributes.registerAttribute('image', {
       },
       fileId: {
         type: String
-      },
-      info: {
-        type: Object
-      },
-      'info.width': {
-        type: Number
-      },
-      'info.height': {
-        type: Number
-      },
-      'info.backgroundColor': {
-        type: String
-      },
-      'info.primaryColor': {
-        type: String
-      },
-      'info.secondaryColor': {
-        type: String
       }
     });
     return {

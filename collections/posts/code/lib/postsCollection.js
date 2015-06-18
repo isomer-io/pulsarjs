@@ -47,12 +47,12 @@ Posts.attachSchema(new SimpleSchema({
         .image, it will be saved in .image.url.
      */
     images: {
-        type: Array
+        type: Array,
+        optional: true
     },
 
     'images.$': orion.attribute('image', {
         label: 'Image',
-        optional: true
     }),
 
     /*
@@ -101,4 +101,8 @@ Posts.findList = new Meteor.Pagination(Posts, {
 
 //for stripe shopping cart
 findOneItem = "findOnePost";
+
+if(Meteor.isClient){
+    SimpleSchema.debug = true;
+}
 

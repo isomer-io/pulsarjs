@@ -80,7 +80,7 @@ ReactiveTemplates.events('attribute.image', {
       Session.set('image_base64' + self.name, base64);
     });
   },
-  'click #cropButton':function(e,t){
+  'click .cropButton':function(e,t) {
     var self = this;
 
     var cropUrl = $('.image-attribute > img').cropper('getCroppedCanvas').toDataURL();
@@ -110,8 +110,7 @@ ReactiveTemplates.events('attribute.image', {
           console.log(upload.error);
           alert(upload.error.reason);
         } else {
-          //var information = orion.helpers.analizeColorFromBase64(base64);
-          //console.log(information, 'info');
+          var information = orion.helpers.analizeColorFromBase64(cropUrl);
           Session.set('image' + self.name, {
             fileId: upload.fileId,
             url: upload.url,
@@ -124,7 +123,5 @@ ReactiveTemplates.events('attribute.image', {
     Tracker.autorun(function () {
       Session.set('uploadProgress' + self.name, upload.progress());
     });
-
-    return false;
   }
 });
