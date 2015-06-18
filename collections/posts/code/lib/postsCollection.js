@@ -102,7 +102,3 @@ Posts.findList = new Meteor.Pagination(Posts, {
 //for stripe shopping cart
 findOneItem = "findOnePost";
 
-if(Meteor.isClient){
-    SimpleSchema.debug = true;
-}
-
