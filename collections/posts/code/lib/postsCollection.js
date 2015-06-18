@@ -59,6 +59,13 @@ Posts.attachSchema(new SimpleSchema({
         label: 'Body'
     }),
 
+
+    price:{
+        type:Number,
+        decimal:true,
+        min:0
+    },
+
     /*
     This attribute sets the user id to that of the user that created
     this post automatically.  */
@@ -68,11 +75,6 @@ Posts.attachSchema(new SimpleSchema({
 
     updatedAt: orion.attribute('updatedAt'),
 
-    price:{
-        type:Number,
-        decimal:true,
-        min:0
-    }
 
 }));
 

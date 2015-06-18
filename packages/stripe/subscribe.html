@@ -1,0 +1,29 @@
+<template name="subscribe">
+    <div class="row">
+        {{#each plans}}
+            {{id}}
+
+            {{#if userIsSubscribed id}}
+                {{>unsubscribeButtonTemplate}}
+            {{else}}
+                {{>subscribeButtonTemplate}}
+            {{/if}}
+        {{/each}}
+    </div>
+
+
+    <div class="row">
+        {{#if stripeErr}}
+            <div class="col-md-offset-4 col-md-4" >
+                <div class="alert alert-danger" role="alert">Stripe had an error: {{stripeErr.message}}</div>
+            </div>
+        {{/if}}
+
+        {{#if stripeData}}
+            <div class="col-md-offset-4 col-md-4">
+                <div class="alert alert-success text-center" role="alert">Subscription successful</div>
+            </div>
+        {{/if}}
+    </div>
+
+</template>

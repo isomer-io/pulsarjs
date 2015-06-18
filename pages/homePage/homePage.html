@@ -1,21 +1,108 @@
 <template name="homePage">
+
+    <div class="container-fluid" id="background">
+        <div class="row" >
+            <div class="col-md-12">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="jumbotron">
+                    <h1>Jumbotron</h1>
+                    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+                </div>
+                <div id="splash" class="col-md-offset-3 col-md-6">
+                    <h1 class="text-center">
+                        Appify
+                    </h1>
+                    <h3 class="text-center">
+                        Change this photo under homePage.css
+                    </h3>
+
+                    <button class="btn-block btn btn-success">
+                        Sign Up
+                    </button>
+                    <br>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center">
-                    Don't forget your launch box.
-                </h1>
-
+                <h2 class="text-center">
+                    All the selling points
+                </h2>
+                <br>
             </div>
         </div>
-
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fa fa-bolt fa-5x"></i>
+                <h4>
+                    Love Me
+                </h4>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-heart fa-5x"></i>
+                <h4>
+                    The best ever
+                </h4>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-bomb fa-5x"></i>
+                <h4>
+                    All the features
+                </h4>
+            </div>
+        </div>
+        <hr>
         <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                {{>connectToStripeButtonTemplate}}
+            <div class="col-md-5">
+
+                <h3 class="text-center">
+                    Some more information
+                </h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                </p>
+
+            </div>
+
+            <div class="col-md-7">
+                <img class="img-responsive center-block" src="http://placehold.it/600x400">
             </div>
         </div>
+        <hr>
+        <div id="splash" class="col-md-offset-4 col-md-4">
+
+            <h4 class="text-center">
+                Get started
+            </h4>
+            <button class="btn-block btn btn-success">
+                Sign Up
+            </button>
 
 
+
+        </div>
     </div>
 
 </template>
