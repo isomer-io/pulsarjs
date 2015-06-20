@@ -35,13 +35,32 @@ if(Meteor.isServer){
 
             var user = Meteor.users.findOne(this.userId);
 
+            var stripeCustomerId = user.stripeCustomerId;
+
+            if(!stripeCustomerId) {
+                var res = Async.runSync(function (done) {
+                    Stripe.customers.create({
+                        source: token.id,
+                        email: Meteor.user().emails[0].address
+                    }, function (err, customerObj) {
+                        console.log(err,customerObj);
+
+                        stripeCustomerId = customerObj.id;
+
+                        done(err, stripeCustomerId);
+                    })
+                });
+
+                Meteor.users.update({_id:this.userId}, {$set: {stripeCustomerId: stripeCustomerId} } );
+            }
+
             var charge = null;
 
             var res = Async.runSync(function(done) {
                 Stripe.charges.create({
                     amount: Math.round(item.price * 100),
                     currency: 'usd',
-                    source: token.id,
+                    source: stripeCustomerId,
                     application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
                     destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
                     description: item.title //TODO: this is fucked
@@ -53,15 +72,6 @@ if(Meteor.isServer){
                     done(err, chargeObj);
                 })
             });
-
-            if(!user.transactions){
-                user.transactions = [];
-                Meteor.users.update({_id:this.userId}, {$set: {transactions: user.transactions} } );
-            }
-
-            Meteor.users.update({_id:this.userId}, {$push: {transactions: charge} } );
-
-            console.log(Meteor.users.findOne(this.userId).transactions);
 
             return res;
         },
@@ -182,7 +192,25 @@ if(Meteor.isServer){
             } else {
                 return false;
             }
+        },
+        transactions:function(){
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var user = Meteor.users.findOne(this.userId);
+
+            var res = Async.runSync(function (done) {
+                Stripe.charges.list({
+                    customer:'cus_6RRoLi5bQeZYym'
+                }, function(err, res) {
+                    done(err, res);
+                });
+
+
+            });
+
+            return res;
         }
     });
+
 
 }

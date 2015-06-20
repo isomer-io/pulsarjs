@@ -142,4 +142,21 @@ if(Meteor.isClient){
             return Session.get('stripeChargeErr');
         }
     });
+
+    Template.transaction.events({
+        'click .refundButton':function(){
+
+        }
+    });
+
+    Template.transactions.helpers({
+        transactions:function(){
+            Meteor.call('transactions', function(err,res){
+                console.log(err,res.result.data);
+                Session.set('transactions', res.result.data);
+            });
+
+            return Session.get('transactions');
+        }
+    });
 }
