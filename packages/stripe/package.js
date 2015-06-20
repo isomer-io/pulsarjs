@@ -23,7 +23,7 @@ Package.onUse(function(api) {
   api.addFiles(['server/StripeServerCode.js'],'server');
 
   api.addFiles(['payForItemButtonTemplate.html','payForItem.html',
-    'connectToStripeButtonTemplate.html', 'StripeOauthTemplate.html','subscribeButtonTemplate.html',
+    'connectToStripeButtonTemplate.html', 'stripeOauthTemplate.html','subscribeButtonTemplate.html',
     'unsubscribeButtonTemplate.html','subscribe.html',
     'client/StripeClientCode.js'], 'client');
 
