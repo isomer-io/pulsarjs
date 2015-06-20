@@ -9,24 +9,44 @@
                  </h1>
             </div>
             <div class="row">
-                <div class="col-md-offset-4 col-md-4">
+                <div class="col-md-4">
                     {{>connectToStripeButtonTemplate}}
                 </div>
             </div>
+            <hr>
             <div class="row">
-                <div class="list-group">
-                    {{#each currentUser.transactions}}
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading">{{this.description}}</h4>
-                            <p class="list-group-item-text">Price: {{this.amount}}</p>
-                            <span class="btn btn-warning">Request Refund</span>
-                        </a>
-                    {{/each}}
-                </div>
-                <div class="col-md-offset-4 col-md-4">
-                    {{>subscribe}}
+                <h2>
+                    Your Purchases
+                </h2>
+                <div class="col-md-12">
+                    <div class="list-group">
+                        {{#each currentUser.transactions}}
+                            <a href="#" class="list-group-item row">
+
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 class="list-group-item-heading">{{this.description}}</h4>
+                                        <p class="list-group-item-text">Price: {{this.amount}}</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-info btn-block">
+                                            Leave Review
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-warning btn-block">Request Refund</a>
+                                    </div>
+                                </div>
+
+
+                            </a>
+                        {{/each}}
+                    </div>
                 </div>
         </div>
+            <hr>
+            {{> subscribe }}
     </div>
 
 

@@ -1,13 +1,34 @@
 <template name="subscribe">
+    <h2>
+        Subscriptions
+    </h2>
+    <div class="well">
+
     <div class="row">
         {{#each plans}}
-            {{id}}
 
-            {{#if userIsSubscribed id}}
-                {{>unsubscribeButtonTemplate}}
-            {{else}}
-                {{>subscribeButtonTemplate}}
-            {{/if}}
+            <div class="col-offset-md-2 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            {{this.id}}
+                        </h3>
+                        <h6>
+                            {{this.statement_descriptor}}
+                        </h6>
+                        {{#if userIsSubscribed id}}
+                            {{>unsubscribeButtonTemplate}}
+                        {{else}}
+                            {{>subscribeButtonTemplate}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
         {{/each}}
     </div>
 
@@ -25,5 +46,5 @@
             </div>
         {{/if}}
     </div>
-
+    </div>
 </template>
