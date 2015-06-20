@@ -121,6 +121,19 @@ if(Meteor.isClient){
         }
     });
 
+    Template.payForItem.helpers({
+        stripeClientId:function(){
+            return orion.config.get('STRIPE_API_CLIENT_ID');
+        },
+        itemHasMerchant:function(){
+            Meteor.call('itemHasMerchant', this.createdBy, function(err,res){
+                Session.set('itemHasMerchant', res);
+            });
+
+            return Session.get('itemHasMerchant');
+        }
+    });
+
     Template.payForItemButtonTemplate.helpers({
         stripeData:function(){
             return Session.get('stripeChargeData');
