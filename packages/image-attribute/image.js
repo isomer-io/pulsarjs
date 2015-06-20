@@ -5,10 +5,13 @@ ReactiveTemplates.onRendered('attribute.image', function () {
   Session.set('image' + this.data.name, this.data.value);
 });
 
-var addCropper = function(){
+Meteor.startup(function(){
+  orion.config.add('CROP_ASPECT_RATIO', 'cropper');
+});
 
-  $('.image-attribute > img').cropper({
-    aspectRatio: 16 / 9,
+Template.cropperPlaceholder.onRendered(function(){
+  $('img.base64-preview').cropper({
+    aspectRatio: orion.config.get('CROP_ASPECT_RATIO'),
     autoCropArea: 0.65,
     strict: false,
     guides: false,
@@ -17,16 +20,10 @@ var addCropper = function(){
     cropBoxMovable: false,
     cropBoxResizable: false
   });
-
-};
-
-Template.cropperPlaceholder.onRendered(function(){
-  addCropper();
 });
 
 ReactiveTemplates.helpers('attribute.image', {
   base64: function() {
-    console.log(Session.get('image_base64' + this.name));
     return Session.get('image_base64' + this.name);
   },
   uploadingClass: function() {
@@ -83,9 +80,9 @@ ReactiveTemplates.events('attribute.image', {
   'click .cropButton':function(e,t) {
     var self = this;
 
-    var cropUrl = $('.image-attribute > img').cropper('getCroppedCanvas').toDataURL();
+    var cropUrl = $('img.base64-preview').cropper('getCroppedCanvas').toDataURL();
 
-    $('.image-attribute > img').cropper('destroy');
+    $('img.base64-preview').cropper('destroy');
 
 
     Session.set('image_base64' + self.name, cropUrl);
@@ -110,6 +107,7 @@ ReactiveTemplates.events('attribute.image', {
           console.log(upload.error);
           alert(upload.error.reason);
         } else {
+          Session.set('image_base64' + self.name, null);
           var information = orion.helpers.analizeColorFromBase64(cropUrl);
           Session.set('image' + self.name, {
             fileId: upload.fileId,
