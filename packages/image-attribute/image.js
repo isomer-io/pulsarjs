@@ -5,13 +5,11 @@ ReactiveTemplates.onRendered('attribute.image', function () {
   Session.set('image' + this.data.name, this.data.value);
 });
 
-Meteor.startup(function(){
-  orion.config.add('CROP_ASPECT_RATIO', 'cropper');
-});
-
 Template.cropperPlaceholder.onRendered(function(){
+  var aspectRatio = this.data.atts.aspectRatio;
+  console.log(aspectRatio);
   $('img.base64-preview').cropper({
-    aspectRatio: orion.config.get('CROP_ASPECT_RATIO'),
+    aspectRatio: aspectRatio,
     autoCropArea: 0.65,
     strict: false,
     guides: false,
