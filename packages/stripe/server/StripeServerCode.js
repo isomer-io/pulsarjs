@@ -168,6 +168,20 @@ if(Meteor.isServer){
             });
 
             return userSubscriptions;
+        },
+        itemHasMerchant:function(ownerId){
+            var owner = Meteor.users.findOne(ownerId);
+
+
+            if(owner){
+                if(owner.stripe.stripe_user_id){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
     });
 

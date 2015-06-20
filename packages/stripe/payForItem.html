@@ -1,7 +1,16 @@
 <template name="payForItem">
     <div class="row">
+        {{#if stripeClientId}}
+            {{#if itemHasMerchant}}
+                {{>payForItemButtonTemplate}}
+            {{else}}
+                <div class="alert alert-info" role="alert">Merchant has no connected stripe account</div>
+            {{/if}}
+        {{else}}
+            <a href="/admin/config" class="btn btn-default btn-info btn-block">Configure stripe API details</a>
+        {{/if}}
+
         <div class="col-md-offset-4 col-md-4" style="margin-bottom: 0.5%;">
-            {{>payForItemButtonTemplate}}
         </div>
 
         {{#if stripeErr}}

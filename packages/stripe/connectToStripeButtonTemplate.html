@@ -1,6 +1,10 @@
 <template name="connectToStripeButtonTemplate">
+    {{#if stripeClientId}}
         <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id={{stripeClientId}}&scope=read_write" class="stripe-connect">
             <button id="connectToStripeButton" type="button" class="btn btn-default btn-block">Connect to stripe</button>
         </a>
+    {{else}}
+        <a href="/admin/config" class="btn btn-default btn-info btn-block">Configure stripe API details</a>
+    {{/if}}
 </template>
 
