@@ -145,18 +145,15 @@ if(Meteor.isClient){
 
     Template.transaction.events({
         'click .refundButton':function(){
+            Meteor.call('requestRefund', this.id, function(err,res){
 
+            });
         }
     });
 
     Template.transactions.helpers({
         transactions:function(){
-            Meteor.call('transactions', function(err,res){
-                console.log(err,res.result.data);
-                Session.set('transactions', res.result.data);
-            });
-
-            return Session.get('transactions');
+            return Meteor.user().transactions;
         }
     });
 }
