@@ -144,10 +144,8 @@ if(Meteor.isClient){
     });
 
     Template.transaction.events({
-        'click .refundButton':function(){
-            Meteor.call('requestRefund', this.id, function(err,res){
-
-            });
+        'click .refundButton':function(e,t){
+            Refunds.insert({chargeId:this.id,userId:Meteor.userId()});
         }
     });
 

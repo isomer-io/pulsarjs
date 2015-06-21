@@ -9,12 +9,12 @@
 
             <div class="col-md-offset-4 col-md-4">
 
-                {{#if this.canShowUpdate }}
+                {{#if this.isOwner }}
                     <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
                         Edit this post
                     </a>
                 {{/if}}
-                {{#if this.canShowRemove }}
+                {{#if this.isOwner }}
                     <a id="deletePostButton" class="btn btn-block btn-danger">
                         Delete this post
                     </a>

@@ -177,14 +177,13 @@ if(Meteor.isServer){
                 return false;
             }
         },
-        requestRefund:function(chargeId){
-            console.log('requesting refund');
+        refund:function(chargeId){
+            console.log('refunding');
 
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
 
-            var userSubscriptions = null;
 
             var res = Async.runSync(function (done) {
                 Stripe.charges.createRefund(chargeId, function(err, res) {
