@@ -46,9 +46,16 @@ Posts.attachSchema(new SimpleSchema({
         WARNING: the url of the image will not be saved in
         .image, it will be saved in .image.url.
      */
-    image: orion.attribute('image', {
+    images: {
+        type: Array,
+        optional: true,
+    },
+
+    'images.$': orion.attribute('image', {
         label: 'Image',
-        optional: true
+        autoform:{
+          aspectRatio:16/4
+        }
     }),
 
     /*

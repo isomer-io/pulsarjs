@@ -20,6 +20,7 @@ blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 callback-hook@1.0.3
+ccorcos:clientside-image-manipulation@1.0.4
 check@1.0.5
 chuangbo:cookie@1.1.0
 coffeescript@1.0.6
@@ -45,6 +46,7 @@ iron:location@1.0.9
 iron:middleware-stack@1.0.9
 iron:router@1.0.9
 iron:url@1.0.9
+jonblum:jquery-cropper@0.9.3
 jquery@1.11.3_2
 json@1.0.3
 launch-screen@1.0.2
