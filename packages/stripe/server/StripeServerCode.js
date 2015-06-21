@@ -31,20 +31,23 @@ if(Meteor.isServer){
             }
         },
         chargeCard:function(token,item){
+            console.log(item);
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
 
+            var params = {
+                amount: Math.round(item.price * 100),
+                currency: 'usd',
+                source: token.id,
+                application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
+                destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
+                description: item.title
+            };
+
 
             var res = Async.runSync(function(done) {
-                Stripe.charges.create({
-                    amount: Math.round(item.price * 100),
-                    currency: 'usd',
-                    source: token.id,
-                    application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
-                    destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
-                    description: item.title
-                }, function (err, chargeObj) {
+                Stripe.charges.create(params, function (err, chargeObj) {
                     done(err, chargeObj);
                 })
             });
