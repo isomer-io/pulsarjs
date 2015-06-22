@@ -31,37 +31,34 @@ if(Meteor.isServer){
             }
         },
         chargeCard:function(token,item){
+            console.log(item);
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
 
-            var charge = null;
+            var params = {
+                amount: Math.round(item.price * 100),
+                currency: 'usd',
+                source: token.id,
+                application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
+                destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
+                description: item.title
+            };
+
 
             var res = Async.runSync(function(done) {
-                Stripe.charges.create({
-                    amount: Math.round(item.price * 100),
-                    currency: 'usd',
-                    source: token.id,
-                    application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
-                    destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
-                    description: item.title //TODO: this is fucked
-                }, function (err, chargeObj) {
-                    console.log(err,chargeObj);
-
-                    charge = chargeObj;
-
+                Stripe.charges.create(params, function (err, chargeObj) {
                     done(err, chargeObj);
                 })
             });
 
             if(!user.transactions){
-                user.transactions = [];
-                Meteor.users.update({_id:this.userId}, {$set: {transactions: user.transactions} } );
+                Meteor.users.update({_id:this.userId}, {$set: {transactions: []} } );
             }
 
-            Meteor.users.update({_id:this.userId}, {$push: {transactions: charge} } );
+            console.log(res);
 
-            console.log(Meteor.users.findOne(this.userId).transactions);
+            Meteor.users.update({_id:this.userId}, {$push: {transactions: res.result} } );
 
             return res;
         },
@@ -182,6 +179,23 @@ if(Meteor.isServer){
             } else {
                 return false;
             }
+        },
+        refund:function(chargeId){
+            console.log('refunding');
+
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+            var user = Meteor.users.findOne(this.userId);
+
+
+            var res = Async.runSync(function (done) {
+                Stripe.charges.createRefund(chargeId, function(err, res) {
+                    console.log(res);
+                    done(err, res);
+                });
+            });
+
+            return res;
         }
     });
 

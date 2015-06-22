@@ -142,4 +142,16 @@ if(Meteor.isClient){
             return Session.get('stripeChargeErr');
         }
     });
+
+    Template.transaction.events({
+        'click .refundButton':function(e,t){
+            Refunds.insert({chargeId:this.id,userId:Meteor.userId()});
+        }
+    });
+
+    Template.transactions.helpers({
+        transactions:function(){
+            return Meteor.user().transactions;
+        }
+    });
 }

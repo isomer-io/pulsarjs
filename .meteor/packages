@@ -30,3 +30,5 @@ orionjs:image-attribute
 stripe
 twbs:bootstrap
 bootswatch:paper
+ccorcos:clientside-image-manipulation
+jonblum:jquery-cropper
