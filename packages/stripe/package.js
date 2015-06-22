@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars"
+    "spacebars","ongoworks:security","nicolaslopezj:roles"
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
@@ -24,10 +24,13 @@ Package.onUse(function(api) {
 
   api.addFiles(['payForItemButtonTemplate.html','payForItem.html',
     'connectToStripeButtonTemplate.html', 'stripeOauthTemplate.html','subscribeButtonTemplate.html',
-    'unsubscribeButtonTemplate.html','subscribe.html',
+    'unsubscribeButtonTemplate.html','subscribe.html', 'transactions.html',
     'client/StripeClientCode.js'], 'client');
 
-  api.addFiles(['StripeCode.js'],['client','server']);
+  api.addFiles(['refunds/RefundCollection.js','StripeCode.js'],['client','server']);
+
+
+  api.addFiles(['server/RefundsSecurity.js'],'server');
   
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
