@@ -10,7 +10,7 @@ if(Meteor.isClient){
             var css = document.createElement('link');
             css.setAttribute('rel', 'stylesheet');
             css.setAttribute('href', orion.config.get('BOOTSWATCH_THEME_URL'));
-            document.getElementsByTagName('head')[0].appendChild(css);
+            //document.getElementsByTagName('head')[0].appendChild(css);
         });
     });
 }

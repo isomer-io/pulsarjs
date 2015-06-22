@@ -6,7 +6,6 @@
 
 meteor-platform
 orionjs:core
-twbs:bootstrap
 orionjs:bootstrap
 orionjs:filesystem
 orionjs:file-attribute
@@ -29,3 +28,5 @@ ongoworks:security
 fortawesome:fontawesome
 orionjs:image-attribute
 stripe
+twbs:bootstrap
+bootswatch:paper

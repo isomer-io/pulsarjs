@@ -19,6 +19,7 @@ binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
+bootswatch:paper@3.3.4_2
 callback-hook@1.0.3
 check@1.0.5
 chuangbo:cookie@1.1.0
@@ -112,7 +113,7 @@ stripe@0.0.1
 summernote:standalone@0.6.7
 templating@1.1.1
 tracker@1.0.7
-twbs:bootstrap@3.3.4
+twbs:bootstrap@3.3.5
 twitter@1.1.4
 ui@1.0.6
 underscore@1.0.3

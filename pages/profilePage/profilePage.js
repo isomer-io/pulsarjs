@@ -20,5 +20,10 @@ if (Meteor.isClient) {
 
     });
 
+    Router.configure({
+        fastRender: true,
+        layout: 'layout'
+    });
+
 
 }
