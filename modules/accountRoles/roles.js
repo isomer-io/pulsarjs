@@ -7,3 +7,7 @@ Options.set('forbidClientAccountCreation', false);
 
 Options.set('defaultRoles', ['user']);
 
+userRole = new Roles.Role('user');
+
+//userRole.allow('collections.posts.showRemove', true);
+

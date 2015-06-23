@@ -32,3 +32,5 @@ twbs:bootstrap
 bootswatch:paper
 ccorcos:clientside-image-manipulation
 jonblum:jquery-cropper
+msavin:mongol
+msavin:jetsetter
