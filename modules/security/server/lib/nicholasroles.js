@@ -8,19 +8,19 @@
  */
 if (Package && Package["nicolaslopezj:roles"]) {
 
-    var Roles = Package["nicolaslopezj:roles"].Roles;
-
-    Security.defineMethod("ifHasRole", {
-        fetch: [],
-        transform: null,
-        deny: function (type, arg, userId) {
-            if (!arg) {
-                throw new Error('ifHasRole security rule method requires an argument');
-            }
-            return !Roles.userHasRole(userId, arg);
-        }
-    });
-
+    //var Roles = Package["nicolaslopezj:roles"].Roles;
+    //
+    //Security.defineMethod("ifHasRole", {
+    //    fetch: [],
+    //    transform: null,
+    //    deny: function (type, arg, userId) {
+    //        if (!arg) {
+    //            throw new Error('ifHasRole security rule method requires an argument');
+    //        }
+    //        return !Roles.userHasRole(userId, arg);
+    //    }
+    //});
+    //
     Security.defineMethod("ifCreatedByUser", {
         fetch: [],
         transform: null,

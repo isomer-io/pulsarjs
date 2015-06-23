@@ -15,8 +15,9 @@ Template.cropperPlaceholder.onRendered(function(){
     guides: false,
     highlight: false,
     dragCrop: false,
-    cropBoxMovable: false,
-    cropBoxResizable: false
+    //cropBoxMovable: false,
+    cropBoxResizable: true,
+    zoomable: false
   });
 });
 

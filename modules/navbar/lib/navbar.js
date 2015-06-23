@@ -108,6 +108,9 @@ if (Meteor.isClient) {
         },
         'click .fa-bars': function() {
             Session.set('menuToggled', !Session.get('menuToggled'));
+        },
+        'click .content': function() {
+            //Session.set('menuToggled', false);
         }
     });
 

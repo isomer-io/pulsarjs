@@ -10,7 +10,6 @@ if(Meteor.isServer){
     Meteor.methods({
         obtainAccessToken:function(query){
             if(query.error){
-                console.log(query.error);
                 return query.error;
             } else{
                 if(!Meteor.users.findOne(this.userId).stripe){
@@ -31,7 +30,6 @@ if(Meteor.isServer){
             }
         },
         chargeCard:function(token,item){
-            console.log(item);
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
@@ -56,8 +54,6 @@ if(Meteor.isServer){
                 Meteor.users.update({_id:this.userId}, {$set: {transactions: []} } );
             }
 
-            console.log(res);
-
             Meteor.users.update({_id:this.userId}, {$push: {transactions: res.result} } );
 
             return res;
@@ -75,7 +71,6 @@ if(Meteor.isServer){
                         source: token.id,
                         email: Meteor.user().emails[0].address
                     }, function (err, customerObj) {
-                        console.log(err,customerObj);
 
                         stripeCustomerId = customerObj.id;
 
@@ -170,7 +165,7 @@ if(Meteor.isServer){
             var owner = Meteor.users.findOne(ownerId);
 
 
-            if(owner){
+            if(owner && owner.stripe){
                 if(owner.stripe.stripe_user_id){
                     return true;
                 } else {
@@ -190,7 +185,6 @@ if(Meteor.isServer){
 
             var res = Async.runSync(function (done) {
                 Stripe.charges.createRefund(chargeId, function(err, res) {
-                    console.log(res);
                     done(err, res);
                 });
             });

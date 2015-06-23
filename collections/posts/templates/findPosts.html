@@ -1,19 +1,27 @@
 <template name="postInFindList">
 
     <!-- This will be repeated inside of the find this -->
-    <div class="col-md-12">
-        <a href="/posts/{{this._id}}" class="list-group-item">
+     <a href="/posts/{{this._id}}" class="list-group-item">
             <h4 class="list-group-item-heading">{{this.title}}</h4>
             <p class="list-group-item-text">{{{this.body}}}</p>
             <p class="list-group-item-text">{{this.createdOn}}</p>
-        </a>
-    </div>
+     </a>
+
+
 
 </template>
 
 
 <template name="findPosts">
-    {{> posts }}
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="list-group">
+                {{> posts }}
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="posts">

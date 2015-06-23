@@ -49,12 +49,13 @@ Posts.attachSchema(new SimpleSchema({
     images: {
         type: Array,
         optional: true,
+        maxCount: 3
     },
 
     'images.$': orion.attribute('image', {
         label: 'Image',
         autoform:{
-          aspectRatio:16/4
+          aspectRatio:16/9
         }
     }),
 
@@ -101,7 +102,3 @@ Posts.findList = new Meteor.Pagination(Posts, {
     },
     fastRender: true
 });
-
-//for stripe shopping cart
-findOneItem = "findOnePost";
-
