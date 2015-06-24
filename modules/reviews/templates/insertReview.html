@@ -5,7 +5,8 @@
 </template>
 
 <template name="insertReviewButton">
-
+    <span></span>
+    {{#unless hasReviewed}}
     <div class="row">
         <div class="col-md-12">
             <a class="btn btn-block btn-info">
@@ -13,6 +14,7 @@
             </a>
         </div>
     </div>
+    {{/unless}}
 
 </template>
 

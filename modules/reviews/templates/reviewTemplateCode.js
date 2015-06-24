@@ -36,15 +36,32 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.findReviews.onRendered(function() {
+    Template.insertReviewButton.helpers({
+        hasReviewed: function() {
+            return Session.get('Reviews.hasReviewed');
+        }
+    });
 
-        console.log(this.data);
+    Template.insertReviewButton.onRendered(function() {
+        Session.setDefault('Reviews.hasReviewed');
+        console.log(this);
+
+        Meteor.call('hasReviewed', this.data.doc._id, function(err, res) {
+
+            //TODO: use reactive var
+            Session.set('Reviews.hasReviewed', res);
+        });
+    });
+
+    Template.findReviews.onRendered(function() {
 
         Reviews.findList.set({
             filters: {
                 reviewDocument: this.data.doc._id
             }
-        })
+        });
+
+
     });
 
     Template.findOneReview.helpers({
@@ -93,6 +110,9 @@ if (Meteor.isClient) {
             } else {
                 return '';
             }
+        },
+        anyReviews: function() {
+            return Reviews.find({reviewDocument: this.doc._id}).count() > 0;
         }
     });
 

@@ -10,6 +10,16 @@
 <template name="findReviews">
     <div class="row">
         <div class="col-md-12">
+            <h3>
+                Reviews
+            </h3>
+        </div>
+    </div>
+
+    {{> insertReviewButton}}
+    {{#if anyReviews}}
+    <div class="row">
+        <div class="col-md-12">
             <br>
             <div class="btn-group btn-group-justified">
                 <a id="highest" class="btn btn-primary {{isDisabled 'highest'}}">Highest</a>
@@ -19,6 +29,7 @@
             <br>
         </div>
     </div>
+    {{/if}}
     <div class="row">
         <div class="col-md-12">
             <div class="list-group">

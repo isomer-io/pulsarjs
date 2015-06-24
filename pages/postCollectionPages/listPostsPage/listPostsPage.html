@@ -1,22 +1,27 @@
 <template name="listPostsPage">
 
+
     <div class="container">
 
         <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>
+                    Posts
+                </h3>
+            </div>
             <div class="col-md-offset-4 col-md-4">
                 {{#if currentUser}}
-                <a href="/posts/create" class="btn btn-primary btn-block">
-                    Add new Post
-                </a>
+                    <a href="/posts/create" class="btn btn-primary btn-block">
+                        Add new Post
+                    </a>
                 {{/if}}
             </div>
         </div>
 
+        <hr>
+
         <div class="row">
             <div class="col-md-12">
-                <h3>
-                    Sort This List
-                </h3>
                 {{#if hasResults}}
                     <a id="newest-first" class="btn btn-primary btn-block">
                         Newest First

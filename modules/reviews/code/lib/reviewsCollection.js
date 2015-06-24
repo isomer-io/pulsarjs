@@ -58,6 +58,20 @@ Reviews.attachSchema(new SimpleSchema({
         }
     },
 
+    reviewDocumentCollectionName: {
+        type: String,
+        autoform: {
+            omit: true
+        }
+    },
+
+    reviewDocumentCreator: {
+        type: String,
+        autoform: {
+            omit: true
+        }
+    },
+
     /*
     This attribute sets the user id to that of the user that created
     this post automatically.  */
@@ -65,7 +79,7 @@ Reviews.attachSchema(new SimpleSchema({
 
     createdAt: orion.attribute('createdAt'),
 
-    updatedAt: orion.attribute('updatedAt'),
+    updatedAt: orion.attribute('updatedAt')
 
 
 }));

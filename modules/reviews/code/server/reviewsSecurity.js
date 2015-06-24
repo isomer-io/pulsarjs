@@ -49,5 +49,15 @@ Meteor.methods({
         } else {
             return results[0].avgStars;
         }
+    },
+    hasReviewed: function(reviewedDocId) {
+
+        var results = Reviews.find({createdBy: Meteor.userId(), reviewDocument: reviewedDocId}).fetch();
+
+        if (results.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 });

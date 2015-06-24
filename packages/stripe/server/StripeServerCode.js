@@ -40,12 +40,17 @@ if(Meteor.isServer){
                 source: token.id,
                 application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
-                description: item.title
+                description: item.title,
+                metadata: {
+                    _id: item.id,
+                    collectionName: item.getCollectionName()
+                }
             };
 
 
             var res = Async.runSync(function(done) {
                 Stripe.charges.create(params, function (err, chargeObj) {
+                    console.log(chargeObj);
                     done(err, chargeObj);
                 })
             });

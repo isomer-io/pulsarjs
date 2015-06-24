@@ -20,6 +20,13 @@ Router.route('/api/stripeoauth/').get(function () {
  */
 orion.config.add('STRIPE_API_KEY', 'stripe');
 orion.config.add('STRIPE_API_CLIENT_ID', 'stripe');
-orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true});
+orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true, public: false});
 orion.config.add('STRIPE_COMPANY_NAME', 'stripe');
 orion.config.add('STRIPE_APPLICATION_FEE_CENTS', 'stripe');
+
+if (Meteor.isServer) {
+    //allowEnv({
+    //    STRIPE_API_SECRET: 0
+    //});
+
+}

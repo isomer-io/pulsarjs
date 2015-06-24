@@ -2,17 +2,22 @@
 
     <div class="container">
 
+        {{> findOnePost }}
 
-        <div class="row">
-
+        {{#if this.canShowUpdate}}
+            <hr>
+            <div class="row">
+            <div class="col-md-12 text-center">
+                <h5>
+                    You are the creator of this Post
+                </h5>
+            </div>
             <div class="col-md-6">
-
                 {{#if this.canShowUpdate }}
                     <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
                         Edit this post
                     </a>
                 {{/if}}
-
             </div>
             <div class="col-md-6">
                 {{#if this.canShowRemove }}
@@ -22,11 +27,11 @@
                 {{/if}}
             </div>
         </div>
+        {{/if}}
 
-        {{> findOnePost }}
+        <hr>
 
-
-
+        {{> findReviews doc=this}}
 
     </div>
 
