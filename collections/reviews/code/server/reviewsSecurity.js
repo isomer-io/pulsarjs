@@ -29,3 +29,25 @@ Reviews.permit('remove').ifLoggedIn().ifCreatedByUser().apply();
 
 //can remove if they are an admin
 Reviews.permit('remove').ifHasRole('admin').apply();
+
+Meteor.methods({
+    averageStars: function(reviewedDocId) {
+        var results = Reviews.aggregate(
+            [
+                { $match : {reviewDocument: reviewedDocId} },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        avgStars: { $avg: "$numberOfStars" }
+                    }
+                }
+            ]
+        );
+        if (results.length === 0) {
+            return 0;
+        } else {
+            return results[0].avgStars;
+        }
+    }
+});

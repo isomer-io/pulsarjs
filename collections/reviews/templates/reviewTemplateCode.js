@@ -85,7 +85,7 @@ if (Meteor.isClient) {
                     Reviews.findList.set({
                         sort: {
                             //reviewDocument: this.doc._id,
-                            createdAt: 1
+                            createdAt: -1
                         }
                     });
                 }
