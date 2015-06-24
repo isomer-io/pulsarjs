@@ -1,0 +1,33 @@
+<template name="reviewInFindList">
+
+    <!-- This will be repeated inside of the find this -->
+     {{> findOneReview }}
+
+
+</template>
+
+
+<template name="findReviews">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <div class="btn-group btn-group-justified">
+                <a id="highest" class="btn btn-primary {{isDisabled 'highest'}}">Highest</a>
+                <a id="lowest" class="btn btn-primary {{isDisabled 'lowest'}}">Lowest</a>
+                <a id="newest" class="btn btn-primary {{isDisabled 'newest'}}">Newest</a>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="list-group">
+                {{> reviews }}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="reviews">
+    {{> pages}}
+</template>

@@ -10,32 +10,30 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>{{this.title}}</h2>
+            <h2>
+                {{this.title}}
+            </h2>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <p>
+        <div class="col-md-4">
+            {{>payForItem}}
+        </div>
+
+        <div class="col-md-4">
+            <div class="well">
                 {{{this.body}}}
-            </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            {{#each this.images}}
+                <img src="{{this.url}}" class="img-responsive center-block"/>
+            {{/each}}
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>
-                {{this.price}}
-            </p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <img src="{{this.image.url}}" class="img-responsive center-block"/>
-        </div>
-    </div>
-
-    {{>payForItem}}
+    {{> insertReviewButton doc=this}}
+    {{> findReviews doc=this}}
 
 </template>

@@ -50,3 +50,5 @@
                 - template: findPosts
                 - page: shell for rendering findPosts template
     - findOne
+
+- url for viewing specific template

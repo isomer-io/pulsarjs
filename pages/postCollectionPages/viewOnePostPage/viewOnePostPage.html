@@ -2,18 +2,19 @@
 
     <div class="container">
 
-        {{> findOnePost }}
-
 
         <div class="row">
 
-            <div class="col-md-offset-4 col-md-4">
+            <div class="col-md-6">
 
                 {{#if this.canShowUpdate }}
                     <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
                         Edit this post
                     </a>
                 {{/if}}
+
+            </div>
+            <div class="col-md-6">
                 {{#if this.canShowRemove }}
                     <a id="deletePostButton" class="btn btn-block btn-danger">
                         Delete this post
@@ -21,6 +22,11 @@
                 {{/if}}
             </div>
         </div>
+
+        {{> findOnePost }}
+
+
+
 
     </div>
 

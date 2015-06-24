@@ -1,0 +1,41 @@
+<template name="insertReview">
+
+    {{> quickForm collection="Reviews" id="insertReview" type="insert" omitFields="createdOn"}}
+
+</template>
+
+<template name="insertReviewButton">
+
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-block btn-info">
+                Add Review
+            </a>
+        </div>
+    </div>
+
+</template>
+
+<template name="insertReviewModal">
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add a review</h4>
+                </div>
+
+                <div class="modal-body">
+                    {{> insertReview }}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" >Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</template>
