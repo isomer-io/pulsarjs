@@ -13,6 +13,17 @@ Router.route('/api/oauth/stripe/').get(function () {
 });
 
 if (Meteor.isServer) {
+
+    var updateCharge = function(event) {
+        var existingCharge = Charges.findOne({chargeId: event.data.objec.id});
+
+        if (existingCharge) {
+            Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}});
+        } else {
+            Charges.insert({chargeId: event.data.object.id, stripeChargeObj: event.data.object});
+        }
+    };
+
     Router.route('/api/stripe/connect/webhook', {where: 'server'}).post(function() {
         var event = this.request.body;
 
@@ -21,16 +32,25 @@ if (Meteor.isServer) {
 
         console.log('Type: ', event.type);
 
+
         if (event.type === 'charge.succeeded') {
             //refresh charges on that user
 
-            Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object}});
+            //console.log(typeof event.data.object);
+
+            updateCharge(event);
+
+
+            //Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object},
+            //        $setOnInsert: {stripeChargeObj: event.data.object}});
 
         }
 
         if (event.type === 'charge.refunded') {
 
-            Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object}});
+            updateCharge(event);
+
+            //Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object}});
 
             //refresh charges on that user
             //var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
@@ -82,10 +102,3 @@ orion.config.add('STRIPE_API_CLIENT_ID', 'stripe', {public: true});
 orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true});
 orion.config.add('STRIPE_COMPANY_NAME', 'stripe', {public: true});
 orion.config.add('STRIPE_APPLICATION_FEE_CENTS', 'stripe', {public: true});
-
-if (Meteor.isServer) {
-    //allowEnv({
-    //    STRIPE_API_SECRET: 0
-    //});
-
-}

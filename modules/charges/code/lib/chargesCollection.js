@@ -35,12 +35,15 @@ Charges = new orion.collection('charges', {
  */
 Charges.attachSchema(new SimpleSchema({
 
+
     stripeChargeObj: {
-        type: Object
+        type: Object,
+        blackbox: true
     },
     chargeId: {
         type: String,
-        index: true
+        index: true,
+        unique: true
     }
 
 }));

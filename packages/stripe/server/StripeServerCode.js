@@ -51,7 +51,6 @@ if(Meteor.isServer){
 
             var res = Async.runSync(function(done) {
                 Stripe.charges.create(params, function (err, chargeObj) {
-                    console.log(chargeObj);
                     done(err, chargeObj);
                 })
             });
@@ -218,8 +217,6 @@ if(Meteor.isServer){
                                 {_id: updatedChargeObj.metadata.chargeCreatorId},
                                 {$push: {"transactions": updatedChargeObj}});
                         });
-
-                    console.log(res);
 
                     done(err, res);
                 }));
