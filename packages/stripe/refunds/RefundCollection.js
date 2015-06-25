@@ -46,9 +46,7 @@ Refunds.attachSchema(new SimpleSchema({
      this refund automatically.  */
     createdBy: orion.attribute('createdBy'),
 
-    createdAt: orion.attribute('createdAt'),
-
-    updatedAt: orion.attribute('updatedAt'),
+    createdAt: orion.attribute('createdAt')
 
 
 }));

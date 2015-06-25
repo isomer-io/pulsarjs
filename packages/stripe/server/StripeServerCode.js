@@ -29,7 +29,7 @@ if(Meteor.isServer){
                 }
             }
         },
-        chargeCard:function(token,item){
+        chargeCard:function(token,item, itemCollectionName){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(this.userId);
@@ -42,8 +42,9 @@ if(Meteor.isServer){
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
                 description: item.title,
                 metadata: {
-                    _id: item.id
-                    //collectionName: item.getCollectionName()
+                    _id: item.id,
+                    chargeCreatorId: this.userId,
+                    collectionName: itemCollectionName
                 }
             };
 
@@ -195,6 +196,39 @@ if(Meteor.isServer){
             });
 
             return res;
+        },
+        getChargesForUser: function() {
+
+        },
+        updateCharge: function(chargeId) {
+
+            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+
+            return Async.runSync(function (done) {
+                Stripe.charges.retrieve(chargeId,
+                    Meteor.bindEnvironment(function(err, res) {
+
+                        var updatedChargeObj = res;
+
+                        Meteor.users.update(
+                            {_id: updatedChargeObj.metadata.chargeCreatorId}, {$pull: {transactions: {id: chargeId} }},
+                        function(err, res) {
+                            Meteor.users.update(
+                                {_id: updatedChargeObj.metadata.chargeCreatorId},
+                                {$push: {"transactions": updatedChargeObj}});
+                        });
+
+                    console.log(res);
+
+                    done(err, res);
+                }));
+            });
+        },
+        testUpdate: function(chargeId) {
+            Meteor.users.update(
+                {_id: this.userId},
+                {$pull: {transactions: {id: chargeId} } });
         }
     });
 

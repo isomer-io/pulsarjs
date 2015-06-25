@@ -47,6 +47,9 @@ Meteor.startup(function () {
     return;
   }
 
+  //query config object, then remove
+  //the _id field and any other fields that are not
+  //set to {public: true}
   var config = orion.config.collection.findOne({});
   delete config._id;
 
