@@ -47,18 +47,14 @@ Meteor.startup(function () {
     return;
   }
 
-  var fields = { _id: 0 };
-  _.each(orion.config.getPublicFields(), function(field) {
-    fields[field] = 1;
-  });
+  var config = orion.config.collection.findOne({});
+  delete config._id;
 
-  //we needs to add in private fields so we can tell our query to not return them
-  //so that private fields won't be injected and remain secure
-  _.each(orion.config.getPrivateFields(), function(field) {
-    fields[field] = 0;
-  });
+  var privateFields = orion.config.getPrivateFields();
 
-  var config = orion.config.collection.findOne({}, { fields: fields });
+  for (var i = 0; i < privateFields.length; i++) {
+    delete config[privateFields[i]];
+  }
 
   Inject.obj('orion.config', config);
 

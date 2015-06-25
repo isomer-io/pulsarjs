@@ -42,8 +42,8 @@ if(Meteor.isServer){
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
                 description: item.title,
                 metadata: {
-                    _id: item.id,
-                    collectionName: item.getCollectionName()
+                    _id: item.id
+                    //collectionName: item.getCollectionName()
                 }
             };
 
