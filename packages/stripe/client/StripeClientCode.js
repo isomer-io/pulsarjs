@@ -11,7 +11,7 @@ if(Meteor.isClient){
         chargeHandler = StripeCheckout.configure({
             key: orion.config.get('STRIPE_API_KEY'),
             token: function(token) {
-                Meteor.call('chargeCard', token, Session.get('currentItem'), Session.get('currentItem.collectionName'),function(err,data){
+                Meteor.call('chargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
                     Session.set('stripeChargeErr',err);
                     Session.set('stripeChargeData',data.result);
                 });
@@ -112,7 +112,7 @@ if(Meteor.isClient){
     Template.payForItemButtonTemplate.events({
         'click #payForItemButton':function(event){
             Session.set('currentItem', this);
-            Session.set('currentItem.collectionName', this.getCollectionName());
+            Session.set('currentItem.targetDocCollectionName', this.getCollectionName());
             chargeHandler.open({
                 name: orion.config.get('STRIPE_COMPANY_NAME'),
                 description: this.title,

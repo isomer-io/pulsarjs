@@ -7,6 +7,14 @@ Posts = new orion.collection('posts', {
     singularName: 'post', // The name of one of these items
     pluralName: 'posts', // The name of more than one of these items
 
+    reviewSettings: {
+        mustPurchaseToReview: true,
+        creatorCanReview: false
+    },
+    chargeSettings: {
+        sellOnce: false //can be sold multiple times
+    },
+
     /*
     Tabular settings for this collection, this must be filled out
     correctly for the admin panel to work
@@ -41,7 +49,11 @@ Posts.attachSchema(new SimpleSchema({
     /*
         The file attribute is a custom orion attribute
         This is where orion does its magic. Just set
-        the attribute type and it will automatically
+        the attribute type and it will automatic
+//make purchaseable
+//make reviewable
+
+ally
         create the form for the file.
         WARNING: the url of the image will not be saved in
         .image, it will be saved in .image.url.
@@ -68,7 +80,7 @@ Posts.attachSchema(new SimpleSchema({
     }),
 
 
-    price:{
+    price: {
         type:Number,
         decimal:true,
         min:0

@@ -1,6 +1,7 @@
 <template name="findOneCharge">
     {{#with this.stripeChargeObj}}
-    <div>
+    <div class="list-group-item">
+        <div class="row">
         <div class="col-md-8">
             <h4 class="list-group-item-heading">{{this.description}}</h4>
             <p class="list-group-item-text">Price: {{this.amount}}</p>
@@ -20,6 +21,7 @@
                 <p class="text-center">Full Amount Refunded</p>
             </div>
         {{/if}}
+        </div>
     </div>
     {{/with}}
 </template>

@@ -1,7 +1,7 @@
 if(Meteor.isServer){
     Meteor.publish("userTransactions", function () {
         if (this.userId) {
-            return Meteor.users.find({_id: this.userId}, {fields: {"transactions": 1, "stripe":1}});
+            return Meteor.users.find({_id: this.userId}, {fields: {"stripe":1}});
         } else {
             this.ready();
         }
@@ -42,9 +42,9 @@ if(Meteor.isServer){
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
                 description: item.title,
                 metadata: {
-                    _id: item.id,
-                    chargeCreatorId: this.userId,
-                    collectionName: itemCollectionName
+                    chargeTargetDocId: item._id,
+                    createdBy: this.userId,
+                    targetDocCollectionName: itemCollectionName
                 }
             };
 
@@ -54,12 +54,6 @@ if(Meteor.isServer){
                     done(err, chargeObj);
                 })
             });
-
-            if(!user.transactions){
-                Meteor.users.update({_id:this.userId}, {$set: {transactions: []} } );
-            }
-
-            Meteor.users.update({_id:this.userId}, {$push: {transactions: res.result} } );
 
             return res;
         },
@@ -226,6 +220,16 @@ if(Meteor.isServer){
             Meteor.users.update(
                 {_id: this.userId},
                 {$pull: {transactions: {id: chargeId} } });
+        },
+        chargeExistsForDocument: function(docId, collectionName) {
+            var collection = LaunchBox.collections[collectionName];
+
+            if (Charges.find({chargeTargetDocId: docId}).fetch()) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
     });
 

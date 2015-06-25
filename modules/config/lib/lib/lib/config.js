@@ -2,9 +2,14 @@
  * Created by wesley on 6/2/15.
  */
 
+LaunchBox = {
+    collections: {}
+};
 
 orion.collections.onCreated(function() {
     var self = this;
+
+    LaunchBox.collections[this.name] = this;
 
     /**
      * Collection permissions

@@ -44,6 +44,14 @@ Charges.attachSchema(new SimpleSchema({
         type: String,
         index: true,
         unique: true
+    },
+    chargeTargetDocId: {
+        type: String,
+        index: true
+    },
+    createdBy: {
+        type: String,
+        index: true
     }
 
 }));
@@ -57,7 +65,8 @@ Charges.findList = new Meteor.Pagination(Charges, {
     infinite: true,
     itemTemplate: 'findOneCharge',
     sort: {
-        createdAt: -1
+        created: -1
+        //createdBy: this.userId
     },
     availableSettings: {
         sort: true,

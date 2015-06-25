@@ -15,12 +15,17 @@ Router.route('/api/oauth/stripe/').get(function () {
 if (Meteor.isServer) {
 
     var updateCharge = function(event) {
-        var existingCharge = Charges.findOne({chargeId: event.data.objec.id});
+        var existingCharge = Charges.findOne({chargeId: event.data.object.id});
+
+        console.log(existingCharge);
 
         if (existingCharge) {
             Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}});
         } else {
-            Charges.insert({chargeId: event.data.object.id, stripeChargeObj: event.data.object});
+            Charges.insert({chargeId: event.data.object.id,
+                stripeChargeObj: event.data.object,
+                chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
+                createdBy: event.data.object.metadata.createdBy});
         }
     };
 
