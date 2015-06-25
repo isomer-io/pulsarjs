@@ -1,7 +1,7 @@
 if(Meteor.isServer){
-    Meteor.publish("userTransactions", function () {
+    Meteor.publish("userStripeData", function () {
         if (this.userId) {
-            return Meteor.users.find({_id: this.userId}, {fields: {"stripe":1}});
+            return Meteor.users.find({_id: this.userId}, {fields: {"stripe":1, "stripeCustomerId": 1}});
         } else {
             this.ready();
         }
@@ -118,6 +118,11 @@ if(Meteor.isServer){
 
             var userSubscriptions = null;
 
+            //error handling
+            if (!user.stripeCustomerId) {
+                return [];
+            }
+
             var res = Async.runSync(function (done) {
                 Stripe.customers.retrieve(
                     user.stripeCustomerId,
@@ -193,42 +198,19 @@ if(Meteor.isServer){
         getChargesForUser: function() {
 
         },
-        updateCharge: function(chargeId) {
-
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
-
-
-            return Async.runSync(function (done) {
-                Stripe.charges.retrieve(chargeId,
-                    Meteor.bindEnvironment(function(err, res) {
-
-                        var updatedChargeObj = res;
-
-                        Meteor.users.update(
-                            {_id: updatedChargeObj.metadata.chargeCreatorId}, {$pull: {transactions: {id: chargeId} }},
-                        function(err, res) {
-                            Meteor.users.update(
-                                {_id: updatedChargeObj.metadata.chargeCreatorId},
-                                {$push: {"transactions": updatedChargeObj}});
-                        });
-
-                    done(err, res);
-                }));
-            });
-        },
-        testUpdate: function(chargeId) {
-            Meteor.users.update(
-                {_id: this.userId},
-                {$pull: {transactions: {id: chargeId} } });
-        },
         chargeExistsForDocument: function(docId, collectionName) {
             var collection = LaunchBox.collections[collectionName];
 
-            if (Charges.find({chargeTargetDocId: docId}).fetch()) {
-                return true;
-            } else {
-                return false;
+            //warning, could return multiple documents
+            var charges = Charges.find({chargeTargetDocId: docId}).fetch();
+
+            for (var i = 0; i < charges.length; i++) {
+                if (charges[i].stripeChargeObj.metadata.targetDocCollectionName === collectionName) {
+                    return true;
+                }
             }
+
+            return false;
 
         }
     });

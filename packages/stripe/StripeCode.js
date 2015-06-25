@@ -17,8 +17,6 @@ if (Meteor.isServer) {
     var updateCharge = function(event) {
         var existingCharge = Charges.findOne({chargeId: event.data.object.id});
 
-        console.log(existingCharge);
-
         if (existingCharge) {
             Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}});
         } else {
@@ -41,56 +39,13 @@ if (Meteor.isServer) {
         if (event.type === 'charge.succeeded') {
             //refresh charges on that user
 
-            //console.log(typeof event.data.object);
-
             updateCharge(event);
-
-
-            //Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object},
-            //        $setOnInsert: {stripeChargeObj: event.data.object}});
 
         }
 
         if (event.type === 'charge.refunded') {
 
             updateCharge(event);
-
-            //Charges.upsert({chargeId: event.data.object.id}, {$set: {stripeChargeObj: event.data.object}});
-
-            //refresh charges on that user
-            //var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
-
-                //Stripe.charges.retrieve(event.data.object.id, function (err, res) {
-                //
-                //
-                //    console.log(res.result);
-                //
-                //    Meteor.users.update(
-                //        {_id: event.data.object.metadata.chargeCreatorId, "transactions.id": event.data.object.id},
-                //        {$set: {"transactions.$": res.result}});
-                //
-                //    //done(err, res);
-                //});
-
-
-            //var res = Async.runSync(function (done) {
-            //    Stripe.charges.retrieve(event.data.object.id, function (err, res) {
-            //
-            //        Meteor.users.update(
-            //            {_id: event.data.object.metadata.chargeCreatorId, "transactions.id": event.data.object.id},
-            //            {$set: {"transactions.$": res.result}});
-            //
-            //        done(err, res);
-            //    });
-            //});
-
-            //TODO: this is quite fucked, but don't touch it because it's all we've got
-            //    Meteor.call('updateCharge', event.data.object.id,
-            //        Meteor.bindEnvironment(function(err, res) {
-            //            //console.log(res);
-            //        })
-            //    );
-
 
         }
 

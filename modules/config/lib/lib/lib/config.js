@@ -32,6 +32,13 @@ orion.collections.onCreated(function() {
         this.helpers({
             getCollectionName: function() {
                 return self.name;
+            },
+            isCreator: function() {
+                if (this.createdBy) {
+                    return Meteor.userId() === this.createdBy;
+                } else {
+                    return false;
+                }
             }
         });
     //}

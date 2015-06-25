@@ -50,13 +50,35 @@ Meteor.methods({
             return results[0].avgStars;
         }
     },
-    hasReviewed: function(reviewedDocId) {
+    canReviewDocument: function(docToReview, collectionName) {
 
-        var results = Reviews.find({createdBy: Meteor.userId(), reviewDocument: reviewedDocId}).fetch();
+        //check if they have written a review already
+        var results = Reviews.find({createdBy: Meteor.userId(), reviewDocument: docToReview._id}).fetch();
 
         if (results.length > 0) {
-            return true;
+            return false;
         } else {
+            //check if the collection allows it
+            var reviewSettings = LaunchBox.collections[collectionName].reviewSettings;
+
+            if (reviewSettings) {
+                //check if creator is allowed to review
+                console.log(Meteor.userId());
+                if (Meteor.userId() === docToReview.createdBy) {
+                    console.log(docToReview);
+                    return reviewSettings.creatorCanReview;
+                }
+
+                //check if they must buy
+                if (reviewSettings.mustPurchaseToReview) {
+                    //check if they have bought it, if true can review
+                    return Meteor.call('chargeExistsForDocument', docToReview._id, collectionName);
+                } else {
+                    return true;
+                }
+
+            }
+
             return false;
         }
     }

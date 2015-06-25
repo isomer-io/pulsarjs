@@ -65,7 +65,7 @@ Charges.findList = new Meteor.Pagination(Charges, {
     infinite: true,
     itemTemplate: 'findOneCharge',
     sort: {
-        created: -1
+        created: 1
         //createdBy: this.userId
     },
     availableSettings: {
@@ -74,3 +74,13 @@ Charges.findList = new Meteor.Pagination(Charges, {
     },
     fastRender: true
 });
+
+if (Meteor.isClient) {
+    Template.findCharges.onRendered(function() {
+        Charges.findList.set({
+            filters: {
+                createdBy: Meteor.userId()
+            }
+        });
+    });
+}

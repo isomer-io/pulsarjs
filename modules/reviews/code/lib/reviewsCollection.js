@@ -4,7 +4,7 @@
     an object with configuration settings for the admin panel
  */
 Reviews = new orion.collection('reviews', {
-    singularName: 'reviews', // The name of one of these items
+    singularName: 'review', // The name of one of these items
     pluralName: 'reviews', // The name of more than one of these items
 
     /*

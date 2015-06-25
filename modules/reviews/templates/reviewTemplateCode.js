@@ -4,6 +4,14 @@
 
 if (Meteor.isClient) {
 
+    var canReviewDocument = function(doc) {
+        Meteor.call('canReviewDocument', doc, doc.getCollectionName(), function(err, res) {
+
+            //TODO: use reactive var
+            Session.set('Reviews.canReview', res);
+        });
+    };
+
     Template.insertReviewButton.onRendered(function() {
         var self = this;
 
@@ -14,7 +22,14 @@ if (Meteor.isClient) {
                     // Potentially alter the doc
                     doc.reviewDocument = self.data.doc._id;
 
+                    doc.reviewDocumentCollectionName = self.data.doc.getCollectionName();
+
+                    doc.reviewDocumentCreator = self.data.doc._id;
+
+                    //console.log(doc);
+
                     //return false;
+
 
                     // Then return it or pass it to this.result()
                     return doc;
@@ -25,6 +40,7 @@ if (Meteor.isClient) {
             },
             onSuccess: function() {
                 Modal.hide();
+                canReviewDocument(self.data.doc);
             }
         });
 
@@ -37,20 +53,29 @@ if (Meteor.isClient) {
     });
 
     Template.insertReviewButton.helpers({
-        hasReviewed: function() {
-            return Session.get('Reviews.hasReviewed');
+        canReview: function() {
+            return Session.get('Reviews.canReview');
         }
     });
 
     Template.insertReviewButton.onRendered(function() {
-        Session.setDefault('Reviews.hasReviewed');
-        console.log(this);
+        Session.setDefault('Reviews.canReview', false);
 
-        Meteor.call('hasReviewed', this.data.doc._id, function(err, res) {
+        var self = this;
+
+        Meteor.call('canReviewDocument', this.data.doc, this.data.doc.getCollectionName(), function(err, res) {
 
             //TODO: use reactive var
-            Session.set('Reviews.hasReviewed', res);
+            Session.set('Reviews.canReview', res);
         });
+
+        Tracker.autorun(function() {
+            if (Charges.find()) {
+                console.log('charge created');
+                canReviewDocument(self.data.doc);
+            }
+        });
+
     });
 
     Template.findReviews.onRendered(function() {

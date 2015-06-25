@@ -30,7 +30,7 @@ if(Meteor.isClient){
         });
     });
 
-    Meteor.subscribe("userTransactions");
+    Meteor.subscribe("userStripeData");
 
     Template.stripeOauthTemplate.helpers({
         stripeData:function(){
@@ -144,16 +144,4 @@ if(Meteor.isClient){
         }
     });
 
-    Template.transaction.events({
-        'click .refundButton':function(e,t){
-            Refunds.insert({chargeId:this.id,userId:Meteor.userId()});
-        }
-
-    });
-
-    Template.transactions.helpers({
-        transactions:function(){
-            return Meteor.user().transactions;
-        }
-    });
 }
