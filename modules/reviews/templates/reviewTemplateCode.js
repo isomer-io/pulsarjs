@@ -70,8 +70,8 @@ if (Meteor.isClient) {
         });
 
         Tracker.autorun(function() {
-            if (Charges.find()) {
-                console.log('charge created');
+
+            if (Session.get('clientCall.charge.created')) {
                 canReviewDocument(self.data.doc);
             }
         });

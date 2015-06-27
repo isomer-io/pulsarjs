@@ -75,9 +75,9 @@ ally
         Here it's the same with an image attribute.
         summernote is an html editor.
      */
-    body: orion.attribute('summernote', {
-        label: 'Body'
-    }),
+    description: {
+        type: String
+    },
 
 
     price: {

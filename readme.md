@@ -53,3 +53,10 @@
 
 - url for viewing specific template
 - doing things across an entire collection
+
+- useful hooks
+    - collection hooks
+        - individual document hooks
+    - onStartup
+    - onRendered
+    -

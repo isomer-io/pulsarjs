@@ -2,9 +2,19 @@
 
     <!-- This will be repeated inside of the find this -->
      <a href="/posts/{{this._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading">{{this.title}}</h4>
-            <p class="list-group-item-text">{{{this.body}}}</p>
-            <p class="list-group-item-text">{{this.createdOn}}</p>
+        <div class="row">
+            <div class="col-md-2 text-center ">
+                <h4 class="text-success">
+                    ${{this.price}}
+                </h4>
+            </div>
+            <div class="col-md-9">
+                <h4 class="list-group-item-heading">{{this.title}}</h4>
+                <p class="list-group-item-text">{{{this.body}}}</p>
+                <p class="list-group-item-text">{{this.createdOn}}</p>
+            </div>
+        </div>
+
      </a>
 
 

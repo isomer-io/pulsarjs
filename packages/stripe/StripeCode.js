@@ -23,7 +23,14 @@ if (Meteor.isServer) {
             Charges.insert({chargeId: event.data.object.id,
                 stripeChargeObj: event.data.object,
                 chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
-                createdBy: event.data.object.metadata.createdBy});
+                createdBy: event.data.object.metadata.createdBy},
+                function() {
+                    Meteor.users.update(Meteor.userId(), {
+                        $set: {clientCall: 'charge.created'}
+                    });
+            });
+
+
         }
     };
 
