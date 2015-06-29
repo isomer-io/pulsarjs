@@ -18,10 +18,13 @@ if (Meteor.isClient) {
 
     Meteor.subscribe('userClientCall');
 
+    Session.setDefault('clientCall.charge.created', false);
+
     Tracker.autorun(function() {
-        if (Meteor.user().clientCall && Meteor.user().clientCall.charge.created) {
-            Session.set('clientCall.charge.created', Session.get('clientCall.charge.created'));
-        }
+        //if (Meteor.user() && Meteor.user().clientCall && Meteor.user().clientCall.charge) {
+        //    console.log('CALLED ON CLIENT');
+        //    Session.set('clientCall.charge.created', !Session.get('clientCall.charge.created'));
+        //}
     });
 
 }

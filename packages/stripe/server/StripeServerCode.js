@@ -1,4 +1,5 @@
 if(Meteor.isServer){
+
     Meteor.publish("userStripeData", function () {
         if (this.userId) {
             return Meteor.users.find({_id: this.userId}, {fields: {"stripe":1, "stripeCustomerId": 1}});
@@ -12,15 +13,15 @@ if(Meteor.isServer){
             if(query.error){
                 return query.error;
             } else{
-                if(!Meteor.users.findOne(this.userId).stripe){
+                if(!Meteor.users.findOne(Meteor.userId()).stripe){
                     var url = "https://connect.stripe.com/oauth/token?" + "code=" + query.code +"&client_secret=" + orion.config.get('STRIPE_API_SECRET') + "&grant_type=authorization_code";
 
                     var result = Meteor.http.call("POST", url);
 
-                    Meteor.users.update({_id:this.userId}, {$set: {stripe: result.data} } );
+                    Meteor.users.update({_id:Meteor.userId()}, {$set: {stripe: result.data} } );
 
                     if(result.data.stripe_user_id){
-                        Roles.addUserToRoles(this.userId, 'vendor');
+                        Roles.addUserToRoles(Meteor.userId(), 'vendor');
                     }
 
                     return result.data;
@@ -32,7 +33,7 @@ if(Meteor.isServer){
         chargeCard:function(token,item, itemCollectionName){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
-            var user = Meteor.users.findOne(this.userId);
+            var user = Meteor.users.findOne(Meteor.userId());
 
             var params = {
                 amount: Math.round(item.price * 100),
@@ -43,7 +44,7 @@ if(Meteor.isServer){
                 description: item.title,
                 metadata: {
                     chargeTargetDocId: item._id,
-                    createdBy: this.userId,
+                    createdBy: Meteor.userId(),
                     targetDocCollectionName: itemCollectionName
                 }
             };
@@ -60,7 +61,7 @@ if(Meteor.isServer){
         createSubscription:function(token,plan){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
-            var user = Meteor.users.findOne(this.userId);
+            var user = Meteor.users.findOne(Meteor.userId());
 
             var stripeCustomerId = user.stripeCustomerId;
 
@@ -77,7 +78,7 @@ if(Meteor.isServer){
                     })
                 });
 
-                Meteor.users.update({_id:this.userId}, {$set: {stripeCustomerId: stripeCustomerId} } );
+                Meteor.users.update({_id:Meteor.userId()}, {$set: {stripeCustomerId: stripeCustomerId} } );
             }
 
             var res = Async.runSync(function (done) {
@@ -114,7 +115,7 @@ if(Meteor.isServer){
         getUserSubscriptions:function(){
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
-            var user = Meteor.users.findOne(this.userId);
+            var user = Meteor.users.findOne(Meteor.userId());
 
             var userSubscriptions = null;
 
@@ -148,7 +149,7 @@ if(Meteor.isServer){
 
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
-            var user = Meteor.users.findOne(this.userId);
+            var user = Meteor.users.findOne(Meteor.userId());
 
             var userSubscriptions = null;
 
@@ -184,7 +185,7 @@ if(Meteor.isServer){
 
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
-            var user = Meteor.users.findOne(this.userId);
+            var user = Meteor.users.findOne(Meteor.userId());
 
 
             var res = Async.runSync(function (done) {
@@ -211,6 +212,11 @@ if(Meteor.isServer){
             }
 
             return false;
+
+        },
+        getBuyer: function(docId, collectionName) {
+            return Charges.findOne({chargeTargetDocId: docId}).metadata.createdBy;
+
 
         }
     });

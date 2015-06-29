@@ -29,16 +29,56 @@
             <br>
         </div>
     </div>
-    {{/if}}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="list-group">
-                {{> reviews }}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <!--{{> reviews }}-->
+                </div>
             </div>
         </div>
-    </div>
+
+        {{#if transactionMode}}
+            Transaction mode is on
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Seller</h3>
+                    {{#with creatorReview}}
+                        {{> findOneReview }}
+                    {{/with}}
+                </div>
+                <div class="col-md-6">
+                    <h3>Buyer</h3>
+                    {{#with buyerReview}}
+                        {{> findOneReview }}
+                    {{/with}}
+
+                </div>
+            </div>
+        {{/if}}
+
+    {{/if}}
+
+
+
+
 </template>
 
 <template name="reviews">
     {{> pages}}
+</template>
+
+<template name="transactionModeReviews">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Reviews
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+
+    </div>
+
 </template>

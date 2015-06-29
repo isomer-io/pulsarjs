@@ -6,7 +6,21 @@
                 <div class="col-md-12" style="margin-bottom: 0.5%;">
                     {{#if stripeClientId}}
                         {{#if itemHasMerchant}}
-                            {{>payForItemButtonTemplate}}
+                            {{#if canBuy}}
+                                {{>payForItemButtonTemplate}}
+                            {{/if}}
+                            {{#unless canBuy}}
+                                {{#unless isSeller}}
+                                <a type="button" class="btn btn-block btn-warning disabled">
+                                    <strong> You have purchased this already.</strong>
+                                </a>
+                                {{/unless}}
+                                {{#if isSeller}}
+                                    <a type="button" class="btn btn-block btn-warning disabled">
+                                        <strong> You cannot purchase your own item.</strong>
+                                    </a>
+                                {{/if}}
+                            {{/unless}}
                         {{else}}
                             <div class="alert alert-info text-center" role="alert">Merchant has no connected stripe account</div>
                         {{/if}}

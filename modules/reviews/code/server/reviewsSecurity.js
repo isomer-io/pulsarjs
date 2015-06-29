@@ -63,9 +63,7 @@ Meteor.methods({
 
             if (reviewSettings) {
                 //check if creator is allowed to review
-                console.log(Meteor.userId());
                 if (Meteor.userId() === docToReview.createdBy) {
-                    console.log(docToReview);
                     return reviewSettings.creatorCanReview;
                 }
 

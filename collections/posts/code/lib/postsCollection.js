@@ -9,10 +9,10 @@ Posts = new orion.collection('posts', {
 
     reviewSettings: {
         mustPurchaseToReview: true,
-        creatorCanReview: false
+        creatorCanReview: true
     },
     chargeSettings: {
-        sellOnce: false //can be sold multiple times
+        sellOnce: true //can be sold multiple times
     },
 
     /*

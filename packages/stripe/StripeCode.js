@@ -17,6 +17,8 @@ if (Meteor.isServer) {
     var updateCharge = function(event) {
         var existingCharge = Charges.findOne({chargeId: event.data.object.id});
 
+        var targetUser = Meteor.users.findOne({_id: event.data.object.metadata.createdBy});
+
         if (existingCharge) {
             Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}});
         } else {
@@ -25,8 +27,8 @@ if (Meteor.isServer) {
                 chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
                 createdBy: event.data.object.metadata.createdBy},
                 function() {
-                    Meteor.users.update(Meteor.userId(), {
-                        $set: {clientCall: 'charge.created'}
+                    Meteor.users.update(event.data.object.metadata.createdBy, {
+                        $set: {'clientCall.charge': !targetUser.clientCall.charge}
                     });
             });
 

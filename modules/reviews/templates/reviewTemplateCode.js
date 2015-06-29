@@ -9,6 +9,7 @@ if (Meteor.isClient) {
 
             //TODO: use reactive var
             Session.set('Reviews.canReview', res);
+
         });
     };
 
@@ -63,15 +64,11 @@ if (Meteor.isClient) {
 
         var self = this;
 
-        Meteor.call('canReviewDocument', this.data.doc, this.data.doc.getCollectionName(), function(err, res) {
-
-            //TODO: use reactive var
-            Session.set('Reviews.canReview', res);
-        });
+        canReviewDocument(self.data.doc);
 
         Tracker.autorun(function() {
 
-            if (Session.get('clientCall.charge.created')) {
+            if (Meteor.user() && Meteor.user().clientCall && Meteor.user().clientCall.charge) {
                 canReviewDocument(self.data.doc);
             }
         });
@@ -115,7 +112,6 @@ if (Meteor.isClient) {
                     });
                 }
                 if (Session.get('Reviews.filter') === 'lowest') {
-                    console.log('re-run');
                     Reviews.findList.set({
                         sort: {
                             //reviewDocument: this.doc._id,
@@ -138,6 +134,22 @@ if (Meteor.isClient) {
         },
         anyReviews: function() {
             return Reviews.find({reviewDocument: this.doc._id}).count() > 0;
+        },
+        transactionMode: function() {
+            return LaunchBox.collections[this.doc.getCollectionName()].reviewSettings.creatorCanReview;
+        },
+        creatorReview: function() {
+
+                return Reviews.findOne({reviewDocument: this.doc._id, createdBy: this.doc.createdBy});
+
+        },
+        buyerReview: function() {
+
+
+            if ( Charges.findOne({chargeTargetDocId: this.doc._id}) ) {
+                return Reviews.findOne({reviewDocument: this.doc._id, createdBy: {$not: this.doc.createdBy} });
+            }
+
         }
     });
 

@@ -47,7 +47,42 @@ if(Meteor.isClient){
         },
         stripeErr:function(){
             return Session.get('stripeChargeErr');
+        },
+        canBuy: function() {
+            return Session.get('charge.canPayForItem') && !this.isCreator();
+        },
+        isSeller: function() {
+            return this.isCreator();
         }
+    });
+
+    Session.setDefault('charge.canPayForItem', true);
+    var canBuyDocument = function(doc) {
+
+        if (doc.createdBy === Meteor.userId()) {
+            return false;
+        }
+
+        Meteor.call('chargeExistsForDocument', doc._id, doc.getCollectionName(), function(err, res) {
+
+            if (LaunchBox.collections[doc.getCollectionName()].chargeSettings.sellOnce) {
+                Session.set('charge.canPayForItem', !res);
+            }
+
+        });
+    };
+
+    Template.payForItem.onRendered(function() {
+        var self = this;
+
+        canBuyDocument(self.data);
+
+        Tracker.autorun(function() {
+
+            if (Meteor.user() && Meteor.user().clientCall && Meteor.user().clientCall.charge) {
+                canBuyDocument(self.data);
+            }
+        });
     });
 
     Template.subscribe.helpers({
