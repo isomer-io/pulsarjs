@@ -1,0 +1,53 @@
+<template name="findOneCharge">
+    {{#with this.stripeChargeObj}}
+    <div class="list-group-item">
+        <a href="/{{this.metadata.targetDocCollectionName}}/{{this.metadata.chargeTargetDocId}}">
+        <div class="row">
+            <div class="col-md-8">
+                <h4 class="list-group-item-heading">{{this.description}}</h4>
+                <p>Price: {{this.amount}}</p>
+                <p>Charge ID: {{this.id}}</p>
+            </div>
+        {{#unless this.refunded}}
+            <div class="col-md-4">
+                {{#if this.amount_refunded}}
+                    <p class="text-center">
+                        Amount Refunded: {{this.amount_refunded}}
+                    </p>
+                {{/if}}
+                <a class="btn btn-warning btn-block refundButton">Request Refund</a>
+            </div>
+        {{/unless}}
+        {{#if this.refunded}}
+            <div class="col-md-4">
+                <p class="text-center">Full Amount Refunded</p>
+            </div>
+        {{/if}}
+        </div>
+        </a>
+    </div>
+    {{/with}}
+</template>
+
+<template name="requestRefundModal">
+
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Request Refund</h4>
+                </div>
+
+                <div class="modal-body">
+                    {{> quickForm collection="Refunds" type="insert" id="insertRefund" }}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</template>

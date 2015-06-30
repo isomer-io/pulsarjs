@@ -3,29 +3,31 @@
     <div class="container">
 
         {{> findOnePost }}
-
-        {{#if this.isCreator}}
-            <hr>
-            <div class="row">
-            <div class="col-md-12 text-center">
-                <h5>
-                    You are the creator of this Post
-                </h5>
-            </div>
-            <div class="col-md-6">
-                    <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
-                        Edit this post
-                    </a>
-            </div>
-            <div class="col-md-6">
-                    <a id="deletePostButton" class="btn btn-block btn-danger">
-                        Delete this post
-                    </a>
-            </div>
-        </div>
-        {{/if}}
-
         <hr>
+        {{#if this.isCreator}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        You are the creator of this Post
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                        <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
+                            Edit this post
+                        </a>
+                </div>
+                <div class="col-md-6">
+                        <a id="deletePostButton" class="btn btn-block btn-danger">
+                            Delete this post
+                        </a>
+                </div>
+            </div>
+            <hr>
+        {{/if}}
 
         {{> findReviews doc=this}}
 

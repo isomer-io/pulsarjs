@@ -22,16 +22,28 @@ Package.onUse(function(api) {
 
   api.addFiles(['server/StripeServerCode.js'],'server');
 
-  api.addFiles(['payForItemButtonTemplate.html','payForItem.html',
-    'connectToStripeButtonTemplate.html', 'stripeOauthTemplate.html','subscribeButtonTemplate.html',
-    'unsubscribeButtonTemplate.html','subscribe.html',
-    'client/StripeClientCode.js'], 'client');
+  api.addFiles(['client/templates/buyButton/buyButton.html',
+    'client/templates/buyButton/buyButton.js',
+    'client/templates/buyerSetupButton/buyerSetupButton.html',
+    'client/templates/buyerSetupButton/stripeOauthTemplate.html',
+    'client/templates/buyerSetupButton/buyerSetupButton.js',
+    'subscribeButtonTemplate.html',
+    'unsubscribeButtonTemplate.html',
+    'subscribe.html',
+    'client/StripeClientCode.js',
+    'charges/templates/findOneCharge.html',
+    'charges/templates/findOneCharge.js',
+    'charges/templates/findCharges.html'], 'client');
 
-  api.addFiles(['refunds/RefundCollection.js','StripeCode.js'],['client','server']);
+  api.addFiles(['refunds/RefundCollection.js','StripeCode.js',
+  'charges/code/lib/chargesCollection.js'],['client','server']);
 
 
-  api.addFiles(['server/RefundsSecurity.js'],'server');
+  api.addFiles(['server/RefundsSecurity.js',
+  'charges/code/server/chargesSecurity.js'],'server');
   
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
+  api.export('Refunds');
+
 });

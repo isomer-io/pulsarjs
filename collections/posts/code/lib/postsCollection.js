@@ -9,24 +9,20 @@ Posts = new orion.collection('posts', {
 
     reviewSettings: {
         mustPurchaseToReview: true,
-        creatorCanReview: true
+        transactionReviewMode: true
     },
+
     chargeSettings: {
         sellOnce: true //can be sold multiple times
     },
 
     /*
-    Tabular settings for this collection, this must be filled out
-    correctly for the admin panel to work
+        fill this out for admin panel
      */
     tabular: {
         columns: [
             { data: "title", title: "Title" },
-        /*
-            If you want to show a custom orion attribute in
-            the index table you must call this function
-            orion.attributeColumn(attributeType, key, label)
-         */
+
             orion.attributeColumn('image', 'image', 'Image'),
             orion.attributeColumn('summernote', 'body', 'Content'),
             orion.attributeColumn('createdBy', 'createdBy', 'Created By'),
@@ -50,10 +46,6 @@ Posts.attachSchema(new SimpleSchema({
         The file attribute is a custom orion attribute
         This is where orion does its magic. Just set
         the attribute type and it will automatic
-//make purchaseable
-//make reviewable
-
-ally
         create the form for the file.
         WARNING: the url of the image will not be saved in
         .image, it will be saved in .image.url.
@@ -71,10 +63,6 @@ ally
         }
     }),
 
-    /*
-        Here it's the same with an image attribute.
-        summernote is an html editor.
-     */
     description: {
         type: String
     },
@@ -85,14 +73,6 @@ ally
         decimal:true,
         min:0
     },
-
-    //reviews: {
-    //    type: [ReviewSchema],
-    //    optional: true,
-    //    autoform: {
-    //        omit: true
-    //    }
-    //},
 
     /*
     This attribute sets the user id to that of the user that created

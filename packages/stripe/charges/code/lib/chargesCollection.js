@@ -12,19 +12,19 @@ Charges = new orion.collection('charges', {
     correctly for the admin panel to work
      */
     tabular: {
-        columns: [
-            { data: "title", title: "Title" },
-        /*
-            If you want to show a custom orion attOnribute in
-            the index table you must call this function
-            orion.attributeColumn(attributeType, key, label)
-         */
-            orion.attributeColumn('image', 'image', 'Image'),
-            orion.attributeColumn('summernote', 'body', 'Content'),
-            orion.attributeColumn('createdBy', 'createdBy', 'Created By'),
-            orion.attributeColumn('createdAt', 'createdAt', 'Created At'),
-            orion.attributeColumn('updatedAt', 'updatedAt', 'Updated At')
-        ]
+        //columns: [
+        //    { data: "title", title: "Title" },
+        ///*
+        //    If you want to show a custom orion attOnribute in
+        //    the index table you must call this function
+        //    orion.attributeColumn(attributeType, key, label)
+        // */
+        //    orion.attributeColumn('image', 'image', 'Image'),
+        //    orion.attributeColumn('summernote', 'body', 'Content'),
+        //    orion.attributeColumn('createdBy', 'createdBy', 'Created By'),
+        //    orion.attributeColumn('createdAt', 'createdAt', 'Created At'),
+        //    orion.attributeColumn('updatedAt', 'updatedAt', 'Updated At')
+        //]
     }
 });
 
@@ -52,7 +52,8 @@ Charges.attachSchema(new SimpleSchema({
     createdBy: {
         type: String,
         index: true
-    }
+    },
+    createdAt: orion.attribute('createdAt')
 
 }));
 
@@ -65,7 +66,7 @@ Charges.findList = new Meteor.Pagination(Charges, {
     infinite: true,
     itemTemplate: 'findOneCharge',
     sort: {
-        created: 1
+        createdAt: -1
         //createdBy: this.userId
     },
     availableSettings: {

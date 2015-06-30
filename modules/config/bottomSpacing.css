@@ -1,3 +1,18 @@
 body {
     margin-bottom: 5%;
 }
+
+.btn {
+    padding: 10px 16px;
+    font-size: 17px;
+    line-height: 1.3333333;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+
+    [class*="col-"]{
+        margin-bottom: 15px;
+    }
+
+}

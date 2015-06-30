@@ -11,17 +11,10 @@ Refunds = new orion.collection('refunds', {
      */
     tabular: {
         columns: [
-            { data: "title", title: "Title" },
-            /*
-             If you want to show a custom orion attribute in
-             the index table you must call this function
-             orion.attributeColumn(attributeType, key, label)
-             */
-            orion.attributeColumn('image', 'image', 'Image'),
-            orion.attributeColumn('summernote', 'body', 'Content'),
+            { data: "chargeId", title: "Charge ID" },
+            { data: "reasonForRequest", title: "Reason"},
             orion.attributeColumn('createdBy', 'createdBy', 'Created By'),
-            orion.attributeColumn('createdAt', 'createdAt', 'Created At'),
-            orion.attributeColumn('updatedAt', 'updatedAt', 'Updated At')
+            orion.attributeColumn('createdAt', 'createdAt', 'Created At')
         ]
     }
 });
@@ -34,11 +27,14 @@ Refunds = new orion.collection('refunds', {
 Refunds.attachSchema(new SimpleSchema({
     chargeId:{
         type:String,
-        unique:true
+        unique:true,
+        autoform: {
+            omit: true
+        }
     },
 
-    userId:{
-        type:String
+    reasonForRequest: {
+        type: String
     },
 
     /*

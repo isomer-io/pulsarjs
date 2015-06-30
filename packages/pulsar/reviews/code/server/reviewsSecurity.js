@@ -64,7 +64,7 @@ Meteor.methods({
             if (reviewSettings) {
                 //check if creator is allowed to review
                 if (Meteor.userId() === docToReview.createdBy) {
-                    return reviewSettings.creatorCanReview;
+                    return reviewSettings.transactionReviewMode;
                 }
 
                 //check if they must buy

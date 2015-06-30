@@ -1,7 +1,7 @@
-<template name="connectToStripeButtonTemplate">
+<template name="buyerSetupButton">
     {{#if stripeClientId}}
         <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id={{stripeClientId}}&scope=read_write" class="stripe-connect">
-            <button id="connectToStripeButton" type="button" class="btn btn-default btn-block">Set up merchant account</button>
+            <button id="connectToStripeButton" type="button" class="btn btn-default btn-block">Set up seller account</button>
         </a>
     {{else}}
         <a href="/admin/config" class="btn btn-default btn-info btn-block">Configure stripe API details</a>

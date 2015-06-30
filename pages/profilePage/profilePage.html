@@ -1,17 +1,22 @@
 <template name="profilePage">
 
+
+
     {{#with currentUser.profile}}
 
         <div class="container">
             <div class="row">
-                 <h1>
-                     {{this.name}}
-                 </h1>
+                <div class="col-md-12 text-center">
+                    <h1>
+                        {{this.name}}
+                    </h1>
+                </div>
+
             </div>
             {{#unless currentUser.stripe}}
             <div class="row">
-                <div class="col-md-4">
-                    {{>connectToStripeButtonTemplate}}
+                <div class="col-md-offset-4 col-md-4">
+                    {{>buyerSetupButton}}
                 </div>
             </div>
             {{/unless}}
@@ -29,10 +34,10 @@
             {{/if}}
             <hr>
             <div class="row">
-                <h2>
-                    Your Purchases
-                </h2>
                 <div class="col-md-12">
+                    <h2>
+                        Your Purchases
+                    </h2>
                     {{>findCharges}}
                 </div>
         </div>

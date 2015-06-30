@@ -9,7 +9,7 @@
 
 <template name="findReviews">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
             <h3>
                 Reviews
             </h3>
@@ -19,6 +19,8 @@
     {{> insertReviewButton}}
     {{#if anyReviews}}
     <div class="row">
+
+        {{#unless transactionMode}}
         <div class="col-md-12">
             <br>
             <div class="btn-group btn-group-justified">
@@ -28,7 +30,7 @@
             </div>
             <br>
         </div>
-    </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="list-group">
@@ -36,26 +38,53 @@
                 </div>
             </div>
         </div>
+        {{/unless}}
 
         {{#if transactionMode}}
-            Transaction mode is on
+        <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
-                    <h3>Seller</h3>
                     {{#with creatorReview}}
-                        {{> findOneReview }}
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><h4>Seller</h4></div>
+                            <div class="panel-body">
+                                {{> findOneReview }}
+                            </div>
+                    </div>
                     {{/with}}
+                    {{#unless creatorReview}}
+                        <div class="well well-sm">
+                            <p>
+                                Seller has not submitted a review.
+                            </p>
+                        </div>
+
+                    {{/unless}}
                 </div>
                 <div class="col-md-6">
-                    <h3>Buyer</h3>
                     {{#with buyerReview}}
-                        {{> findOneReview }}
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h4>Buyer</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{> findOneReview }}
+                        </div>
+                    </div>
                     {{/with}}
+                    {{#unless buyerReview}}
+                        <div class="well">
+                            <p>
+                                Buyer has not submitted a review.
+                            </p>
+                        </div>
 
+                    {{/unless}}
                 </div>
             </div>
+        </div>
         {{/if}}
-
+    </div>
     {{/if}}
 
 

@@ -136,7 +136,7 @@ if (Meteor.isClient) {
             return Reviews.find({reviewDocument: this.doc._id}).count() > 0;
         },
         transactionMode: function() {
-            return LaunchBox.collections[this.doc.getCollectionName()].reviewSettings.creatorCanReview;
+            return LaunchBox.collections[this.doc.getCollectionName()].reviewSettings.transactionReviewMode;
         },
         creatorReview: function() {
 

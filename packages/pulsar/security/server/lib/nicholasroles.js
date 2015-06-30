@@ -29,6 +29,9 @@ if (Package && Package["nicolaslopezj:roles"]) {
         }
     });
 
+    //TODO: Finish defining 1 submission per user
+    //Security.defineMethod("ifUserHadNotCreated")
+
 }
 
 

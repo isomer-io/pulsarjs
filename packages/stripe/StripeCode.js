@@ -2,15 +2,7 @@
  * Created by macsj200 on 5/30/15.
  */
 
-Router.route('/api/oauth/stripe/').get(function () {
-    if(!Meteor.user().stripe){
-        Meteor.call('obtainAccessToken', this.params.query, function(err,data){
-            Session.set('stripeOauthErr',err);
-            Session.set('stripeOauthData',data);
-        });
-    }
-    this.render('StripeOauthPage');
-});
+
 
 if (Meteor.isServer) {
 

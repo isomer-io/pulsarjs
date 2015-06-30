@@ -1,4 +1,4 @@
-<template name="payForItem">
+<template name="buyButton">
     <div class="row">
         <div class="col-md-12">
 
@@ -7,17 +7,19 @@
                     {{#if stripeClientId}}
                         {{#if itemHasMerchant}}
                             {{#if canBuy}}
-                                {{>payForItemButtonTemplate}}
+                                <a id="payForItemButton" type="button" class="btn btn-block btn-warning">
+                                    <strong> Buy for ${{this.price}}</strong>
+                                </a>
                             {{/if}}
                             {{#unless canBuy}}
                                 {{#unless isSeller}}
                                 <a type="button" class="btn btn-block btn-warning disabled">
-                                    <strong> You have purchased this already.</strong>
+                                    You have purchased this already.
                                 </a>
                                 {{/unless}}
                                 {{#if isSeller}}
                                     <a type="button" class="btn btn-block btn-warning disabled">
-                                        <strong> You cannot purchase your own item.</strong>
+                                        You cannot purchase your own item.
                                     </a>
                                 {{/if}}
                             {{/unless}}
