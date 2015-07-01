@@ -43,3 +43,9 @@ orion.collections.onCreated(function() {
         });
     //}
 });
+
+
+Router.configure({
+    fastRender: true,
+    layoutTemplate: 'appLayout'
+});

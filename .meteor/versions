@@ -112,6 +112,9 @@ orionjs:s3@1.1.0
 orionjs:summernote@1.1.0
 peppelg:bootstrap-3-modal@1.0.3
 pulsar@0.0.1
+pulsar-config@0.0.1
+pulsar-reviews@0.0.1
+pulsar-security@0.0.1
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5

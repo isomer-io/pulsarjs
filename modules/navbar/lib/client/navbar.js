@@ -2,14 +2,6 @@
  * Created by wesley on 6/2/15.
  */
 
-
-orion.dictionary.addDefinition('title', 'navbar', {
-    type: String,
-    label: 'Nav Bar Title'
-});
-
-if (Meteor.isClient) {
-
     Session.setDefault('pagesLeft', '[]');
     Session.set('pagesLeft', '[]');
 
@@ -113,5 +105,3 @@ if (Meteor.isClient) {
             //Session.set('menuToggled', false);
         }
     });
-
-}

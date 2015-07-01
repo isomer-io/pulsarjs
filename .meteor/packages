@@ -27,8 +27,6 @@ matb33:collection-hooks
 ongoworks:security
 fortawesome:fontawesome
 orionjs:image-attribute
-stripe
-pulsar
 twbs:bootstrap
 bootswatch:paper
 ccorcos:clientside-image-manipulation
@@ -39,4 +37,5 @@ fastclick
 meteoric:ionic
 orionjs:relationships
 meteorhacks:aggregate
+pulsar
 autopublish

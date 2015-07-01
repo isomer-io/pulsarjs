@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use(["templating",'tracker','session'], "client");
+  api.use(['templating','tracker','session'], "client");
 
   api.use("meteorhacks:async@1.0.0", "server");
 
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles"
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'pulsar-config'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
@@ -45,5 +45,6 @@ Package.onUse(function(api) {
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
   api.export('Refunds');
+  api.export('Charges');
 
 });

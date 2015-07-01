@@ -8,11 +8,6 @@ if (Meteor.isClient) {
     //    this.render('homePage');
     //});
 
-    Router.configure({
-        fastRender: true,
-        layoutTemplate: 'appLayout'
-    });
-
         Router.route('homePage', {
             path: '/'
         });
