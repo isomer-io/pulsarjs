@@ -72,6 +72,9 @@ meteorhacks:collection-utils@1.2.0
 meteorhacks:fast-render@2.5.0
 meteorhacks:inject-data@1.3.0
 meteorhacks:inject-initial@1.0.2
+meteorhacks:kadira@2.22.0
+meteorhacks:kadira-debug@1.3.3
+meteorhacks:meteorx@1.3.1
 meteorhacks:picker@1.0.2
 meteoric:ionic@0.1.17
 meteortoys:toykit@0.7.0
@@ -139,6 +142,7 @@ webapp@1.2.0
 webapp-hashing@1.0.3
 wesleyfsmith:pulsarjs@0.0.1
 wesleyfsmith:pulsarjs-config@0.0.1
+wesleyfsmith:pulsarjs-debug@0.0.1
 wesleyfsmith:pulsarjs-payments@0.0.1
 wesleyfsmith:pulsarjs-reviews@0.0.1
 wesleyfsmith:pulsarjs-security@0.0.1
