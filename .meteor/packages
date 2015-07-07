@@ -38,6 +38,7 @@ meteoric:ionic
 orionjs:relationships
 meteorhacks:aggregate
 wesleyfsmith:pulsarjs
+wesleyfsmith:pulsarjs-security
 wesleyfsmith:pulsarjs-payments
 wesleyfsmith:pulsarjs-reviews
 wesleyfsmith:pulsarjs-navbar
