@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'pulsar-security',
+  name: 'wesleyfsmith:pulsarjs-security',
   version: '0.0.1',
   summary: '',
   documentation: ''

@@ -23,8 +23,6 @@ if (Meteor.isServer) {
                         $set: {'clientCall.charge': !targetUser.clientCall.charge}
                     });
             });
-
-
         }
     };
 

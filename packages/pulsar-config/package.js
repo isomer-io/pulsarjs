@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'pulsar-config',
+  name: 'wesleyfsmith:pulsarjs-config',
   version: '0.0.1',
   summary: '',
   documentation: ''

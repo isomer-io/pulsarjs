@@ -8,8 +8,8 @@ Posts = new orion.collection('posts', {
     pluralName: 'posts', // The name of more than one of these items
 
     reviewSettings: {
-        mustPurchaseToReview: true,
-        transactionReviewMode: true
+        mustPurchaseToReview: false,
+        transactionReviewMode: false
     },
 
     chargeSettings: {

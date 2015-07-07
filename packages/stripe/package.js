@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'stripe',
+  name: 'wesleyfsmith:pulsarjs-payments',
   version: '0.0.1',
   summary: 'A simplified version of https://github.com/tyler-johnson/stripe-meteor',
   documentation: 'README.md'
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'pulsar-config'
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'wesleyfsmith:pulsarjs-config'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
@@ -41,7 +41,7 @@ Package.onUse(function(api) {
 
   api.addFiles(['server/RefundsSecurity.js',
   'charges/code/server/chargesSecurity.js'],'server');
-  
+
   api.export('createCustomer', 'client');
   api.export('createCharge', 'client');
   api.export('Refunds');
