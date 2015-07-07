@@ -15,6 +15,8 @@ Posts = new orion.collection('posts', {
     chargeSettings: {
         sellOnce: true //can be sold multiple times
     },
+    
+
 
     /*
         fill this out for admin panel

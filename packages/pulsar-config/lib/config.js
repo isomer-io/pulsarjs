@@ -24,7 +24,7 @@ orion.collections.onCreated(function() {
 
     //if (Meteor.isClient) {
         //this.canIndex = function() {
-        //    return Roles.userHasPermission(Meteor.userId(), 'collections.' + self.name + '.index');
+          //  return Roles.userHasPermission(Meteor.userId(), 'collections.' + self.name + '.index');
         //},
         //this.canShowCreate = function() {
         //    return Roles.userHasPermission(Meteor.userId(), 'collections.' + self.name + '.showCreate');
