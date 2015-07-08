@@ -82,18 +82,53 @@ if(Meteor.isServer){
                 Meteor.users.update({_id:Meteor.userId()}, {$set: {stripeCustomerId: stripeCustomerId} } );
             }
 
+            var userSubscriptions = (function(){
+              var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+
+              var user = Meteor.users.findOne(Meteor.userId());
+
+              var userSubscriptions = null;
+
+              //error handling
+              if (!user.stripeCustomerId) {
+                  return [];
+              }
+
+              var res = Async.runSync(function (done) {
+                  Stripe.customers.retrieve(
+                      user.stripeCustomerId,
+                      function(err, customer) {
+                          userSubscriptions = customer.subscriptions.data;
+
+                          //TODO: make less hackish
+                          _.forEach(userSubscriptions, function(subscription){
+                              subscription.planId = subscription.plan.id;
+                          });
+
+                          done(err, customer);
+                      }
+                  );
+              });
+
+              return userSubscriptions;
+            })();
+
             var res = Async.runSync(function (done) {
-                console.log('subscribing to plan',plan);
-                Stripe.customers.createSubscription(stripeCustomerId, {
-                    plan: plan
-                },function(err,data){
+                if(userSubscriptions.length !== 0){
+                  done({msg:'You can\'t subscribe to more than one plan at a time'});
+                } else {
+                  console.log('subscribing to plan',plan);
+                  Stripe.customers.createSubscription(stripeCustomerId, {
+                      plan: plan
+                  },function(err,data){
 
-                    if(!err){
-                        console.log('subscribed');
-                    }
+                      if(!err){
+                          console.log('subscribed');
+                      }
 
-                    done(err,data);
-                });
+                      done(err,data);
+                  });
+                }
             });
 
             return res;

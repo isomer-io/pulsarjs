@@ -40,11 +40,17 @@
     <div class="row">
         {{#if stripeErr}}
             <div class="col-md-offset-4 col-md-4" >
-                <div class="alert alert-danger" role="alert">Stripe had an error: {{stripeErr.message}}</div>
+                <div class="alert alert-danger" role="alert">Error: {{stripeErr.msg}}</div>
             </div>
         {{/if}}
 
-        {{#if stripeData}}
+        {{#if stripeSubscriptionData}}
+            <div class="col-md-offset-4 col-md-4">
+                <div class="alert alert-success text-center" role="alert">Subscription successful</div>
+            </div>
+        {{/if}}
+
+        {{#if stripeUnsubscriptionData}}
             <div class="col-md-offset-4 col-md-4">
                 <div class="alert alert-success text-center" role="alert">Subscription successful</div>
             </div>

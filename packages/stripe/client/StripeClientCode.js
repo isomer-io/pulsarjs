@@ -22,7 +22,7 @@ if(Meteor.isClient){
             key: orion.config.get('STRIPE_API_KEY'),
             token: function(token) {
                 Meteor.call('createSubscription', token, Session.get('currentPlan'), function(err,data){
-                    Session.set('stripeSubscriptionErr',err);
+                    Session.set('stripeSubscriptionErr',data.error);
                     Session.set('stripeSubscriptionData',data.result);
                     subscriptionsDep.changed();
                 });
@@ -41,8 +41,11 @@ if(Meteor.isClient){
 
 
     Template.subscribe.helpers({
-        stripeData:function(){
+        stripeSubscriptionData:function(){
             return Session.get('stripeSubscriptionData');
+        },
+        stripeUnsubscritptionData:function(){
+          return Session.get('stripeUnsubscriptionData');
         },
         stripeErr:function(){
             return Session.get('stripeSubscriptionErr');
@@ -68,7 +71,7 @@ if(Meteor.isClient){
             return _.findWhere(Session.get('userSubscriptions'), {'planId':planId});
         },
         userHasSubscription:function(){
-          return Session.get('userSubscriptions').length !== 0;
+          return false || Session.get('userSubscriptions').length !== 0;
         }
     });
 
