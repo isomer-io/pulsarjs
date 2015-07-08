@@ -66,6 +66,9 @@ if(Meteor.isClient){
 
             //TODO: possibly clean up (a little hackish injecting planId, need to do for findWhere to work)
             return _.findWhere(Session.get('userSubscriptions'), {'planId':planId});
+        },
+        userHasSubscription:function(){
+          return Session.get('userSubscriptions').length !== 0;
         }
     });
 

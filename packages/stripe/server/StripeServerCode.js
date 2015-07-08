@@ -59,6 +59,7 @@ if(Meteor.isServer){
             return res;
         },
         createSubscription:function(token,plan){
+
             var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
 
             var user = Meteor.users.findOne(Meteor.userId());

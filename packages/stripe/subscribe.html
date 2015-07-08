@@ -19,7 +19,9 @@
                         {{#if userIsSubscribed id}}
                             {{>unsubscribeButtonTemplate}}
                         {{else}}
-                            {{>subscribeButtonTemplate}}
+                            {{#unless userHasSubscription}}
+                              {{>subscribeButtonTemplate}}
+                            {{/unless}}
                         {{/if}}
                     </div>
                 </div>
