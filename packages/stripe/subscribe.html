@@ -21,6 +21,8 @@
                         {{else}}
                             {{#unless userHasSubscription}}
                               {{>subscribeButtonTemplate}}
+                            {{else}}
+                              <div class="alert alert-info" role="alert">You can only subscripe to one plan at a time</div>
                             {{/unless}}
                         {{/if}}
                     </div>
