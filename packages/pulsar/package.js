@@ -19,7 +19,7 @@ Package.onUse(function(api) {
       'wesleyfsmith:pulsarjs-security',
       'wesleyfsmith:pulsarjs-config',
       "wesleyfsmith:pulsarjs-payments",
-      'wesleyfsmith:pulsarjs-reviews'
+      'wesleyfsmith:pulsarjs-reviews','wesleyfsmith:image-attribute'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');

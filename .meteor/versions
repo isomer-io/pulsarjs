@@ -105,7 +105,6 @@ orionjs:core@1.1.0
 orionjs:dictionary@1.1.0
 orionjs:file-attribute@1.1.1
 orionjs:filesystem@1.1.0
-orionjs:image-attribute@1.1.4
 orionjs:lang-en@1.1.1
 orionjs:relationships@1.1.2
 orionjs:s3@1.1.0
@@ -137,6 +136,7 @@ useraccounts:bootstrap@1.8.1
 useraccounts:core@1.8.1
 webapp@1.2.0
 webapp-hashing@1.0.3
+wesleyfsmith:image-attribute@1.1.4
 wesleyfsmith:pulsarjs@0.0.1
 wesleyfsmith:pulsarjs-config@0.0.1
 wesleyfsmith:pulsarjs-navbar@0.0.1

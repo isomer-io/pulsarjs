@@ -72,6 +72,17 @@ ReactiveTemplates.events('attribute.image', {
     var files = event.currentTarget.files;
     if (files.length != 1) return;
 
+    var namesplit = files[0].name.split('.')
+
+    var extension = namesplit[namesplit.length - 1];
+
+    var allowedExtensions = ['jpeg'];
+
+    if(!_.contains(allowedExtensions,extension)){
+      Modal.show('wrongfiletype');
+      return;
+    }
+
     orion.helpers.getBase64Image(files[0], function(base64) {
       Session.set('image_base64' + self.name, base64);
     });
