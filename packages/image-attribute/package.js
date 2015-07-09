@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'orionjs:image-attribute',
+  name: 'wesleyfsmith:image-attribute',
   summary: 'Image attribute for orion',
   version: '1.1.4',
-  git: 'http://github.com/orionjs/orion'
+  git: 'https://github.com/IsomerEDU/LaunchBox'
 });
 
 Package.onUse(function(api) {
