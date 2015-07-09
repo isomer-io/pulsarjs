@@ -23,10 +23,10 @@ Package.onUse(function(api) {
 
   //CUSTOM ROLES
   api.addFiles(['server/lib/nicholasroles.js'],'server');
-  api.addFiles(['lib/roles.js'], ['client', 'server']);
+  // api.addFiles(['lib/roles.js'], ['client', 'server']);
 
-  api.export('UserRole');
-  api.export('AdminRole');
+  // api.export('UserRole');
+  // api.export('AdminRole');
 
 
 

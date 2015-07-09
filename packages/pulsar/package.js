@@ -24,6 +24,6 @@ Package.onUse(function(api) {
 
   api.versionsFrom('METEOR@1.1.0.2');
 
-
+  api.export('Pulsar');
 
 });
