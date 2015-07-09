@@ -16,17 +16,6 @@ if (Meteor.isClient) {
         this.render('viewOnePostPage', {data: post});
     });
 
-
-    //Here we define a helper on the single post page
-    //In this case we check if the loggedin user
-    //created the post
-    Template.viewOnePostPage.helpers({
-        'isOwner': function() {
-            return this.createdBy === Meteor.userId();
-        }
-    });
-
-
     //This is how you display a modal
     //In this case, we are displaying a modal to
     //confirm that the user wants to delete a specific post
