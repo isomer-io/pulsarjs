@@ -10,6 +10,9 @@ if (Meteor.isClient) {
         menuOrientation: 'left'
     });
 
+    Session.setDefault("posts.filter", false);
+
+
     Router.route('/posts', function() {
        this.render('listPostsPage');
     });
@@ -17,6 +20,15 @@ if (Meteor.isClient) {
     Template.listPostsPage.helpers({
        hasResults: function() {
            return Posts.find().count();
+       },
+       isDisabled: function(filter) {
+         if (Session.get('posts.filter')  && filter === 'oldest-first') {
+           return 'disabled';
+         }
+         if (!Session.get('posts.filter') && filter === 'newest-first') {
+           return 'disabled';
+         }
+        return '';
        }
     });
 
@@ -27,6 +39,9 @@ if (Meteor.isClient) {
                    createdAt: 1
                }
             });
+
+            Session.set('posts.filter', true);
+
         },
         'click #newest-first': function() {
             Posts.findList.set({
@@ -34,6 +49,9 @@ if (Meteor.isClient) {
                     createdAt: -1
                 }
             });
+
+            Session.set('posts.filter', false);
+
         }
     });
 
