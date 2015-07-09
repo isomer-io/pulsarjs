@@ -76,9 +76,10 @@ ReactiveTemplates.events('attribute.image', {
 
     var extension = namesplit[namesplit.length - 1];
 
-    var allowedExtensions = ['jpg'];
+    var allowedExtensions = ['jpeg'];
 
     if(!_.contains(allowedExtensions,extension)){
+      Modal.show('wrongfiletype');
       return;
     }
 

@@ -22,6 +22,7 @@ Package.onUse(function(api) {
   api.addFiles([
     'colibri.js',
     'helper.js',
+    'wrongfiletype.html',
     'image.html',
     'image.less',
     'image.js',
