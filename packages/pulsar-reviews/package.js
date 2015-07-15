@@ -1,8 +1,8 @@
 Package.describe({
   name: 'wesleyfsmith:pulsarjs-reviews',
   version: '0.0.1',
-  summary: '',
-  documentation: ''
+  documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
+  git: 'https://github.com/isomer-io/pulsarjs'
 });
 
 Package.onUse(function(api) {

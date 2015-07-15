@@ -1,8 +1,8 @@
 Package.describe({
   name: 'wesleyfsmith:pulsarjs-payments',
   version: '0.0.1',
-  summary: 'A simplified version of https://github.com/tyler-johnson/stripe-meteor',
-  documentation: 'README.md'
+  documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
+  git: 'https://github.com/isomer-io/pulsarjs'
 });
 
 Package.onUse(function(api) {
