@@ -13,9 +13,9 @@ Posts = new orion.collection('posts', {
     },
 
     chargeSettings: {
-        sellOnce: true //can be sold multiple times
+        sellOnce: true //can be sold once
     },
-    
+
 
 
     /*

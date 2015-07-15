@@ -2,35 +2,13 @@
 
     <div class="container">
 
-        {{> findOnePost }}
+        {{> findOnePost postId=id}}
 
         <hr>
-        {{#if this.isCreator}}
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>
-                        You are the creator of this Post
-                    </h3>
-                </div>
-            </div>
+        {{> postCreatorControls postId=id}}
 
-            <div class="row">
-
-                <div class="col-md-6">
-                        <a href="/posts/{{this._id}}/edit" class="btn btn-block btn-success">
-                            Edit this post
-                        </a>
-                </div>
-                <div class="col-md-6">
-                        <a id="deletePostButton" class="btn btn-block btn-danger">
-                            Delete this post
-                        </a>
-                </div>
-            </div>
-            <hr>
-        {{/if}}
-
-        {{> findReviews doc=this}}
+        <hr>
+        {{> findReviews docId=id collectionName="posts"}}
 
     </div>
 

@@ -21,6 +21,6 @@ if (Meteor.isClient) {
     });
 
 
-
-
 }
+
+Options.set('forbidClientAccountCreation', false);

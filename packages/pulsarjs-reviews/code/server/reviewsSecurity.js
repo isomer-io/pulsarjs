@@ -15,6 +15,8 @@ Meteor.publish('review', function(reviewId) {
  *
  */
 
+//TODO: make these reflect UI permission
+
 //they can only insert if they are a user
 Reviews.permit('insert').ifLoggedIn().apply();
 

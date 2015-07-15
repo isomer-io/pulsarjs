@@ -4,8 +4,8 @@
 
 if (Meteor.isClient) {
 
-    var canReviewDocument = function(doc) {
-        Meteor.call('canReviewDocument', doc, doc.getCollectionName(), function(err, res) {
+    var canReviewDocument = function(docId, collectionName) {
+        Meteor.call('canReviewDocument', docId, collectionName, function(err, res) {
 
             //TODO: use reactive var
             Session.set('Reviews.canReview', res);
@@ -13,19 +13,22 @@ if (Meteor.isClient) {
         });
     };
 
-    Template.insertReviewButton.onRendered(function() {
+    Template.insertReviewButton.onCreated(function() {
         var self = this;
+
+        console.log(Template.currentData());
+
+
 
         AutoForm.addHooks('insertReview', {
             before: {
                 // Replace `formType` with the form `type` attribute to which this hook applies
                 insert: function(doc) {
                     // Potentially alter the doc
-                    doc.reviewDocument = self.data.doc._id;
 
-                    doc.reviewDocumentCollectionName = self.data.doc.getCollectionName();
+                    doc.reviewDocument = self.data.docId;
 
-                    doc.reviewDocumentCreator = self.data.doc._id;
+                    doc.reviewDocumentCollectionName = self.data.collectionName;
 
                     //console.log(doc);
 
@@ -41,7 +44,7 @@ if (Meteor.isClient) {
             },
             onSuccess: function() {
                 Modal.hide();
-                canReviewDocument(self.data.doc);
+                canReviewDocument(Template.currentData().docId, Template.currentData().collectionName);
             }
         });
 
@@ -64,12 +67,12 @@ if (Meteor.isClient) {
 
         var self = this;
 
-        canReviewDocument(self.data.doc);
+        canReviewDocument(Template.currentData().docId, Template.currentData().collectionName);
 
         Tracker.autorun(function() {
 
             if (Meteor.user() && Meteor.user().clientCall && Meteor.user().clientCall.charge) {
-                canReviewDocument(self.data.doc);
+                canReviewDocument(Template.currentData().docId, Template.currentData().collectionName);
             }
         });
 
@@ -77,9 +80,14 @@ if (Meteor.isClient) {
 
     Template.findReviews.onRendered(function() {
 
+      console.log(this.data);
+
+      var self = this;
+
+        //TODO: check that we are grabbing from correct collection
         Reviews.findList.set({
             filters: {
-                reviewDocument: this.data.doc._id
+                reviewDocument: self.data.docId
             }
         });
 
@@ -133,21 +141,23 @@ if (Meteor.isClient) {
             }
         },
         anyReviews: function() {
-            return Reviews.find({reviewDocument: this.doc._id}).count() > 0;
+            return Reviews.find({reviewDocument: this.docId}).count() > 0;
         },
         transactionMode: function() {
-            return LaunchBox.collections[this.doc.getCollectionName()].reviewSettings.transactionReviewMode;
+            return LaunchBox.collections[this.collectionName].reviewSettings.transactionReviewMode;
         },
         creatorReview: function() {
-
-                return Reviews.findOne({reviewDocument: this.doc._id, createdBy: this.doc.createdBy});
+                var collection = LaunchBox.collections[this.collectionName];
+                var doc = collection.findOne({_id: this.docId});
+                return Reviews.findOne({reviewDocument: this.docId, createdBy: doc.createdBy});
 
         },
         buyerReview: function() {
 
 
-            if ( Charges.findOne({chargeTargetDocId: this.doc._id}) ) {
-                return Reviews.findOne({reviewDocument: this.doc._id, createdBy: {$not: this.doc.createdBy} });
+            if ( Charges.findOne({chargeTargetDocId: this.docId}) ) {
+                var doc = collection.findOne({_id: this.docId});
+                return Reviews.findOne({reviewDocument: this.docId, createdBy: {$not: doc.createdBy} });
             }
 
         }

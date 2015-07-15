@@ -65,13 +65,6 @@ Reviews.attachSchema(new SimpleSchema({
         }
     },
 
-    reviewDocumentCreator: {
-        type: String,
-        autoform: {
-            omit: true
-        }
-    },
-
     /*
     This attribute sets the user id to that of the user that created
     this post automatically.  */

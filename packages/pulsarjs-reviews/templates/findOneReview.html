@@ -8,31 +8,34 @@
 
 <template name="findOneReview">
 
-
             <div class="row">
-                <div class="col-md-12">
-                    <h4>
-                        {{this.title}}
-                    </h4>
-                </div>
-                <div class="col-md-12">
-                    {{#each stars}}
-                        <i class="fa fa-star"></i>
-                    {{/each}}
-                </div>
-                <div class="col-md-12">
-                    <p>
-                        By: Profile Link on {{this.createdAt}}
-                    </p>
-                </div>
-                <div class="col-md-12">
-                    <p>
-                        {{this.body}}
-                    </p>
-                </div>
+
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{this.title}}</div>
+                    <div class="panel-body">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                            {{#each stars}}
+                                <i class="fa fa-star"></i>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-12">
+                            <p>
+                                By: Profile Link on {{this.createdAt}}
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>
+                                {{this.body}}
+                            </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
             </div>
-
-
-
 
 </template>

@@ -11,10 +11,11 @@ Package.onUse(function(api) {
   api.use("meteorhacks:async@1.0.0", "server");
 
   api.use([
+    'alethes:pages',
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'wesleyfsmith:pulsarjs-config', 'wesleyfsmith:pulsarjs-payments'
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'wesleyfsmith:pulsarjs-config', 'wesleyfsmith:pulsarjs-payments'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
