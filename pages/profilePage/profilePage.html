@@ -6,6 +6,7 @@
 
         <div class="container">
             <div class="row">
+
                 <div class="col-md-12 text-center">
                     <h1>
                         {{this.name}}
@@ -13,37 +14,16 @@
                 </div>
 
             </div>
-            {{#unless currentUser.stripe}}
-            <div class="row">
-                <div class="col-md-offset-4 col-md-4">
-                    {{>buyerSetupButton}}
-                </div>
-            </div>
-            {{/unless}}
-            {{#if currentUser.stripe}}
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>
-                            You have a merchant account connected.
-                        </h5>
-                        <a href="https://dashboard.stripe.com/login" class="btn btn-default btn-block">
-                            Go to merchant dashboard.
-                        </a>
-                    </div>
-                </div>
-            {{/if}}
+
+            {{>buyerSetup}}
+
             <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>
-                        Your Purchases
-                    </h2>
-                    {{>findCharges}}
-                </div>
+            {{>findCharges}}
+
+            <hr>
+            {{>subscribe}}
+
         </div>
-            <hr>
-            {{> subscribe }}
-    </div>
 
 
     {{/with}}

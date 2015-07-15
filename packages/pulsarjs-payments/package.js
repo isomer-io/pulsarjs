@@ -26,6 +26,7 @@ Package.onUse(function(api) {
     'client/templates/buyButton/buyButton.js',
     'client/templates/buyerSetupButton/buyerSetupButton.html',
     'client/templates/buyerSetupButton/stripeOauthTemplate.html',
+    'client/templates/buyerSetupButton/buyerSetup.html',
     'client/templates/buyerSetupButton/buyerSetupButton.js',
     'subscribeButtonTemplate.html',
     'unsubscribeButtonTemplate.html',

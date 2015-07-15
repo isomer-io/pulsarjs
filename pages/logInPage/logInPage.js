@@ -8,4 +8,6 @@ if (Meteor.isClient) {
         this.render('logInPage');
     });
 
+    //use this to configure login page
+
 }

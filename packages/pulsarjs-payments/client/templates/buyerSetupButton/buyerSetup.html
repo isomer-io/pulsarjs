@@ -1,0 +1,23 @@
+<template name="buyerSetup">
+  
+  {{#unless currentUser.stripe}}
+  <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+          {{>buyerSetupButton}}
+      </div>
+  </div>
+  {{/unless}}
+  {{#if currentUser.stripe}}
+      <div class="row">
+          <div class="col-md-4">
+              <h5>
+                  You have a merchant account connected.
+              </h5>
+              <a href="https://dashboard.stripe.com/login" class="btn btn-default btn-block">
+                  Go to merchant dashboard.
+              </a>
+          </div>
+      </div>
+  {{/if}}
+
+</template>

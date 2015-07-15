@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'wesleyfsmith:pulsarjs-config',
+  name: 'wesleyfsmith:pulsarjs',
   version: '0.0.1',
   documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
   git: 'https://github.com/isomer-io/pulsarjs'
@@ -15,22 +15,15 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'fourseven:scss'
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages',
+      'wesleyfsmith:pulsarjs-security',
+      'wesleyfsmith:pulsarjs-config',
+      "wesleyfsmith:pulsarjs-payments",
+      'wesleyfsmith:pulsarjs-reviews','wesleyfsmith:pulsarjs-imagecrop'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
 
-  //CONFIG STUFF
-
-  api.addFiles(['appLayout.html'], 'client');
-  api.addFiles(['bottomSpacing.scss'], 'client');
-  api.addFiles(['footer/footer.html'], 'client');
-  api.addFiles(['htmlExtras.html'], 'client');
-
-  api.addFiles(['lib/ClientInvoke/ClientCall.js',
-    'lib/config.js'], ['client', 'server']);
-
-  api.export('LaunchBox');
-
+  api.export('Pulsar');
 
 });

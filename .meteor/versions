@@ -137,9 +137,9 @@ useraccounts:bootstrap@1.8.1
 useraccounts:core@1.8.1
 webapp@1.2.0
 webapp-hashing@1.0.3
-wesleyfsmith:image-attribute@1.1.4
 wesleyfsmith:pulsarjs@0.0.1
 wesleyfsmith:pulsarjs-config@0.0.1
+wesleyfsmith:pulsarjs-imagecrop@1.1.4
 wesleyfsmith:pulsarjs-navbar@0.0.1
 wesleyfsmith:pulsarjs-payments@0.0.1
 wesleyfsmith:pulsarjs-reviews@0.0.1
