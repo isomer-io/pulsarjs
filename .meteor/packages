@@ -27,7 +27,6 @@ matb33:collection-hooks
 ongoworks:security
 fortawesome:fontawesome
 twbs:bootstrap
-bootswatch:paper
 ccorcos:clientside-image-manipulation
 jonblum:jquery-cropper
 msavin:mongol
@@ -42,3 +41,5 @@ wesleyfsmith:pulsarjs-payments
 wesleyfsmith:pulsarjs-reviews
 wesleyfsmith:pulsarjs-navbar
 autopublish
+fourseven:scss
+reywood:bootstrap3-sass

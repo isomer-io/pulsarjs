@@ -15,14 +15,16 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages'
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'fourseven:scss'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
 
   //CONFIG STUFF
+
   api.addFiles(['appLayout.html'], 'client');
-  api.addFiles(['bottomSpacing.css'], 'client');
+  api.addFiles(['bottomSpacing.scss'], 'client');
+  api.addFiles(['footer/footer.html'], 'client');
   api.addFiles(['htmlExtras.html'], 'client');
 
   api.addFiles(['lib/ClientInvoke/ClientCall.js',
