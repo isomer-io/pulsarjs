@@ -5,19 +5,26 @@
 if (Meteor.isClient) {
 
     Navbar.add({
-        url: '/profile',
+        url: '/profile/' + Meteor.userId(),
         menuName: 'Account',
         menuOrientation: 'right',
         requiresLogin: true
     });
 
-    Router.route('/profile', function() {
+    Router.route('/profile/:_id', function() {
 
-        if (!Meteor.user()) {
-            return;
-        }
-        this.render('profilePage');
+        this.render('profilePage', {
+          data: function(){
+            return {id:this.params._id}
+          }
+        });
 
+    });
+
+    Template.profilePage.helpers({
+      isOwnId:function(){
+        return Template.currentData().id === Meteor.userId()
+      }
     });
 
 
