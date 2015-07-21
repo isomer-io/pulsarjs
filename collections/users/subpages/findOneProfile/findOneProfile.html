@@ -1,0 +1,20 @@
+<!--
+
+    You will need to change this file, to reflect one post with all
+    of it's information displayed. For example, this.name would
+    display the name of the post within the list.
+
+-->
+
+<template name="findOneProfile">
+    {{#with currentProfile}}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                {{this.birthday}}
+            </h2>
+        </div>
+    </div>
+    {{/with}}
+
+</template>
