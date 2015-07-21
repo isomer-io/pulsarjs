@@ -5,7 +5,7 @@
 if (Meteor.isClient) {
 
     Navbar.add({
-        url: '/profile/' + Meteor.userId(),
+        url: '/profile/',
         menuName: 'Account',
         menuOrientation: 'right',
         requiresLogin: true
@@ -21,10 +21,18 @@ if (Meteor.isClient) {
 
     });
 
+    Router.route('/profile', function() {
+      this.render('profilePage', {
+        data: function() {
+          return {id: Meteor.userId()}
+        }
+      })
+    });
+
     Template.profilePage.helpers({
       isOwnId:function(){
-        return Template.currentData().id === Meteor.userId()
-      }
+        return Template.currentData().id === Meteor.userId();
+      },
     });
 
 
