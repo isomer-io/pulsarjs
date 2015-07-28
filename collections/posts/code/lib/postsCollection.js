@@ -76,6 +76,11 @@ Posts.attachSchema(new SimpleSchema({
         min:0
     },
 
+    helpWanted:{
+      type:Boolean,
+      defaultValue:false
+    },
+
     /*
     This attribute sets the user id to that of the user that created
     this post automatically.  */
