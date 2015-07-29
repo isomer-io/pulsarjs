@@ -1,0 +1,24 @@
+<template name="idePage">
+
+    <div class="container">
+
+        <div class="row">
+          <div class="col-md-4">
+            <button class="btn btn-alert helpers">Add helper (Collection -> HTML)</button>
+          </div>
+
+          <div class="col-md-4">
+            <button class="btn btn-info events">Add event (HTML -> Collection)</button>
+          </div>
+
+          <div class="col-md-4">
+            {{> sharejsAce docid=document onRender=config onConnect=setMode id="editor"}}
+          </div>
+
+        </div>
+
+
+
+    </div>
+
+</template>
