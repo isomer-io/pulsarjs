@@ -53,18 +53,22 @@ if(Meteor.isClient){
 
   Template.idePage.events({
     'click button.helpers':function(){
-      insertTemplate({
-        filename:"sampleHelperCode.js",
-        indentBlock:true,
-        insertAt:outerEditor.find("{").end
-      });
+      if(!outerEditor.find("helpers")){
+        insertTemplate({
+          filename:"sampleHelperCode.js",
+          indentBlock:true,
+          insertAt:outerEditor.find("{").end
+        });
+      }
     },
     'click button.events':function(){
-      insertTemplate({
-        filename:"sampleEventCode.js",
-        indentBlock:true,
-        insertAt:outerEditor.find("{").end
-      });
+      if(!outerEditor.find("events")){
+        insertTemplate({
+          filename:"sampleEventCode.js",
+          indentBlock:true,
+          insertAt:outerEditor.find("{").end
+        });
+      }
     }
   });
 }
