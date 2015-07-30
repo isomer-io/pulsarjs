@@ -17,4 +17,4 @@ Meteor.publish('publicProfile', function(userId) {
 });
 
 
-Meteor.users.permit('insert').apply();
+// Meteor.users.permit('insert').apply();
