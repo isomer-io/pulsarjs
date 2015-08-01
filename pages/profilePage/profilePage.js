@@ -5,19 +5,34 @@
 if (Meteor.isClient) {
 
     Navbar.add({
-        url: '/profile',
+        url: '/profile/',
         menuName: 'Account',
         menuOrientation: 'right',
         requiresLogin: true
     });
 
+    Router.route('/profile/:_id', function() {
+
+        this.render('profilePage', {
+          data: function(){
+            return {id:this.params._id}
+          }
+        });
+
+    });
+
     Router.route('/profile', function() {
-
-        if (!Meteor.user()) {
-            return;
+      this.render('profilePage', {
+        data: function() {
+          return {id: Meteor.userId()}
         }
-        this.render('profilePage');
+      })
+    });
 
+    Template.profilePage.helpers({
+      isOwnId:function(){
+        return Template.currentData().id === Meteor.userId();
+      },
     });
 
 
