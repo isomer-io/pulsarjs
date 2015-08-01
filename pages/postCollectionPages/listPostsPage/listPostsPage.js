@@ -29,7 +29,12 @@ if (Meteor.isClient) {
            return 'disabled';
          }
         return '';
-       }
+      },
+      sortSettings: function() {
+        return {
+            createdAt: -1
+        }
+      }
     });
 
     Template.listPostsPage.events({
