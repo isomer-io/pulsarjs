@@ -1,8 +1,8 @@
 Package.describe({
   name: 'pulsarjs:core',
   version: '0.0.1',
-  documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
-  git: 'https://github.com/isomer-io/pulsarjs'
+  git: 'https://github.com/isomer-io/pulsarjs',
+  summary: 'Core for pulsarjs'
 });
 
 Package.onUse(function(api) {
@@ -15,11 +15,11 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages',
-      'pulsarjs:security',
-      'pulsarjs:config',
-      'pulsarjs:payments',
-      'pulsarjs:reviews','pulsarjs:imagecrop'
+    "spacebars","ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2", 'alethes:pages@1.8.4',
+      'pulsarjs:security@0.0.1',
+      'pulsarjs:config@0.0.1',
+      'pulsarjs:payments@0.0.1',
+      'pulsarjs:reviews@0.0.1','pulsarjs:imagecrop@0.0.1'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');

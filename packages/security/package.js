@@ -1,7 +1,7 @@
 Package.describe({
   name: 'pulsarjs:security',
   version: '0.0.1',
-  documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
+  summary: 'Security for pulsarjs',
   git: 'https://github.com/isomer-io/pulsarjs'
 });
 
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages'
+    "spacebars","ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2"
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
