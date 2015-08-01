@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'wesleyfsmith:pulsarjs-config',
+  name: 'pulsarjs:config',
   version: '0.0.1',
-  documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
-  git: 'https://github.com/isomer-io/pulsarjs'
+  git: 'https://github.com/isomer-io/pulsarjs',
+  summary: 'config for pulsarjs'
 });
 
 Package.onUse(function(api) {
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'fourseven:scss', 'reywood:bootstrap3-sass'
+    "spacebars","ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2", 'alethes:pages@1.8.4', 'fourseven:scss@3.2.0', 'reywood:bootstrap3-sass@3.3.5_1'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');

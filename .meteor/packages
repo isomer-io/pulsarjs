@@ -35,9 +35,9 @@ fastclick
 meteoric:ionic
 orionjs:relationships
 meteorhacks:aggregate
-wesleyfsmith:pulsarjs
-wesleyfsmith:pulsarjs-security
-wesleyfsmith:pulsarjs-payments
-wesleyfsmith:pulsarjs-reviews
-wesleyfsmith:pulsarjs-navbar
+pulsarjs:core
+pulsarjs:security
+pulsarjs:payments
+pulsarjs:reviews
+pulsarjs:navbar
 autopublish
