@@ -16,9 +16,6 @@ if (Meteor.isClient) {
     Template.insertReviewButton.onCreated(function() {
         var self = this;
 
-        console.log(Template.currentData());
-
-
 
         AutoForm.addHooks('insertReview', {
             before: {
@@ -79,8 +76,6 @@ if (Meteor.isClient) {
     });
 
     Template.findReviews.onRendered(function() {
-
-      console.log(this.data);
 
       var self = this;
 
