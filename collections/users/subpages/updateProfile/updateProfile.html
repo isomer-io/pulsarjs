@@ -1,0 +1,9 @@
+<template name="updateProfile">
+
+    <div class="row">
+      <div class="col-md-12">
+          {{> quickForm collection="Meteor.users" id="updateProfile" doc=currentUser type="update" fields="profile"}}
+      </div>
+    </div>
+
+</template>
