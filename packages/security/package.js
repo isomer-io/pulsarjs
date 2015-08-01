@@ -11,11 +11,7 @@ Package.onUse(function(api) {
   api.use("meteorhacks:async@1.0.0", "server");
 
   api.use([
-    "mrgalaxy:stripe@2.1.0",
-    "orionjs:core@1.1.0",
-    "iron:router@1.0.9",
-    "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2"
+    "ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2"
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');

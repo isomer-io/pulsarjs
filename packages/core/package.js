@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security@1.2.0","nicolaslopezj:roles@1.1.2", 'alethes:pages@1.8.4',
+    "spacebars", 'alethes:pages@1.8.4',
       'pulsarjs:security@0.0.1',
       'pulsarjs:config@0.0.1',
       'pulsarjs:payments@0.0.1',
