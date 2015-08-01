@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'wesleyfsmith:pulsarjs-imagecrop',
+  name: 'pulsarjs:imagecrop',
   summary: 'Image attribute for orion',
   version: '1.1.4',
   git: 'https://github.com/IsomerEDU/LaunchBox'

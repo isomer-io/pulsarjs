@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'wesleyfsmith:pulsarjs-config',
+  name: 'pulsarjs:security',
   version: '0.0.1',
   documentation: 'https://github.com/isomer-io/pulsarjs/blob/master/readme.md',
   git: 'https://github.com/isomer-io/pulsarjs'
@@ -15,22 +15,19 @@ Package.onUse(function(api) {
     "orionjs:core@1.1.0",
     "iron:router@1.0.9",
     "meteorhacks:async@1.0.0",
-    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages', 'fourseven:scss', 'reywood:bootstrap3-sass'
+    "spacebars","ongoworks:security","nicolaslopezj:roles", 'alethes:pages'
   ], ["client", "server"]);
 
   api.versionsFrom('METEOR@1.1.0.2');
 
-  //CONFIG STUFF
 
-  api.addFiles(['appLayout.html'], 'client');
-  api.addFiles(['bottomSpacing.css'], 'client');
-  api.addFiles(['footer/footer.html'], 'client');
-  api.addFiles(['htmlExtras.html'], 'client');
+  //CUSTOM ROLES
+  api.addFiles(['server/lib/nicholasroles.js'],'server');
+  // api.addFiles(['lib/roles.js'], ['client', 'server']);
 
-  api.addFiles(['lib/ClientInvoke/ClientCall.js',
-    'lib/config.js'], ['client', 'server']);
+  // api.export('UserRole');
+  // api.export('AdminRole');
 
-  api.export('LaunchBox');
 
 
 });
