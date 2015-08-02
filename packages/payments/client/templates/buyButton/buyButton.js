@@ -19,7 +19,7 @@ Template.buyButton.onRendered(function() {
 
 Template.buyButton.helpers({
     stripeClientId:function(){
-        return orion.config.get('STRIPE_API_CLIENT_ID');
+        return orion.config.get('Stripe Client Id');
     },
     itemHasMerchant:function(){
         Meteor.call('itemHasMerchant', this.createdBy, function(err,res){
@@ -63,7 +63,7 @@ Template.buyButton.events({
         Session.set('currentItem', this);
         Session.set('currentItem.targetDocCollectionName', this.getCollectionName());
         chargeHandler.open({
-            name: orion.config.get('STRIPE_COMPANY_NAME'),
+            name: orion.config.get('Company Name'),
             description: this.title,
             email:Meteor.user().emails[0].address,
             amount: Math.round(this.price * 100)

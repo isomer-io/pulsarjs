@@ -14,7 +14,7 @@ Router.route('/api/oauth/stripe/').get(function () {
 
 Template.buyerSetupButton.helpers({
     stripeClientId:function(){
-        return orion.config.get('STRIPE_API_CLIENT_ID');
+        return orion.config.get('Stripe Client Id');
     }
 });
 

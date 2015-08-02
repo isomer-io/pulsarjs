@@ -52,8 +52,11 @@ if (Meteor.isServer) {
  * Initializes the variables, so you can
  * edit them in the admin panel
  */
-orion.config.add('STRIPE_API_KEY', 'stripe', {public: true});
-orion.config.add('STRIPE_API_CLIENT_ID', 'stripe', {public: true});
-orion.config.add('STRIPE_API_SECRET', 'stripe', {secret: true});
-orion.config.add('STRIPE_COMPANY_NAME', 'stripe', {public: true});
-orion.config.add('STRIPE_APPLICATION_FEE_CENTS', 'stripe', {public: true});
+
+orion.config.add('Stripe Secret Key', 'stripe', {secret: true});
+orion.config.add('Stripe Publishable Key', 'stripe', {public: true});
+
+orion.config.add('Stripe Client Id', 'stripe', {public: true});
+
+orion.config.add('Company Name', 'stripe', {public: true});
+orion.config.add('Stripe Application Fee (Cents)', 'stripe', {public: true});

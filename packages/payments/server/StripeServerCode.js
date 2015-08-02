@@ -14,7 +14,7 @@ if(Meteor.isServer){
                 return query.error;
             } else{
                 if(!Meteor.users.findOne(Meteor.userId()).stripe){
-                    var url = "https://connect.stripe.com/oauth/token?" + "code=" + query.code +"&client_secret=" + orion.config.get('STRIPE_API_SECRET') + "&grant_type=authorization_code";
+                    var url = "https://connect.stripe.com/oauth/token?" + "code=" + query.code +"&client_secret=" + orion.config.get('Stripe Secret Key') + "&grant_type=authorization_code";
 
                     var result = Meteor.http.call("POST", url);
 
@@ -30,7 +30,7 @@ if(Meteor.isServer){
             }
         },
         chargeCard:function(token,item, itemCollectionName){
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
 
@@ -38,7 +38,7 @@ if(Meteor.isServer){
                 amount: Math.round(item.price * 100),
                 currency: 'usd',
                 source: token.id,
-                application_fee:orion.config.get('STRIPE_APPLICATION_FEE_CENTS'),
+                application_fee:orion.config.get('Stripe Application Fee (Cents)'),
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
                 description: item.title,
                 metadata: {
@@ -59,7 +59,7 @@ if(Meteor.isServer){
         },
         createSubscription:function(token,plan){
 
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
 
@@ -82,7 +82,7 @@ if(Meteor.isServer){
             }
 
             var userSubscriptions = (function(){
-              var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+              var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
               var user = Meteor.users.findOne(Meteor.userId());
 
@@ -133,7 +133,7 @@ if(Meteor.isServer){
             return res;
         },
         getPlans:function(){
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var plans = null;
 
@@ -148,7 +148,7 @@ if(Meteor.isServer){
             return plans;
         },
         getUserSubscriptions:function(){
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
 
@@ -182,7 +182,7 @@ if(Meteor.isServer){
 
             console.log('cancelling plan');
 
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
 
@@ -218,7 +218,7 @@ if(Meteor.isServer){
         refund:function(chargeId){
             console.log('refunding');
 
-            var Stripe = StripeAPI(orion.config.get('STRIPE_API_SECRET'));
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
 
