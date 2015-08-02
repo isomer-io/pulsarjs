@@ -114,7 +114,7 @@ pulsarjs:config@0.0.1
 pulsarjs:core@0.0.1
 pulsarjs:imagecrop@0.0.1
 pulsarjs:navbar@0.0.1
-pulsarjs:payments@0.0.1
+pulsarjs:payments@0.0.2
 pulsarjs:reviews@0.0.1
 pulsarjs:security@0.0.1
 random@1.0.3
