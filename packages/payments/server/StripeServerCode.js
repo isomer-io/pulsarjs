@@ -18,9 +18,8 @@ if(Meteor.isServer){
 
                     var result = Meteor.http.call("POST", url);
 
-                    Meteor.users.update({_id:Meteor.userId()}, {$set: {stripe: result.data} } );
-
                     if(result.data.stripe_user_id){
+                        Meteor.users.update({_id:Meteor.userId()}, {$set: {stripe: result.data} } );
                         Roles.addUserToRoles(Meteor.userId(), 'vendor');
                     }
 
