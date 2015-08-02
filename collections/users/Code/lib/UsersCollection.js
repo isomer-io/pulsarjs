@@ -40,7 +40,8 @@ Schema.User = new SimpleSchema({
   },
   stripe:{
     type:Object,
-    optional:true
+    optional:true,
+    blackbox:true
   }
 });
 
