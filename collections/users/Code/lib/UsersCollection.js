@@ -38,6 +38,11 @@ Schema.User = new SimpleSchema({
       optional: true,
       blackbox: true
   },
+  stripe:{
+    type:Object,
+    optional:true,
+    blackbox:true
+  }
 });
 
 Meteor.users.attachSchema(Schema.User);

@@ -111,10 +111,10 @@ orionjs:s3@1.1.0
 orionjs:summernote@1.1.0
 peppelg:bootstrap-3-modal@1.0.3
 pulsarjs:config@0.0.1
-pulsarjs:core@0.0.1
+pulsarjs:core@0.0.2
 pulsarjs:imagecrop@0.0.1
 pulsarjs:navbar@0.0.1
-pulsarjs:payments@0.0.1
+pulsarjs:payments@0.0.2
 pulsarjs:reviews@0.0.1
 pulsarjs:security@0.0.1
 random@1.0.3

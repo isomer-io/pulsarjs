@@ -1,6 +1,6 @@
 Package.describe({
   name: 'pulsarjs:core',
-  version: '0.0.1',
+  version: '0.0.2',
   git: 'https://github.com/isomer-io/pulsarjs',
   summary: 'Core for pulsarjs'
 });
@@ -18,7 +18,7 @@ Package.onUse(function(api) {
     "spacebars", 'alethes:pages@1.8.4',
       'pulsarjs:security@0.0.1',
       'pulsarjs:config@0.0.1',
-      'pulsarjs:payments@0.0.1',
+      'pulsarjs:payments@0.0.2',
       'pulsarjs:reviews@0.0.1','pulsarjs:imagecrop@0.0.1'
   ], ["client", "server"]);
 

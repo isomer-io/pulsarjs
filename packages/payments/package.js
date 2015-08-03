@@ -1,6 +1,6 @@
 Package.describe({
   name: 'pulsarjs:payments',
-  version: '0.0.1',
+  version: '0.0.2',
   summary: 'Payments for pulsarjs',
   git: 'https://github.com/isomer-io/pulsarjs'
 });

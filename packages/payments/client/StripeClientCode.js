@@ -6,10 +6,10 @@ if(Meteor.isClient){
 
         Session.setDefault('plans',[]);
 
-        Stripe.setPublishableKey(orion.config.get('STRIPE_API_KEY'));
+        Stripe.setPublishableKey(orion.config.get('Stripe Publishable Key'));
 
         chargeHandler = StripeCheckout.configure({
-            key: orion.config.get('STRIPE_API_KEY'),
+            key: orion.config.get('Stripe Publishable Key'),
             token: function(token) {
                 Meteor.call('chargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
                     Session.set('stripeChargeErr',err);
@@ -19,7 +19,7 @@ if(Meteor.isClient){
         });
 
         subscriptionHandler = StripeCheckout.configure({
-            key: orion.config.get('STRIPE_API_KEY'),
+            key: orion.config.get('Stripe Publishable Key'),
             token: function(token) {
                 Meteor.call('createSubscription', token, Session.get('currentPlan'), function(err,data){
                     Session.set('stripeSubscriptionErr',data.error);
@@ -79,7 +79,7 @@ if(Meteor.isClient){
         'click #subscribeButton':function(event){
             Session.set('currentPlan',this.id);
             subscriptionHandler.open({
-                name: orion.config.get('STRIPE_COMPANY_NAME'),
+                name: orion.config.get('Company Name'),
                 description: 'Subscription', //TODO: this is also fucked
                 email:Meteor.user().emails[0].address
             });
