@@ -3,27 +3,25 @@
 */
 if (Meteor.isServer) {
 
-  var webhookCallback = function(err){
-    if(err){
-      res.writeHead(300);
-      res.end('err');
-    } else {
-      res.writeHead(200);
-      res.end('ok');
-    }
-  };
-
   var handleWebhook = function(event,res) {
+    var webhookCallback = function(err){
+      if(err){
+        res.writeHead(300);
+        res.end('err');
+      } else {
+        res.writeHead(200);
+        res.end('ok');
+      }
+    };
+
     var definedWebhooks = {
-      "charge.succeeded":function(event,res){
+      "charge.succeeded":function(){
         var existingCharge = Charges.findOne({chargeId: event.data.object.id});
 
         var targetUser = Meteor.users.findOne({_id: event.data.object.metadata.createdBy});
 
         if (existingCharge) {
           Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}},webhookCallback);
-
-
         } else {
           Charges.insert({chargeId: event.data.object.id,
             stripeChargeObj: event.data.object,
@@ -35,7 +33,7 @@ if (Meteor.isServer) {
       }
 
       if(definedWebhooks[event.type]){
-        definedWebhooks[event.type](event,res);
+        definedWebhooks[event.type]();
       } else {
         res.writeHead(404);
         res.end('Hook not defined');
