@@ -1,62 +1,65 @@
 /**
- * Created by macsj200 on 5/30/15.
- */
-
-
-
+* Created by macsj200 on 5/30/15.
+*/
 if (Meteor.isServer) {
 
-    var updateCharge = function(event,res) {
-        console.log('Type: ', event.type);
+  var webhookCallback = function(err){
+    if(err){
+      res.writeHead(300);
+      res.end('err');
+    } else {
+      res.writeHead(200);
+      res.end('ok');
+    }
+  };
 
-
-        var webhookCallback = function(err){
-
-          if(err){
-            res.writeHead(300);
-            res.end('err');
-          } else {
-            res.writeHead(200);
-            res.end('ok');
-          }
-        }
-
+  var handleWebhook = function(event,res) {
+    var definedWebhooks = {
+      "charge.succeeded":function(event,res){
         var existingCharge = Charges.findOne({chargeId: event.data.object.id});
 
         var targetUser = Meteor.users.findOne({_id: event.data.object.metadata.createdBy});
 
         if (existingCharge) {
-            Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}},webhookCallback);
+          Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}},webhookCallback);
 
 
         } else {
-            Charges.insert({chargeId: event.data.object.id,
-                stripeChargeObj: event.data.object,
-                chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
-                createdBy: event.data.object.metadata.createdBy},
-                webhookCallback);
+          Charges.insert({chargeId: event.data.object.id,
+            stripeChargeObj: event.data.object,
+            chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
+            createdBy: event.data.object.metadata.createdBy},
+            webhookCallback);
+          }
         }
-    };
+      }
+
+      if(definedWebhooks[event.type]){
+        definedWebhooks[event.type](event,res);
+      } else {
+        res.writeHead(404);
+        res.end('Hook not defined');
+      }
+    }
 
     Router.route('/api/stripe/connect/webhook', {where: 'server'}).post(function() {
-        var event = this.request.body;
+      var event = this.request.body;
 
 
-        updateCharge(event, this.response);
-
+      handleWebhook(event, this.response);
     });
-}
+  }
 
 
-/**
- * Initializes the variables, so you can
- * edit them in the admin panel
- */
+  /**
+  * Initializes the variables, so you can
+  * edit them in the admin panel
+  */
 
-orion.config.add('Stripe Secret Key', 'stripe', {secret: true});
-orion.config.add('Stripe Publishable Key', 'stripe', {public: true});
+  orion.config.add('Stripe Secret Key', 'stripe', {secret: true});
+  orion.config.add('Stripe Publishable Key', 'stripe', {public: true});
 
-orion.config.add('Stripe Client Id', 'stripe', {public: true});
+  orion.config.add('Stripe Client Id', 'stripe', {public: true});
 
-orion.config.add('Company Name', 'stripe', {public: true});
-orion.config.add('Stripe Application Fee (Cents)', 'stripe', {public: true});
+  orion.config.add('Company Name', 'stripe', {public: true});
+  orion.config.add('Stripe Application Fee (Cents)', 'stripe', {public: true});
