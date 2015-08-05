@@ -1,3 +1,5 @@
+orion.config.add('Max Image Size (MB)', 'aws');
+
 ReactiveTemplates.onRendered('attribute.image', function () {
   Session.set('uploadProgress' + this.data.name, null);
   Session.set('image_base64' + this.data.name, null);
@@ -56,6 +58,8 @@ function dataURItoBlob(dataURI) {
   return new Blob([ia], {type:mimeString});
 }
 
+var fileInput = null;
+
 ReactiveTemplates.events('attribute.image', {
   'click .btn-remove': function(event, template) {
     var file = Session.get('image' + template.data.name);
@@ -68,6 +72,7 @@ ReactiveTemplates.events('attribute.image', {
     Session.set('isUploading' + template.data.name, false);
   },
   'change input': function(event, template) {
+    fileInput = template;
     var self = this;
     var files = event.currentTarget.files;
     if (files.length != 1) return;
@@ -92,14 +97,21 @@ ReactiveTemplates.events('attribute.image', {
 
     var cropUrl = $('img.base64-preview').cropper('getCroppedCanvas').toDataURL();
 
-    $('img.base64-preview').cropper('destroy');
-
-
-    Session.set('image_base64' + self.name, cropUrl);
-
     var files = [dataURItoBlob(cropUrl)];
 
     files[0].name = self.name;
+
+    $('img.base64-preview').cropper('destroy');
+
+    if(files[0].size > orion.config.get('Max Image Size (MB)')){
+      Modal.show('fileTooLarge');
+
+      Session.set('image_base64' + this.name, null);
+
+      return;
+    }
+
+    Session.set('image_base64' + self.name, cropUrl);
 
     var upload = orion.filesystem.upload({
       fileList: files,
