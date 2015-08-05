@@ -3,7 +3,8 @@ if (Meteor.isClient) {
 
      var postId = Template.currentData().postId;
 
-     this.subscribe('post', postId);
+     //subscribe
+     Meteor.subscribe('findOnePost', postId);
   });
 
   Template.findOnePost.helpers({

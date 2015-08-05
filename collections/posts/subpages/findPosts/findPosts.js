@@ -9,7 +9,7 @@ Posts.paginations.push(new Meteor.Pagination(Posts, {
        },
        availableSettings: {
            sort: true,
-           filter: true
+           filters: true
        },
        fastRender: true
 }));
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
 
         Posts.paginations[0].set({
           sort: Template.currentData().sort || {},
-          filter: Template.currentData().filter || {}
+          filters: Template.currentData().filters || {}
         });
     });
   });

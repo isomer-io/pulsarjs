@@ -21,17 +21,9 @@ if (Package && Package["nicolaslopezj:roles"]) {
     //    }
     //});
     //
-    Security.defineMethod("ifCreatedByUser", {
-        fetch: [],
-        transform: null,
-        deny: function (type, arg, userId, doc) {
-            return userId !== doc.createdBy;
-        }
-    });
+    
 
     //TODO: Finish defining 1 submission per user
     //Security.defineMethod("ifUserHadNotCreated")
 
 }
-
-
