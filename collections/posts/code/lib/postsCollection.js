@@ -61,7 +61,8 @@ Posts.attachSchema(new SimpleSchema({
     'images.$': orion.attribute('image', {
         label: 'Image',
         autoform:{
-          aspectRatio:16/9
+          aspectRatio:16/9,
+          maxSizeMb:40
         }
     }),
 

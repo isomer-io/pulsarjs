@@ -1,5 +1,3 @@
-orion.config.add('Max Image Size (MB)', 'aws');
-
 ReactiveTemplates.onRendered('attribute.image', function () {
   Session.set('uploadProgress' + this.data.name, null);
   Session.set('image_base64' + this.data.name, null);
@@ -9,7 +7,7 @@ ReactiveTemplates.onRendered('attribute.image', function () {
 
 Template.cropperPlaceholder.onRendered(function(){
   var aspectRatio = this.data.atts.aspectRatio;
-  console.log(aspectRatio);
+  maxSizeMb = this.data.atts.maxSizeMb;
   $('img.base64-preview').cropper({
     aspectRatio: aspectRatio,
     autoCropArea: 0.65,
@@ -85,6 +83,7 @@ ReactiveTemplates.events('attribute.image', {
 
     if(!_.contains(allowedExtensions,extension)){
       Modal.show('wrongfiletype');
+
       return;
     }
 
@@ -103,7 +102,7 @@ ReactiveTemplates.events('attribute.image', {
 
     $('img.base64-preview').cropper('destroy');
 
-    if(files[0].size > orion.config.get('Max Image Size (MB)')){
+    if(files[0].size/1024/1024 > maxSizeMb){
       Modal.show('fileTooLarge');
 
       Session.set('image_base64' + this.name, null);
