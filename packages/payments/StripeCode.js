@@ -3,8 +3,8 @@
 */
 if (Meteor.isServer) {
 
-  var handleWebhook = function(event,res) {
-    var webhookCallback = function(err){
+  var doWebhookLogic = function(event,res) {
+    var writeResponseCallback = function(err){
       if(err){
         res.writeHead(300);
         res.end('err');
@@ -14,26 +14,26 @@ if (Meteor.isServer) {
       }
     };
 
-    var definedWebhooks = {
+    var webhooks = {
       "charge.succeeded":function(){
         var existingCharge = Charges.findOne({chargeId: event.data.object.id});
 
         var targetUser = Meteor.users.findOne({_id: event.data.object.metadata.createdBy});
 
         if (existingCharge) {
-          Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}},webhookCallback);
+          Charges.update({_id: existingCharge._id}, {$set: {stripeChargeObj: event.data.object}},writeResponseCallback);
         } else {
           Charges.insert({chargeId: event.data.object.id,
             stripeChargeObj: event.data.object,
             chargeTargetDocId: event.data.object.metadata.chargeTargetDocId,
             createdBy: event.data.object.metadata.createdBy},
-            webhookCallback);
+            writeResponseCallback);
           }
         }
       }
 
-      if(definedWebhooks[event.type]){
-        definedWebhooks[event.type]();
+      if(webhooks[event.type]){
+        webhooks[event.type]();
       } else {
         res.writeHead(404);
         res.end('Hook not defined');
@@ -44,7 +44,7 @@ if (Meteor.isServer) {
       var event = this.request.body;
 
 
-      handleWebhook(event, this.response);
+      doWebhookLogic(event, this.response);
     });
   }
 
