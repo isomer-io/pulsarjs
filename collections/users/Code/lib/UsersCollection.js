@@ -59,7 +59,8 @@ Schema.UserProfile = new SimpleSchema({
         autoform:{
             aspectRatio:16/9,
             maxSizeMb:40
-        }
+        },
+	optional:true
     })
 
 });
