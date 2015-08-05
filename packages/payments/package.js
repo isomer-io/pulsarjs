@@ -24,6 +24,7 @@ Package.onUse(function(api) {
 
   api.addFiles(['client/templates/buyButton/buyButton.html',
     'client/templates/buyButton/buyButton.js',
+    'client/templates/buyButton/modals.html',
     'client/templates/buyerSetupButton/buyerSetupButton.html',
     'client/templates/buyerSetupButton/stripeOauthTemplate.html',
     'client/templates/buyerSetupButton/buyerSetup.html',
