@@ -59,4 +59,14 @@
         - individual document hooks
     - onStartup
     - onRendered
-    -
+
+Document helpers
+    - hasPermission('update')
+    - hasPermission('delete')
+    - hasPermission('remove')
+    - hasPermission('insert')
+
+    - doc.remove()
+    - doc.array.push()
+    - doc.cat = 'hello'
+    - new Post()

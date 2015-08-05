@@ -25,7 +25,7 @@ Package.onUse(function(api) {
     'wrongfiletype.html',
     'image.html',
     'image.less',
-    'image.js',
+    'image.js', 'fileTooLarge.html'
     ], 'client');
 
   api.export('Colibri');
