@@ -1,6 +1,6 @@
 Package.describe({
   name: 'pulsarjs:config',
-  version: '0.0.2',
+  version: '0.0.3',
   git: 'https://github.com/isomer-io/pulsarjs',
   summary: 'config for pulsarjs'
 });
