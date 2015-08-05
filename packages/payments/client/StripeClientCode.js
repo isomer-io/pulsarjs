@@ -12,8 +12,11 @@ if(Meteor.isClient){
             key: orion.config.get('Stripe Publishable Key'),
             token: function(token) {
                 Meteor.call('chargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
-                    Session.set('stripeChargeErr',err);
-                    Session.set('stripeChargeData',data.result);
+                    if(err){
+                      Modal.show('failModal');
+                    } else {
+                      Modal.show('successModal');
+                    }
                 });
             }
         });
@@ -98,12 +101,4 @@ if(Meteor.isClient){
             });
         }
     });
-
-
-
-
-
-
-
-
 }

@@ -1,0 +1,47 @@
+<template name="successModal">
+
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Charge succeeded</h4>
+                  </div>
+
+                  <div class="modal-body">
+                    Transaction succeeded {{data}}
+                  </div>
+
+            </div>
+        </div>
+    </div>
+
+</template>
+
+
+<template name="failModal">
+
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Charge error</h4>
+                  </div>
+
+                  <div class="modal-body">
+                    Charge failed
+                  </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</template>
