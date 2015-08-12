@@ -1,0 +1,43 @@
+<!--
+
+    You will need to change this file, to reflect one request with all
+    of it's information displayed. For example, this.name would
+    display the name of the request within the list.
+
+-->
+
+<template name="findOneRequest">
+    {{#with currentRequest}}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                {{this.title}}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <!-- {{>buyButton}} -->
+            {{#unless isTaken}}
+            <button class="btn btn-block btn-success takeRequest">Take request</button>
+            {{else}}
+            <button class="btn btn-block btn-alert">Request taken</button>
+            {{/unless}}
+            <div class="well">
+                {{{this.description}}}
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            {{#each this.images}}
+                <img src="{{this.url}}" class="img-responsive center-block"/>
+            {{/each}}
+            {{#unless this.images}}
+                <img src="http://lorempixel.com/output/sports-q-c-1418-913-8.jpg" class="img-responsive center-block"/>
+            {{/unless}}
+        </div>
+    </div>
+    {{/with}}
+
+</template>

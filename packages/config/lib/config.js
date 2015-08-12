@@ -81,59 +81,61 @@ var getRulesByType = function(type, rules) {
   return results;
 }
 
-Security.Rule.prototype.apply = (function (original) {
-  return function () {
-    //do something additional
+if(Meteor.isServer){
 
-    var currentCollection = LaunchBox.collections[this._collections[0]._name];
+  Security.Rule.prototype.apply = (function (original) {
+    return function () {
+      //do something additional
 
-    if (!currentCollection.rules) {
-      currentCollection.rules = [];
-    }
+      var currentCollection = LaunchBox.collections[this._collections[0]._name];
 
-
-    var singularName = currentCollection.singularName;
-
-    if (this._types[0] === 'findOne') {
-
-      if (Meteor.isServer) {
-        Meteor.publish('findOne' + singularName.charAt(0).toUpperCase() + singularName.slice(1), function(docId) {
-
-          var rules = getRulesByType('findOne', rulesByCollection[currentCollection.pluralName]);
-
-          for (var i = 0; i < rules.length; i++) {
-
-
-
-            if (!checkRestrictions(rules[i].restrictions)) {
-              this.ready();
-
-              return [];
-            }
-          }
-
-          //TODO: add in execpt props
-
-          // return currentCollection.find({_id: docId})
-          this.ready();
-          return [];
-        });
+      if (!currentCollection.rules) {
+        currentCollection.rules = [];
       }
 
-      return;
 
-    }
+      var singularName = currentCollection.singularName;
 
-      if (this._types[0] === 'find') { //TODO: change to types.contains, may not need this anymore
+      if (this._types[0] === 'findOne') {
+
+        if (Meteor.isServer) {
+          Meteor.publish('findOne' + singularName.charAt(0).toUpperCase() + singularName.slice(1), function(docId) {
+
+            var rules = getRulesByType('findOne', rulesByCollection[currentCollection.pluralName]);
+
+            for (var i = 0; i < rules.length; i++) {
+
+
+
+              if (!checkRestrictions(rules[i].restrictions)) {
+                this.ready();
+
+                return [];
+              }
+            }
+
+            //TODO: add in execpt props
+
+            // return currentCollection.find({_id: docId})
+            this.ready();
+            return [];
+          });
+        }
 
         return;
 
-    } else {
-      original.apply(this);
-    }
-  }
-})(Security.Rule.prototype.apply);
+      }
 
+        if (this._types[0] === 'find') { //TODO: change to types.contains, may not need this anymore
+
+          return;
+
+      } else {
+        original.apply(this);
+      }
+    }
+  })(Security.Rule.prototype.apply);
+}
 
 Router.configure({
     fastRender: true,

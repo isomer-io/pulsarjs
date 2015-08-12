@@ -1,0 +1,28 @@
+<template name="jobCreatorControls">
+  {{#with currentJob}}
+    {{#if this.isCreator}}
+        <div class="row">
+            <div class="col-md-12">
+              <hr>
+                <h3>
+                    You are the creator of this Job
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                    <a href="/jobs/{{this._id}}/edit" class="btn btn-block btn-success">
+                        Edit this job
+                    </a>
+            </div>
+            <div class="col-md-6">
+                    <a id="deleteJobButton" class="btn btn-block btn-danger">
+                        Delete this job
+                    </a>
+            </div>
+        </div>
+    {{/if}}
+  {{/with}}
+</template>

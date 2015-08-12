@@ -35,7 +35,8 @@ Package.onUse(function(api) {
     'client/StripeClientCode.js',
     'charges/templates/findOneCharge.html',
     'charges/templates/findOneCharge.js',
-    'charges/templates/findCharges.html'], 'client');
+    'charges/templates/findCharges.html','client/templates/buyButton/payWorkerButton.html',
+      'client/templates/buyButton/payWorkerButton.js',], 'client');
 
   api.addFiles(['refunds/RefundCollection.js','StripeCode.js',
   'charges/code/lib/chargesCollection.js'],['client','server']);

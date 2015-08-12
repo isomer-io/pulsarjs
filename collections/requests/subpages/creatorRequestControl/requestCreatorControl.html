@@ -1,0 +1,32 @@
+<template name="requestCreatorControls">
+  {{#with currentRequest}}
+    {{#if this.isCreator}}
+        <div class="row">
+            <div class="col-md-12">
+              <hr>
+                <h3>
+                    You are the creator of this Request
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                    <a href="/requests/{{this._id}}/edit" class="btn btn-block btn-success">
+                        Edit this request
+                    </a>
+            </div>
+            <div class="col-md-6">
+                    <a id="deleteRequestButton" class="btn btn-block btn-danger">
+                        Delete this request
+                    </a>
+            </div>
+        </div>
+
+        {{#if this.takenBy}}
+        {{>payWorkerButton}}
+        {{/if}}
+    {{/if}}
+  {{/with}}
+</template>

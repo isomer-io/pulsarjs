@@ -8,10 +8,23 @@ if(Meteor.isClient){
 
         Stripe.setPublishableKey(orion.config.get('Stripe Publishable Key'));
 
-        chargeHandler = StripeCheckout.configure({
+        directChargeHandler = StripeCheckout.configure({
             key: orion.config.get('Stripe Publishable Key'),
             token: function(token) {
-                Meteor.call('chargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
+                Meteor.call('directChargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
+                    if(err){
+                      Modal.show('failModal');
+                    } else {
+                      Modal.show('successModal');
+                    }
+                });
+            }
+        });
+
+        takerChargeHandler = StripeCheckout.configure({
+            key: orion.config.get('Stripe Publishable Key'),
+            token: function(token) {
+                Meteor.call('takerChargeCard', token, Session.get('currentItem'), Session.get('currentItem.targetDocCollectionName'),function(err,data){
                     if(err){
                       Modal.show('failModal');
                     } else {

@@ -9,6 +9,14 @@ Meteor.publish('review', function(reviewId) {
     return Posts.find({_id: reviewId});
 });
 
+Security.defineMethod("ifCreatedByUser", {
+  fetch: [],
+  transform: null,
+  deny: function (type, userId, doc) {
+    return userId !== doc.createdBy;
+  }
+});
+
 /**
  *
  * Define your security permissions here

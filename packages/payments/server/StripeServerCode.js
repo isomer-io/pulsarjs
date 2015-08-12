@@ -29,7 +29,7 @@ if(Meteor.isServer){
                 }
             }
         },
-        chargeCard:function(token,item, itemCollectionName){
+        directChargeCard:function(token,item, itemCollectionName){
             var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
 
             var user = Meteor.users.findOne(Meteor.userId());
@@ -40,6 +40,34 @@ if(Meteor.isServer){
                 source: token.id,
                 application_fee:orion.config.get('Stripe Application Fee (Cents)'),
                 destination: Meteor.users.findOne(item.createdBy).stripe.stripe_user_id,
+                description: item.title,
+                metadata: {
+                    chargeTargetDocId: item._id,
+                    createdBy: Meteor.userId(),
+                    targetDocCollectionName: itemCollectionName
+                }
+            };
+
+
+            var res = Async.runSync(function(done) {
+                Stripe.charges.create(params, function (err, chargeObj) {
+                    done(err, chargeObj);
+                })
+            });
+
+            return res;
+        },
+        takerChargeCard:function(token,item, itemCollectionName){
+            var Stripe = StripeAPI(orion.config.get('Stripe Secret Key'));
+
+            var user = Meteor.users.findOne(Meteor.userId());
+
+            var params = {
+                amount: Math.round(item.price * 100),
+                currency: 'usd',
+                source: token.id,
+                application_fee:orion.config.get('Stripe Application Fee (Cents)'),
+                destination: Meteor.users.findOne(item.takenBy).stripe.stripe_user_id,
                 description: item.title,
                 metadata: {
                     chargeTargetDocId: item._id,
@@ -207,6 +235,20 @@ if(Meteor.isServer){
 
             if(owner && owner.stripe){
                 if(owner.stripe.stripe_user_id){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        },
+        takerHasMerchant:function(takerId){
+            var taker = Meteor.users.findOne(takerId);
+
+
+            if(taker && taker.stripe){
+                if(taker.stripe.stripe_user_id){
                     return true;
                 } else {
                     return false;

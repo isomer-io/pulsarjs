@@ -1,0 +1,13 @@
+<template name="viewOneRequestPage">
+
+    <div class="container">
+
+        {{> findOneRequest requestId=id}}
+
+        {{> requestCreatorControls requestId=id}}
+
+        {{> findReviews docId=id collectionName="requests"}}
+
+    </div>
+
+</template>
