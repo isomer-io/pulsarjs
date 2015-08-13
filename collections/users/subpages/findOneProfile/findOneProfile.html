@@ -11,8 +11,23 @@
     <div class="row">
         <div class="col-md-12">
             <h2>
-                {{this.birthday}}
+                {{this.firstName}} {{this.lastName}}
             </h2>
+
+            <ul>
+              <li>
+                Age: {{age}}
+              </li>
+              <li>
+                City: {{this.address.city}}
+              </li>
+              <li>
+                Picture: <img src="{{currentProfilePictureUrl}}"/>
+              </li>
+              <li>
+                Description: {{this.profileDescription}}
+              </li>
+            </ul>
         </div>
     </div>
     {{/with}}

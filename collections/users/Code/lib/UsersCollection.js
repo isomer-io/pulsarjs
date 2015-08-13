@@ -10,12 +10,12 @@ Schema.UserProfile = new SimpleSchema({
         optional: true,
         public:true
     },
-    lastName: {
+    firstName: {
         type: String,
         optional:true,
         public:true
     },
-    firstName: {
+    lastName: {
         type: String,
         optional:true,
         public:true
@@ -54,14 +54,19 @@ Schema.UserProfile = new SimpleSchema({
         optional:true,
         public: true
     },
-    profilePicture:orion.attribute('image', {
-        label: 'Image',
+    profilePictures: {
+        type: Array,
+        optional: true,
+        maxCount: 3
+    },
+
+    'profilePictures.$': orion.attribute('image', {
+        label: 'Image (.jpeg)',
         autoform:{
-            aspectRatio:16/9,
-            maxSizeMb:40
-        },
-	optional:true
-    })
+          aspectRatio:16/9,
+          maxSizeMb:40
+        }
+    }),
 
 });
 
