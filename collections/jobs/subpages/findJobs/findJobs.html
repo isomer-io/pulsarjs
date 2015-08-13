@@ -22,11 +22,20 @@
 <template name="findJobs">
     <div class="row">
         <div class="col-md-12">
+          {{> esInput index="jobs" placeholder="Search..." }}
             <div class="list-group">
-                {{> jobs }}
+              {{#esEach index="jobs"}}
+                  {{>jobInFindList}}
+              {{/esEach}}
             </div>
         </div>
     </div>
+</template>
+
+<template name="searchBox">
+    <ul>
+
+    </ul>
 </template>
 
 <template name="jobs">
