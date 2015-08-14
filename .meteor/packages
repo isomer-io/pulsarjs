@@ -40,8 +40,5 @@ pulsarjs:security
 pulsarjs:payments
 pulsarjs:reviews
 pulsarjs:navbar
-<<<<<<< HEAD
-=======
 autopublish
 lukemadera:autoform-googleplace
->>>>>>> 254ec231d279421cc9e4f3c646996da6011e01dd
